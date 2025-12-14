@@ -1,0 +1,8 @@
+// 사용할 테마를 여기에 설정
+@import './theme_blue'; // 기본 테마로 블루 사용
+
+// 공통 스타일을 정의
+body {
+    background-color: var(--primary);
+    color: $deep;
+}

@@ -1,0 +1,118 @@
+@use '/src/styles/_variables.scss' as *;
+@use '/src/styles/mixin.scss' as *;
+
+.pageHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    background-color: $background-white;
+    .pageTit {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin: 16px 0 15px;
+        font-size: var(--font-size-xl);
+        line-height: var(--line-height-xl);
+        color: $color-accent;
+    }
+}
+.searchBox {
+    border: 1px solid $border-default;
+    background-color: $background-default;
+    .searchBoxWrap {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 50px;
+        row-gap: 12px;
+        width: calc(100% - 150px);
+        padding: 20px 30px 30px;
+        position: relative;
+        .formItem {
+            width: 370px;
+        }
+        .btnSearch {
+            width: 90px;
+            position: absolute;
+            right: -120px;
+            bottom: 30px;
+        }
+        > .MuiBox-root {
+            max-width: 470px;
+        }
+    }
+    .row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        .label {
+            flex-shrink: 0;
+            width: 61px;
+            font-size: 13px;
+            line-height: 20px;
+            color: #010101;
+            @include ellipsis;
+            &:hover {
+                width: unset;
+                min-width: 61px;
+                position: absolute;
+                background-color: $background-white;
+                z-index: 9;
+                @include unSetellipsis;
+                & + .textWrap {
+                    margin-left: 71px;
+                }
+                & + .MuiTextField-root {
+                    margin-left: 71px;
+                }
+                & + .MuiMultiInputDateRangeField-root {
+                    margin-left: 71px;
+                }
+                & + .MuiAutocomplete-root {
+                    margin-left: 71px;
+                }
+            }
+        }
+    }
+}
+.accordion {
+    box-shadow: none;
+    border: none;
+}
+.btnToggleSearchBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 29px;
+    height: 29px;
+    position: absolute;
+    left: 50%;
+    bottom: -15px;
+    border: 1px solid $border-default;
+    border-radius: $corner-full;
+    background-color: $background-white;
+    transform: translateX(-15px);
+    &.on {
+        transform: translateX(-15px) rotate(180deg);
+    }
+    svg {
+        fill: var(--primary);
+    }
+}
+
+.accordion {
+    box-shadow: none !important;
+    &:has(.searchBox) {
+        margin-top: 0 !important;
+        margin-bottom: 25px !important;
+    }
+}
+
+.dateComPicker,
+.dateSalry {
+    display: flex;
+    gap: 10px;
+}

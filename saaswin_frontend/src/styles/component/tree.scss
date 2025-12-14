@@ -1,0 +1,23 @@
+@use '/src/styles/_variables.scss' as *;
+@use '/src/styles/mixin.scss' as *;
+
+.treeView {
+    .MuiTreeItem-content {
+        &.Mui-focused,
+        &:hover,
+        &.Mui-expanded,
+        &.Mui-selected {
+            background-color: unset;
+        }
+        .MuiTreeItem-label {
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-sm);
+            color: $color-neutral;
+        }
+    }
+    .MuiTreeItem-iconContainer {
+        svg {
+            flex-shrink: 0;
+        }
+    }
+}

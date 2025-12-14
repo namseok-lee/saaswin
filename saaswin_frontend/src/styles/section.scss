@@ -1,0 +1,8 @@
+@use '/src/styles/_variables.scss' as *;
+
+.contSection {
+    font-size: var(--font-size-3xl);
+    & + .contSection {
+        margin-top: $space-06;
+    }
+}

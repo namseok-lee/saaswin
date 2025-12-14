@@ -1,0 +1,54 @@
+{
+    "id": "n1",
+    "name": "Sudhir",
+    "uuid": "4fd99e8e-758f-11e9-b2d5-68ecc57cde45",
+    "title": "CEO",
+    "children": [
+        {
+            "id": "n2",
+            "name": "Harsha",
+            "uuid": "768d1fb9-de9c-46c3-8d5c-23e0e484ce2e",
+            "title": "COO"
+        },
+        {
+            "id": "n3",
+            "name": "Mehul",
+            "uuid": "fbde2453-17eb-4d7f-909a-0fccc6d53e7a",
+            "title": "VP Tech",
+            "children": [
+                {
+                    "id": "n4",
+                    "name": "Subashish",
+                    "uuid": "afafc60c-a4c0-11e9-b35d-0028f87be1ac",
+                    "title": "Manager Dev"
+                },
+                {
+                    "id": "n5",
+                    "name": "Rakshith",
+                    "uuid": "059d2060-04dd-45fa-98e3-2fd67864909b",
+                    "title": "Technical Architect",
+                    "children": [
+                        {
+                            "id": "n6",
+                            "name": "Prajwal",
+                            "uuid": "c76e7144-bb3d-402f-8cae-83e4b5d5eb20",
+                            "title": "Team Lead"
+                        },
+                        {
+                            "id": "n7",
+                            "name": "Neha",
+                            "uuid": "d506cb2a-22fa-4dc1-abbb-907224300f5a",
+                            "title": "Team Lead"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "n8",
+            "name": "Badri",
+            "uuid": "6f6e8269-91b7-4d6f-b3ce-f8f74cd85b3d",
+            "title": "Head of Marketing"
+        }
+    ]
+}

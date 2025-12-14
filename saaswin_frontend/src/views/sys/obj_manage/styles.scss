@@ -1,0 +1,605 @@
+@use '/src/styles/_variables.scss' as *;
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+body {
+    width: 100vw;
+    margin: 0;
+
+    * {
+        font-family: 'pretendard', sans-serif;
+    }
+}
+
+/* 조직도 전체 컨테이너 */
+.org-chart-wrapper {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 225px);
+}
+
+/* 조직도 메인 레이아웃 */
+.org-chart-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* 캔버스 스타일 */
+.canvas {
+    float: left;
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    border: 1px solid $border-neutral;
+    border-right: none;
+    // margin-top: 60px;
+
+    .joint-paper {
+        margin: 0 auto;
+    }
+
+    .paper-scroller-background {
+        background-color: $background-subtler;
+    }
+
+    // .hide-buttons .member-button {
+    //     opacity: 0;
+    //     transition: opacity 0.2s ease;
+    // }
+
+    // .show-buttons .member-button {
+    //     opacity: 1;
+    //     transition: opacity 0.2s ease;
+    // }
+
+    .member-shape {
+        border: 1px solid $border-accent;
+    }
+}
+
+/* 속성 편집기 */
+.inspector-container {
+    width: 328px;
+    flex-shrink: 0;
+    height: 100%;
+    // margin-top: 21px;
+
+    .inspector-header {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .forms {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px 30px;
+        border: 1px solid $border-neutral;
+        background-color: $background-white;
+        overflow-y: auto;
+    }
+}
+
+/* 조직도 툴바 */
+.org-tools {
+    position: absolute;
+    top: -10px;
+    right: 305px;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+
+    .customToolbar {
+        display: flex;
+        gap: 5px;
+
+        .btn {
+            min-width: unset;
+            width: 30px;
+        }
+    }
+
+    .forCanvas {
+        display: flex;
+        gap: 3px;
+
+        .btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: unset;
+            width: 38px;
+            height: 38px;
+            background-color: #fbfbfb;
+        }
+    }
+}
+
+/* 버튼 스타일 */
+button.rappid-button {
+    width: 84px;
+    height: 32px;
+    background: $color-white;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 16px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 16px;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 0.25px;
+    color: rgba(0, 0, 0, 0.87);
+    cursor: pointer;
+
+    &:hover {
+        background: rgba(70, 102, 229, 0.12);
+        border: 1px solid #4666e5;
+        color: #4666e5;
+    }
+}
+
+/* 조직도 방향 설정 */
+#orgchart-direction-container {
+    position: fixed;
+    bottom: 16px;
+    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
+    margin: 16px;
+    padding: 8px;
+    background-color: $background-subtler;
+    border: 1px solid $border-default;
+
+    p {
+        margin: 0;
+    }
+}
+
+/* 다이얼로그 스타일 */
+.joint-dialog.joint-member-dialog.joint-theme-default {
+    .fg {
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        box-sizing: border-box;
+        font-family: sans-serif;
+        box-shadow: 4px 4px 4px -1px rgba(0, 0, 0, 0.18);
+        padding: 8px 16px;
+        background-color: $background-default;
+        border-radius: 0;
+        height: fit-content;
+        display: flex;
+        flex-flow: column;
+        border: none;
+
+        .titlebar {
+            position: relative;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 16px 0;
+            margin-bottom: 8px;
+
+            &:after {
+                content: '';
+                height: 1px;
+                background-color: $border-default;
+                position: absolute;
+                left: -16px;
+                right: -16px;
+                bottom: 0;
+            }
+        }
+    }
+}
+
+/* 선택 박스 스타일 */
+.joint-selection-region {
+    border: 1px dashed #3498db;
+    background-color: rgba(52, 152, 219, 0.1);
+    position: absolute;
+    pointer-events: none;
+}
+
+.joint-selection.joint-theme-default.selected {
+    display: none !important;
+}
+.noSelectedMember {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    padding-top: 130px;
+    .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 70px;
+        height: 70px;
+        border-radius: 100%;
+        background-color: var(--lower);
+    }
+}
+.text {
+    font-size: var(--font-size-2xl);
+    line-height: var(--line-height-2xl);
+    color: $color-accent;
+}
+/* 조직 인원 목록 */
+.orgMemberNumber {
+    .title {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 15px;
+        padding-bottom: 7px;
+        border-bottom: 1px dashed $border-neutral;
+        .icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 26px;
+            height: 26px;
+            border-radius: $corner-full;
+            background-color: $background-subtler;
+            overflow: hidden;
+        }
+        .department {
+            margin-left: 5px;
+            font-size: var(--font-size-lg);
+            line-height: var(--line-height-lg);
+            color: $color-accent;
+        }
+        .total {
+            font-size: var(--font-size-lg);
+            line-height: var(--line-height-lg);
+            color: $color-neutral;
+        }
+    }
+    .sortingOrder {
+        margin-bottom: 20px;
+    }
+    .type {
+        font-size: var(--font-size-lg);
+        line-height: var(--line-height-lg);
+        color: $color-accent;
+    }
+    .memberInfo {
+        display: flex;
+        gap: 5px;
+        padding: 8px 15px;
+        border-radius: 8px;
+        border: 1px solid $border-default;
+        &.leader {
+            margin-bottom: 10px;
+            background-color: $background-info-default;
+        }
+        .img {
+            flex-shrink: 0;
+            width: 34px;
+            height: 34px;
+            margin-right: 5px;
+            position: relative;
+            img {
+                display: block;
+                width: 100%;
+                border-radius: $corner-full;
+                overflow: hidden;
+            }
+        }
+        .profile {
+            width: 90%;
+        }
+        .name {
+            width: 140px;
+            font-size: var(--font-size-md);
+            line-height: var(--line-height-md);
+            color: $color-accent;
+            letter-spacing: -0.03em;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-break: break-all;
+            overflow: hidden;
+        }
+        .code {
+            font-size: var(--font-size-md);
+            line-height: var(--line-height-md);
+            color: $color-subtitle;
+        }
+        .position {
+            font-size: var(--font-size-md);
+            line-height: var(--line-height-md);
+            color: $color-default;
+        }
+        .tag {
+            display: inline-block;
+            margin-top: 3px;
+            padding: 2px 10px;
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-sm);
+            color: var(--primary);
+            border-radius: 20px;
+            background-color: var(--lower);
+        }
+        &.on {
+            .img {
+                &::after {
+                    content: '';
+                    display: block;
+                    width: 10px;
+                    height: 10px;
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    border-radius: $corner-full;
+                    background-color: $icon-info-accent;
+                }
+            }
+        }
+        &.nodata {
+            flex-direction: column;
+            align-items: center;
+            .text {
+                margin-bottom: 6px;
+                font-size: var(--font-size-md);
+                line-height: var(--font-size-md);
+                color: $color-neutral;
+                text-align: center;
+            }
+            .btnSetLeader {
+                width: fit-content;
+            }
+        }
+    }
+    .memberList {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+.setLeaderModal {
+    .type {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 7px;
+        font-size: var(--font-size-lg);
+        line-height: var(--line-height-lg);
+        color: $color-accent;
+    }
+    .memberInfoList {
+        display: flex;
+        gap: 15px;
+        width: 100%;
+        .item {
+            width: 100%;
+        }
+    }
+}
+.memberInfo {
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 17px 15px;
+    position: relative;
+    border-radius: 8px;
+    border: 1px solid $border-default;
+    &.leader {
+        margin-bottom: 10px;
+        background-color: $background-info-default;
+    }
+    .img {
+        flex-shrink: 0;
+        width: 34px;
+        height: 34px;
+        margin-right: 5px;
+        position: relative;
+        img {
+            display: block;
+            width: 100%;
+            border-radius: $corner-full;
+            overflow: hidden;
+        }
+    }
+    .name {
+        width: 95%;
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
+        color: $color-accent;
+        letter-spacing: -0.03em;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
+        overflow: hidden;
+    }
+    .code {
+        position: absolute;
+        top: 17px;
+        right: 15px;
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
+        color: $color-subtitle;
+    }
+    .profile {
+        width: 72%;
+    }
+    .position {
+        width: 100%;
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
+        color: $color-default;
+        letter-spacing: -0.1em;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
+        overflow: hidden;
+    }
+    .etc {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        .text {
+            display: flex;
+            align-items: center;
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-sm);
+            color: $color-accent;
+        }
+        .btnEditTerm {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 24px;
+            height: 24px;
+            margin-left: 5px;
+            border-radius: $corner-full;
+            background-color: #e1f5fc;
+        }
+    }
+    .tag {
+        display: inline-block;
+        margin-top: 3px;
+        padding: 2px 10px;
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-sm);
+        color: var(--primary);
+        border-radius: 20px;
+        background-color: var(--lower);
+    }
+    &.on {
+        .img {
+            &::after {
+                content: '';
+                display: block;
+                width: 10px;
+                height: 10px;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                border-radius: $corner-full;
+                background-color: $icon-info-accent;
+            }
+        }
+    }
+    &.nodata {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        height: 105px;
+        margin-bottom: 15px;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid $border-default;
+        background-color: $background-info-default;
+        .icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 34px;
+            height: 34px;
+            border-radius: $corner-full;
+            background-color: $background-default;
+        }
+        .text {
+            margin-bottom: 6px;
+            font-size: var(--font-size-md);
+            line-height: var(--font-size-md);
+            color: $color-neutral;
+            text-align: center;
+        }
+        .btnSetLeader {
+            width: fit-content;
+        }
+    }
+    &.searchResult {
+        .name {
+            color: #ed6c02;
+        }
+    }
+}
+.alertMsg {
+    .guideText {
+        display: flex;
+        gap: 8px;
+        padding: 10px 12px;
+        margin-bottom: 20px;
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
+        color: $color-info-enabled;
+        background-color: rgba(225, 245, 252, 0.3);
+        .icon {
+            fill: var(--primary);
+            transform: scale(0.8);
+        }
+    }
+    .message {
+        margin-top: 20px;
+        font-size: var(--font-size-lg);
+        line-height: var(--line-height-lg);
+        color: $color-accent;
+        text-align: center;
+        .emphasis {
+            color: var(--primary);
+        }
+    }
+}
+
+/* 버튼 영역 */
+.btnArea {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+    gap: 10px;
+    position: relative;
+
+    .btn {
+        flex: 1;
+        flex-grow: 0;
+    }
+
+    &.forCanvas {
+        position: absolute;
+        top: 176px;
+        right: 480px;
+
+        .btn {
+            flex: none;
+        }
+    }
+}
+
+/* 툴바 */
+.customToolbar {
+    position: absolute;
+    right: 40px;
+    z-index: 9;
+    transform: translateY(20px);
+
+    .btn {
+        min-width: unset;
+        padding: 0 2px;
+    }
+}
+
+// 데이터 없을 때
+.contentsArea {
+    height: 100%;
+    .card {
+        height: 100%;
+    }
+}
+.nodate {
+    height: calc(100vh - 246px);
+    .btnArea {
+        display: flex;
+        margin-top: 20px;
+    }
+}
+.joint-paper-scroller {
+    background-color: #f5f5f5;
+}

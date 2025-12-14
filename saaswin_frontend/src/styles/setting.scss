@@ -1,0 +1,593 @@
+@use '/src/styles/_variables.scss' as *;
+
+.configuration {
+    .section {
+        padding: 25px 30px 30px;
+        border-radius: $corner-xs;
+        border: 1px solid $border-default;
+        .sectionTitle {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            font-size: var(--font-size-lg);
+            line-height: 25px;
+            color: $color-accent;
+            border-bottom: 2px solid $border-neutral;
+            .ico {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 26px;
+                height: 26px;
+                border-radius: $corner-full;
+                background-color: #e5f5ed;
+                svg {
+                    fill: var(--primary);
+                }
+            }
+        }
+        & + .section {
+            margin-top: 25px;
+        }
+    }
+    .formBox {
+        padding: 15px 20px;
+        background-color: $background-accent-subtler;
+        &.multiType {
+            margin-bottom: 20px;
+        }
+    }
+    .pageBtnArea {
+        display: flex;
+        justify-content: end;
+        gap: 5px;
+        margin: 10px -43px 0 -30px;
+        padding: 15px 30px;
+        border-top: 1px solid $border-neutral;
+    }
+    .gridView {
+        .total {
+            display: flex;
+            justify-content: end;
+            width: 100%;
+            margin-top: 15px;
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-sm);
+            color: $color-accent;
+        }
+    }
+    /**** 화면설정 ****/
+    // 글자 크기
+    .fontSize {
+        display: flex;
+        gap: 8px;
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
+        color: $color-subtitle;
+        text-align: center;
+        .iptRdo {
+            display: none;
+        }
+        .img {
+            display: flex;
+            width: 55px;
+            height: 50px;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5px;
+            border: 1px solid $gray-200;
+            border-radius: $padding-s;
+        }
+        .iptRdo:checked {
+            & + .img {
+                border-color: var(--primary);
+                &::after {
+                    content: '';
+                    display: block;
+                    width: 20px;
+                    height: 20px;
+                    position: absolute;
+                    top: -5px;
+                    left: -5px;
+                    border-radius: $corner-full;
+                    background: var(--primary) url('../../public/img/ico/ico_check.png') 50% 50% no-repeat;
+                }
+            }
+            & ~ .text {
+                font-weight: 700;
+                color: $color-accent;
+            }
+        }
+    }
+    // 테마선택
+    .theme {
+        display: flex;
+        gap: 50px;
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
+        color: $color-subtitle;
+        text-align: center;
+        .wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            width: 483px;
+            padding: 10px 8px;
+            border-radius: $corner-sm;
+        }
+        .iptRdo {
+            display: none;
+        }
+        .img {
+            position: relative;
+            margin-bottom: 5px;
+        }
+        .iptRdo:checked {
+            & + .wrapper > div > .img {
+                border-color: var(--primary);
+                &::after {
+                    content: '';
+                    display: block;
+                    width: 20px;
+                    height: 20px;
+                    position: absolute;
+                    top: -5px;
+                    left: -5px;
+                    border-radius: $corner-full;
+                    background: var(--primary) url('../../public/img/ico/ico_check.png') 50% 50% no-repeat;
+                }
+            }
+            & ~ .wrapper > div > .text {
+                font-weight: 700;
+                color: $color-accent;
+            }
+            & + .wrapper {
+                background-color: var(--lower);
+            }
+        }
+    }
+    /**** 로그인관리 ****/
+    &.loginManage {
+        // 제한설정
+        .limit {
+            .desc {
+                margin-bottom: 10px;
+                font-size: var(--font-size-md);
+                line-height: var(--line-height-md);
+                color: $color-neutral;
+                .tit {
+                    display: flex;
+                    gap: 10px;
+                    align-items: center;
+                    margin-bottom: 5px;
+                    color: $color-accent;
+                    .switchBtn {
+                        margin-bottom: -10px;
+                    }
+                }
+            }
+        }
+        // 보안설정
+        .btnSetCertify {
+            margin-top: 10px;
+        }
+    }
+    /**** 내 로그인 정보 *****/
+    &.myLoginInfo {
+        .connectInfo {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            .info {
+                display: flex;
+                align-items: center;
+            }
+            .btnCopy {
+                font-size: var(--font-size-sm);
+                line-height: var(--line-height-sm);
+                color: $color-default;
+                svg {
+                    transform: scale(0.7);
+                    margin-left: -5px;
+                }
+            }
+            .text {
+                margin-left: 5px;
+                font-size: var(font-size-md);
+                line-height: var(line-height-md);
+                color: $color-accent;
+            }
+        }
+        .desc {
+            margin-bottom: 10px;
+            font-size: var(font-size-md);
+            line-height: var(line-height-md);
+            color: $color-neutral;
+        }
+        .snsConnect {
+            .snsList {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                padding: 20px;
+                background-color: $background-subtler;
+                .item {
+                    display: flex;
+                    align-items: center;
+                }
+                .btnSnsConnect {
+                    width: 200px;
+                    margin-right: 15px;
+                    .icoArrow {
+                        fill: $icon-accent;
+                        transform: rotate(-90deg);
+                    }
+                }
+                .acccountId {
+                    font-size: var(--font-size-lg);
+                    line-height: var(--line-height-lg);
+                    color: $color-accent;
+                    text-decoration: underline;
+                }
+                .btnLinkOff {
+                    font-size: var(--font-size-lg);
+                    line-height: var(--line-height-lg);
+                    color: var(--primary);
+                    svg {
+                        fill: var(--primary);
+                    }
+                }
+            }
+        }
+    }
+    /**** 회사 정보 관리 ****/
+    &.companyInfoManage {
+        .infoSubmit {
+            .formList {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 15px;
+                width: 1020px;
+                .col {
+                    grid-column: span 3;
+                }
+            }
+        }
+        .desc {
+            margin-bottom: 10px;
+            font-size: var(font-size-md);
+            line-height: var(line-height-md);
+            color: $color-neutral;
+        }
+        .officailStamp {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            .upload {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 150px;
+                height: 150px;
+                border: 1px dashed $border-bold;
+                border-radius: 2px;
+                background-color: $background-default;
+                cursor: pointer;
+                .text {
+                    display: flex;
+                    align-items: center;
+                    font-size: var(--font-size-md);
+                    line-height: var(--font-size-md);
+                    color: $color-subtitle;
+                    svg {
+                        transform: scale(0.7);
+                    }
+                }
+            }
+            .preview {
+                width: 150px;
+                height: 150px;
+                position: relative;
+                border: 1px solid $border-bold;
+                border-radius: 2px;
+                .img {
+                    width: 100%;
+                    height: 100%;
+                }
+                .swichImg {
+                    display: none;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    background-color: rgba(39, 39, 39, 0.5);
+                    cursor: pointer;
+                    .btnSwitchImg {
+                        height: 35px;
+                        padding: 7px 10px;
+                        font-size: var(--font-size-lg);
+                        line-height: var(--line-height-lg);
+                        color: $color-white;
+                        background-color: $background-bk;
+                    }
+                }
+                &:hover {
+                    .swichImg {
+                        display: flex;
+                    }
+                }
+            }
+            .inputFile {
+                display: none;
+            }
+        }
+    }
+    // 초대관리
+    &.inviteManagement {
+        .part {
+            .partTitle {
+                display: flex;
+                align-items: center;
+                margin-bottom: 5px;
+                gap: 5px;
+                font-size: var(--font-size-lg);
+                line-height: var(--line-height-lg);
+                color: $color-accent;
+                .tag {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 88px;
+                    height: 28px;
+                    font-size: var(--font-size-sm);
+                    line-height: var(--line-height-sm);
+                    color: var(--primary);
+                    border-radius: 20px;
+                    background-color: $background-accent-subtler;
+                    svg {
+                        fill: var(--primary);
+                    }
+                }
+            }
+            .desc {
+                margin-bottom: 10px;
+                font-size: var(--font-size-md);
+                line-height: var(--line-height-md);
+                color: $color-neutral;
+            }
+        }
+        .btnFormArea {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 30px;
+            .btnForm {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 6px;
+                width: 360px;
+                height: 200px;
+                padding: 10px 30px;
+                position: relative;
+                border: 1px solid $border-default;
+                border-radius: $corner-sm;
+                box-shadow: 0 2px 4px $shadow-card;
+                cursor: pointer;
+                .ico {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 34px;
+                    height: 34px;
+                    border-radius: $corner-full;
+                    background-color: var(--primary);
+                    svg {
+                        transform: scale(1.2);
+                    }
+                }
+                .icoArrow {
+                    margin-left: auto;
+                    transform: scale(1.2);
+                }
+                .btnDelete {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 34px;
+                    height: 34px;
+                    position: absolute;
+                    top: 12px;
+                    right: 15px;
+                    font-size: 0;
+                    border-radius: $corner-full;
+                    background-color: $background-subtler;
+                }
+                &.add {
+                    color: $color-subtitle;
+                    .ico {
+                        background-color: $icon-subtle;
+                    }
+                }
+                &:hover {
+                    border-color: var(--primary);
+                    .btnDelete {
+                        svg {
+                            fill: var(--primary);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.inviteFormDrawer {
+        .context {
+            margin-bottom: 15px;
+        }
+        .sectionTitle {
+            align-items: center;
+            gap: 0;
+            .switch {
+                margin-bottom: -25px;
+            }
+        }
+        .checkboxGroup {
+            width: 320px;
+        }
+        .startDaySetting {
+            margin-top: 25px;
+        }
+        .pageBtnArea {
+            margin: 10px -24px 0 -22px;
+        }
+        .total {
+            display: flex;
+            justify-content: end;
+            margin-top: 12px;
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-sm);
+            color: $color-accent;
+        }
+    }
+}
+// 비밀번호 재설정 메일
+.resetMailGuide {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding: 10px 12px;
+    background-color: var(--bgFocus);
+    .text {
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
+        color: $color-neutral;
+        letter-spacing: -0.1em;
+    }
+}
+.mailFindCoworker {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    .label {
+        width: 95px;
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
+        color: $color-accent;
+    }
+    .btnAdd {
+        margin-bottom: -1px;
+    }
+}
+.mailSendTarget {
+    .title {
+        margin-bottom: 10px;
+        font-weight: 400;
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
+        color: $color-accent;
+    }
+    .targetList {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        min-height: 180px;
+        margin-bottom: 20px;
+        padding: 10px 15px;
+        border: 1px solid $border-default;
+        background-color: $background-default;
+        .empty {
+            align-items: center;
+        }
+        .list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            width: 100%;
+            max-height: 250px;
+            overflow-y: auto;
+            .item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 188px;
+                height: 30px;
+                padding: 0 15px;
+                border: 1px solid $border-bold;
+                border-radius: $corner-xl;
+                .text {
+                    font-size: var(--font-size-md);
+                    line-height: var(--line-height-md);
+                    color: $color-default;
+                    letter-spacing: -0.1em;
+                    .name {
+                        color: $color-accent;
+                    }
+                }
+                .btnDel {
+                    transform: scale(0.6);
+                }
+            }
+        }
+        .ipAddressList {
+            width: 100%;
+            max-height: 255px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            overflow-y: auto;
+            .item {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                font-size: var(--font-size-sm);
+                line-height: var(--line-height-sm);
+                color: $color-accent;
+                svg {
+                    transform: scale(0.8);
+                }
+                &:hover {
+                    color: var(--primary);
+                    svg {
+                        fill: var(--primary);
+                    }
+                }
+            }
+        }
+    }
+}
+.resetMailFooter {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.passwordChange {
+    width: 370px;
+    .chageAction {
+        padding: 20px;
+        border: 1px solid $border-bold;
+        border-top: none;
+        .formItem {
+            & + .formItem {
+                margin-top: 15px;
+            }
+        }
+    }
+    .btnChangePwd {
+        width: 370px;
+        &.on {
+            svg {
+                transform: rotate(-180deg);
+            }
+        }
+    }
+    .btnGroup {
+        margin-top: 25px;
+    }
+}

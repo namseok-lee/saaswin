@@ -1,0 +1,26 @@
+@use '/src/styles/_variables.scss' as *;
+@use '/src/styles/mixin.scss' as *;
+
+.formType {
+    .formItem {
+        & + .formItem {
+            margin-top: 17px;
+        }
+    }
+    .itemWrap {
+        display: flex;
+        align-items: center;
+        .label {
+            flex-shrink: 0;
+            width: 61px;
+            font-size: var(--font-size-md);
+            line-height: var(--line-height-md);
+            color: $color-accent;
+            @include ellipsis;
+            .asterisk {
+                font-size: var(--font-size-sm);
+                color: $color-error;
+            }
+        }
+    }
+}

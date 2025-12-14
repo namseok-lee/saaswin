@@ -1,0 +1,67 @@
+@use '/src/styles/_variables.scss' as *;
+
+.MuiTabs-root.tabList {
+    min-height: unset;
+    border-bottom: 1px solid rgba(217, 217, 217, 0.6);
+    .MuiButtonBase-root {
+        padding: 7px 10px;
+        height: 36px;
+        min-height: unset;
+        font-size: var(--font-size-xl);
+        line-height: var(--line-height-xl);
+        letter-spacing: -0.1px;
+        color: $color-subtitle;
+        .MuiTouchRipple-root {
+            display: none;
+        }
+        &.Mui-selected {
+            font-weight: 600;
+            color: $color-accent;
+        }
+    }
+}
+.MuiTabs-indicator {
+    background-color: var(--primary) !important;
+}
+.MuiTabPanel-root.tabPanel {
+    margin-top: 30px;
+    padding: 0;
+    .MuiGrid-root.MuiGrid-container {
+        margin-left: 0;
+        .MuiGrid-root.MuiGrid-item {
+            padding: 0;
+        }
+    }
+}
+
+.tabButtons {
+    display: flex;
+    padding: 10px;
+    border: $corner-xs;
+    background-color: $background-accent-subtler;
+    .btnTab {
+        width: 125px;
+        height: 32px;
+        font-size: var(--font-size-md);
+        line-height: 32px;
+        color: $color-neutral;
+        text-align: center;
+        border-radius: $corner-xs;
+        svg {
+            fill: $icon-default;
+        }
+        &.on {
+            background-color: $background-white;
+            box-shadow: 0px 2px 6px 0px $shadow-tab;
+            svg,
+            path {
+                fill: var(--primary);
+            }
+        }
+    }
+}
+.tabContents {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}

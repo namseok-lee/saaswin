@@ -1,0 +1,11 @@
+@use '/src/styles/_variables.scss' as *;
+
+.MuiLinearProgress-root {
+    background-color: var(--low);
+    .MuiLinearProgress-bar1Indeterminate {
+        background-color: var(--primary);
+    }
+    .MuiLinearProgress-bar2Indeterminate {
+        background-color: (var(--lightest), $gray-900);
+    }
+}

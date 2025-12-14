@@ -1,0 +1,14 @@
+@use '/src/styles/_variables.scss' as *;
+
+@mixin ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+    overflow: hidden;
+}
+
+@mixin unSetellipsis {
+    text-overflow: unset !important;
+    word-break: keep-all !important;
+    overflow: unset !important;
+}

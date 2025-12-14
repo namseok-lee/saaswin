@@ -1,0 +1,58 @@
+@use '/src/styles/_variables.scss' as *;
+.outWorking {
+    .context {
+        height: calc(100vh - 129px);
+        overflow-y: auto;
+    }
+    .section {
+        margin-bottom: 15px;
+    }
+    .MuiPaper-elevation {
+        max-height: 100vh;
+    }
+    .attachFile {
+        .fileList {
+            margin-bottom: 15px;
+        }
+    }
+}
+
+.fuelCost {
+    .guideTxt {
+        margin-bottom: 15px;
+        padding: 10px 12px;
+        font-size: var(--font-size-lg);
+        line-height: var(--line-height-lg);
+        color: $color-neutral;
+        background-color: $background-info-default;
+    }
+    .detailInfo {
+        margin-bottom: 9px;
+    }
+    .address {
+        display: flex;
+        gap: 4px;
+        .formItem {
+            width: 100px;
+        }
+        .text {
+            letter-spacing: -0.05em;
+        }
+    }
+    .ps {
+        padding: 12px;
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-sm);
+        color: $color-accent;
+        text-align: right;
+    }
+    .totalCost {
+        padding: 6px 12px;
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
+        color: #000;
+        text-align: right;
+        border: 1px solid $border-default;
+        background-color: $background-default;
+    }
+}

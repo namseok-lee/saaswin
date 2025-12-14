@@ -1,0 +1,19 @@
+@use '/src/styles/_variables.scss' as *;
+
+.emptyNoData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 100%;
+    .text {
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
+        color: $color-subtitle;
+        text-align: center;
+    }
+    .icoBlue {
+        fill: var(--high);
+    }
+}

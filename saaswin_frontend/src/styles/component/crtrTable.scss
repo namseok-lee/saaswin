@@ -1,0 +1,35 @@
+@use '/src/styles/_variables.scss' as *;
+
+.crtrTable {
+    padding: 14px 30px 30px;
+    border-radius: $corner-xs;
+    border: 1px solid $border-default;
+    .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 4px;
+        border-bottom: 2px solid $border-neutral;
+    }
+    .formList {
+        .formRow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            max-width: 1020px;
+            .col {
+                grid-column: span 3;
+            }
+            &.formRow {
+                margin-top: 20px;
+            }
+        }
+        .formLabel {
+            flex-shrink: 0;
+            font-size: 13px;
+            line-height: 20px;
+            color: #010101;
+        }
+    }
+}

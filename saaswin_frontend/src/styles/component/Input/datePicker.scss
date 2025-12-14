@@ -1,0 +1,339 @@
+@use '/src/styles/_variables.scss' as *;
+@use '/src/styles/mixin.scss' as *;
+
+@mixin labelStyle {
+    flex-shrink: 0;
+    width: 85px;
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-md);
+    color: $color-accent;
+    @include ellipsis;
+    .asterisk {
+        font-size: var(--font-size-sm);
+        color: $color-error;
+    }
+}
+
+// date picker(MUI)
+.datePicker {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    .row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+    }
+    .label {
+        @include labelStyle;
+    }
+    &.vertical {
+        .row {
+            flex-direction: column;
+            align-items: start;
+            justify-content: center;
+            gap: 4px;
+        }
+        .label {
+            width: 100%;
+        }
+        .datepicker-wrapper {
+            width: 100%;
+        }
+    }
+    .validationText {
+        margin-top: 4px;
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-xxs);
+        text-align: right;
+        color: $color-accent;
+    }
+    .MuiTextField-root {
+        width: 100%;
+    }
+    .MuiInputBase-root {
+        padding-right: 12px;
+        border-radius: 0;
+        .MuiInputBase-input {
+            padding: 6px 12px;
+            font-size: var(--font-size-md);
+            line-height: var(--line-height-md);
+            text-align: left;
+            color: $color-accent;
+            &::placeholder {
+                font-size: var(--font-size-md);
+                line-height: var(--line-height-md);
+                color: $color-subtitle;
+            }
+        }
+        &.Mui-focused,
+        &:hover {
+            .MuiOutlinedInput-notchedOutline {
+                border-bottom: 1px solid var(--primary);
+            }
+        }
+        &.Mui-error {
+            .MuiInputBase-input {
+                color: $color-error;
+            }
+            .MuiOutlinedInput-notchedOutline {
+                background-color: $background-error;
+                border-bottom: 1px solid $border-error;
+            }
+        }
+        &.Mui-disabled {
+            &.Mui-focused,
+            &:hover {
+                color: $color-disabled;
+                border-top: none;
+                border-bottom-color: $border-disabled;
+                background-color: $background-disabled;
+            }
+            .MuiInputBase-input {
+                color: $color-disabled;
+                -webkit-text-fill-color: unset;
+            }
+            .MuiOutlinedInput-notchedOutline {
+                border-bottom-color: $border-disabled;
+                background-color: $background-disabled;
+            }
+            .MuiInputAdornment-root {
+                filter: opacity(0.3);
+            }
+        }
+    }
+
+    .MuiOutlinedInput-notchedOutline {
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid $gray-400;
+        background-color: $gray-50;
+        z-index: 0;
+    }
+    .MuiInputAdornment-root {
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        background: url('../../../../public/img/ico/ico_calendar.png') no-repeat;
+        z-index: 1;
+        svg {
+            display: none;
+        }
+    }
+    .MuiButtonBase-root {
+        &:hover,
+        &:focus-within {
+            background-color: transparent;
+        }
+    }
+    .MuiTouchRipple-root {
+        display: none;
+    }
+    .delete-button {
+        right: 40px !important;
+    }
+    // time picker
+    &.timePicker {
+        .MuiInputAdornment-root {
+            background: url('../../../../public/img/ico/ico_clock.png') no-repeat;
+            svg {
+                display: none;
+            }
+        }
+    }
+    // date range picker
+    &.dateRangePicker {
+        // label
+        .MuiInputLabel-root {
+            font-size: var(--font-size-md);
+            line-height: var(--line-height-md);
+            color: $color-default;
+            transform: translate(12px, 6px) scale(1);
+            &.Mui-disabled {
+                color: $color-disabled;
+            }
+        }
+        // label 줄어들어서 위쪽에 있을 때
+        .MuiInputLabel-shrink {
+            display: none;
+        }
+        .MuiMultiInputDateRangeField-separator {
+            margin-left: 3px;
+            font-size: var(--font-size-md);
+            color: #000;
+        }
+        .MuiTextField-root {
+            &:last-of-type {
+                margin-left: 3px;
+            }
+        }
+        .MuiInputBase-root {
+            &::after {
+                content: '';
+                display: block;
+                width: 20px;
+                height: 20px;
+                position: absolute;
+                top: 6px;
+                right: 12px;
+                background: url('../../../../public/img/ico/ico_calendar.png') no-repeat;
+            }
+            &.Mui-disabled {
+                background-color: $background-disabled;
+                &::after {
+                    opacity: 0.3;
+                }
+                &.Mui-focused,
+                &:hover {
+                    background-color: $background-disabled;
+                }
+            }
+        }
+    }
+    &.error {
+        .MuiOutlinedInput-notchedOutline {
+            border-bottom-color: $border-error;
+            background-color: $background-error;
+        }
+        .validationText {
+            color: $color-error;
+        }
+    }
+    // white ver
+    &.white {
+        .MuiOutlinedInput-notchedOutline {
+            background-color: $background-white;
+        }
+        &.dateRangePicker,
+        &.timePicker {
+            .MuiOutlinedInput-notchedOutline {
+                background-color: $background-white;
+            }
+        }
+    }
+}
+// time range picker
+.timeRangePicker {
+    display: flex;
+    align-items: center;
+    .row {
+        display: flex;
+        gap: 3px;
+        align-items: center;
+    }
+    .label {
+        @include labelStyle;
+    }
+    &.vertical {
+        flex-direction: column;
+        align-items: start;
+        gap: 4px;
+    }
+    &.error {
+        .MuiOutlinedInput-notchedOutline {
+            border-bottom-color: $border-error;
+            background-color: $background-error;
+        }
+        .validationText {
+            color: $color-error;
+        }
+    }
+    &.white {
+        .MuiOutlinedInput-notchedOutline {
+            background-color: $background-white;
+        }
+    }
+}
+
+// 달력 팝업 부분
+.MuiPickersPopper-root {
+    .MuiPaper-root {
+        border-radius: $corner-none;
+        border: 1px solid $border-default;
+        box-shadow: 0 4px 10px 0 $shadow-layer1;
+    }
+}
+// 헤더
+.MuiPickersCalendarHeader-labelContainer {
+    font-weight: 600;
+    font-size: var(--font-size-2xl);
+    color: $color-accent;
+}
+// 바디
+.MuiDateCalendar-root {
+    width: 294px;
+}
+// 날짜
+.MuiDateCalendar-viewTransitionContainer {
+    .MuiDayCalendar-weekDayLabel {
+        width: 35px;
+        font-size: var(--font-size-lg);
+        color: $color-neutral;
+    }
+    .MuiPickersDay-root {
+        font-size: var(--font-size-lg);
+        color: $color-accent;
+        &.Mui-selected {
+            color: $color-white;
+            background-color: var(--primary) !important;
+        }
+        &:hover {
+            background-color: rgba(232, 241, 244, 0.4);
+        }
+        .MuiTouchRipple-root {
+            display: none;
+        }
+        &:first-of-type {
+            &:not(.MuiPickersDay-dayOutsideMonth) {
+                color: $color-accent-red;
+            }
+        }
+    }
+    .MuiPickersDay-dayOutsideMonth {
+        color: $color-subtitle;
+    }
+}
+.MuiDateRangePickerDay-root {
+    // 일요일
+    &:first-of-type {
+        .MuiPickersDay-root {
+            &:not(.MuiPickersDay-dayOutsideMonth) {
+                color: $color-accent-red;
+            }
+        }
+    }
+}
+// 취소 확인 부분
+.MuiDialogActions-root {
+    padding: 9px 8px;
+    border-top: 1px dashed rgba(217, 217, 217, 0.6);
+    .MuiButtonBase-root {
+        font-size: var(--font-size-sm);
+        color: var(--primary);
+        &:first-of-type {
+            color: $color-neutral;
+        }
+    }
+}
+// 시간 팝업 부분
+.MuiMultiSectionDigitalClock-root {
+    border-bottom: none;
+    padding: 16px 0;
+    .MuiMultiSectionDigitalClockSection-root {
+        width: 60px;
+    }
+    .MuiMultiSectionDigitalClockSection-item {
+        width: 36px;
+        height: 36px;
+        margin: 0 12px;
+        padding: 0;
+        font-size: var(--font-size-lg);
+        color: $color-accent;
+        &.Mui-selected {
+            background-color: var(--primary) !important;
+            color: $color-white;
+        }
+    }
+}

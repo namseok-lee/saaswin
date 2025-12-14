@@ -1,0 +1,44 @@
+.form-control {
+    width: 300px; /* FormControl의 너비 설정 */
+    height: 30px; /* FormControl의 높이 설정 */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 16px; /* 아래 여백 */
+}
+
+.input-label {
+    font-size: 0.875rem; /* 라벨의 폰트 크기 조정 */
+    position: absolute;
+    top: 50%; /* 라벨을 수직 가운데로 위치시킴 */
+    left: 14px; /* 라벨의 좌측 위치 */
+    transform: translateY(-50%) scale(1); /* 라벨의 위치 및 크기 조정 */
+    background-color: white; /* 라벨 배경색 */
+    padding: 0 4px; /* 라벨 패딩 */
+    pointer-events: none; /* 라벨 클릭 방지 */
+}
+
+.custom-select {
+    width: 100%;
+    height: 100%;
+    padding: 4px 10px; /* 내부 텍스트 패딩 조정 */
+    font-size: 0.875rem; /* 텍스트 폰트 크기 조정 */
+    border: 1px solid #ccc; /* 테두리 색상 설정 */
+    border-radius: 4px; /* 테두리 반경 설정 */
+    appearance: none; /* 기본 스타일 제거 */
+    background-color: white;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'><path fill='%23999' d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    cursor: pointer;
+}
+
+.custom-select:hover {
+    border-color: #888; /* 호버 시 테두리 색상 변경 */
+}
+
+.custom-select:focus {
+    border-color: #3f51b5; /* 포커스 시 테두리 색상 변경 */
+    outline: none; /* 기본 포커스 아웃라인 제거 */
+}

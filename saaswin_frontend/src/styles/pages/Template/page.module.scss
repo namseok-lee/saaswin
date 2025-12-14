@@ -1,0 +1,854 @@
+@use '/src/styles/_variables.scss' as *;
+
+@mixin card {
+    .card {
+        flex-shrink: 0;
+        position: relative;
+        width: 260px;
+        height: 370px;
+        padding: 10px;
+        border: 1px solid $border-default;
+        border-radius: 1px;
+        background-color: $background-default;
+        transition: transform 0.3s ease;
+        box-sizing: border-box;
+        overflow: hidden;
+        .cardImage {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+        .title {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 240px;
+            height: 150px;
+            position: absolute;
+            bottom: 8px;
+            left: 9px;
+            right: 0;
+            text-align: center;
+            font-size: var(--font-size-xl);
+            color: $color-neutral;
+            border-radius: $corner-md $corner-md 0 0;
+            background: linear-gradient(180deg, #f5f5f5 0%, #ecebeb 100%);
+        }
+        .docType {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 46px;
+            height: 46px;
+            position: absolute;
+            top: -23px;
+            left: 50%;
+            border-radius: $corner-full;
+            background-color: $background-white;
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.08);
+            transform: translateX(-50%);
+        }
+        .insait {
+            padding: 5px 15px;
+            font-size: var(--font-size-md);
+            line-height: var(--line-height-md);
+            color: $color-default;
+            border: 1px solid $border-bold;
+            border-radius: $corner-xl;
+            background-color: $background-white;
+        }
+        .btns {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.3);
+            z-index: 99;
+            opacity: 0;
+            .btn {
+                width: 150px;
+                height: 30px;
+                font-size: 17px;
+                background-color: #fff;
+                cursor: pointer;
+            }
+        }
+        &.on {
+            border-color: var(--primary);
+            .title {
+                color: $color-white;
+                background: var(--bgTemplateList);
+            }
+            .docType {
+                path {
+                    fill: var(--primary);
+                }
+            }
+            .insait {
+                margin-top: 4px;
+                border: none;
+                color: $color-white;
+                background-color: var(--primary);
+            }
+        }
+    }
+}
+
+// template list slider ver
+.slideArea {
+    position: relative;
+    width: 100%;
+    padding: 20px 0 50px;
+    overflow: hidden;
+    transition: all 0.5s;
+}
+.cardSlider {
+    display: flex;
+    width: calc(100vw - 460px);
+    margin: 0 50px;
+    overflow: hidden;
+    .slideList {
+        display: flex;
+        flex-shrink: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+        transition: transform 0.5s ease-in-out;
+    }
+    .slideItem {
+        display: flex;
+        flex-wrap: wrap;
+        width: calc(100vw - 430px);
+        box-sizing: border-box;
+        flex-shrink: 0;
+        overflow: hidden;
+        @include card;
+    }
+    .slideBtn {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        font-size: 30px;
+        z-index: 99;
+        &:disabled {
+            opacity: 0.1;
+        }
+        &.slideBtnRight {
+            left: unset;
+            right: 0;
+        }
+    }
+}
+
+// template list infinite scroll ver
+.infiniteScroller {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 36px;
+    column-gap: 5.1%;
+    @include card;
+    &.noThumbType {
+        .card {
+            height: 260px;
+            background-color: var(--lower);
+            .title {
+                height: 190px;
+                background-size: 100% 100%;
+            }
+            .docType {
+                background-color: var(--primary);
+                svg,
+                path {
+                    fill: #ffffff;
+                }
+            }
+            &::before {
+                content: '';
+                display: block;
+                width: 240px;
+                height: 240px;
+                border: 1px solid $border-neutral;
+                background-color: $background-white;
+            }
+        }
+    }
+}
+.cardWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    .cardContainer {
+        display: flex;
+        gap: 30px;
+        padding: 30px;
+    }
+}
+
+// create template
+.templateCreateWrap {
+    &.templateWrap {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .sideArea,
+    .pageList {
+        flex-grow: 0;
+        flex-shrink: 0;
+        width: 240px;
+        height: calc(100vh - 50px);
+        border-right: 1px solid $border-neutral;
+        background-color: $background-white;
+        overflow-y: auto;
+        &.btns {
+            width: 15%;
+        }
+    }
+    .sideArea {
+        padding: 26px 20px 20px;
+        .category {
+            .tit {
+                margin-bottom: 13px;
+                font-size: var(--font-size-2xl);
+                line-height: var(--line-height-2xl);
+                color: $color-accent;
+            }
+            & + .category {
+                margin-top: 40px;
+            }
+        }
+        .btnArea {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .btnAddComp {
+            justify-content: flex-start;
+            gap: 12px;
+            font-size: var(--font-size-xl);
+            line-height: var(--line-height-xl);
+            .icon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 38px;
+                height: 38px;
+                border-radius: 8px;
+                background-color: var(--lower);
+            }
+            &:hover {
+                color: var(--primary);
+                .icon {
+                    background-color: var(--secondary);
+                    background: linear-gradient(144.61deg, var(--secondary) 6.56%, var(--high) 94.53%);
+                    box-shadow: 0px 2px 4px var(--lightest);
+                    svg path {
+                        fill: #ffffff;
+                    }
+                }
+            }
+        }
+        .searchBox {
+            margin-bottom: 23px;
+        }
+    }
+
+    .contentsWrap {
+        width: 100%;
+    }
+    .contentsArea {
+        width: 100%;
+        height: calc(100vh - 50px);
+        overflow-y: auto;
+        background-color: $background-accent-subtler;
+        .docEditor {
+            display: flex;
+            justify-content: space-between;
+            height: 60px;
+            padding: 15px 30px;
+            border-bottom: 1px solid $border-neutral;
+            background-color: $background-white;
+            .ratio {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .btns {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+            .textEdit {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+    }
+    .pageList {
+        border-left: 1px solid $border-neutral;
+        border-right: none;
+    }
+    .icoClose {
+        font-size: 30px;
+    }
+
+    .pdfViewer {
+        display: flex;
+        justify-content: center;
+        padding: 40px;
+        canvas {
+            border: none;
+        }
+        .pageWrap {
+            position: relative;
+            margin: 0 auto;
+        }
+        .rnd {
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            padding: 0;
+            background-color: #e3313108;
+            cursor: 'move';
+            .point {
+                position: 'absolute';
+                width: 6px;
+                height: 6px;
+                border: 1px solid #010101;
+                background-color: $background-white;
+            }
+        }
+        .componentContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            background-color: transparent;
+        }
+        .componentItemText {
+            width: 100%;
+            input[type='text'] {
+                padding: 0;
+            }
+        }
+        .componentItemNumber {
+            width: 100%;
+            background-color: transparent;
+            input[type='number'] {
+                padding: 0;
+            }
+        }
+        .componentItemDatePicker {
+            width: 100%;
+            padding: 0;
+            background-color: transparent;
+        }
+        .componentItemSign {
+            width: 100%;
+            height: auto;
+            padding: 10px;
+        }
+        .componentItemTextarea {
+            width: 100%;
+            height: 100%;
+        }
+        .componentItemAttachFile {
+            position: relative;
+            input[type='file'] {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0%;
+                opacity: 0;
+            }
+        }
+    }
+
+    // template edit
+    .templateEditWrap {
+        [class*='componentItem'] {
+            background-color: rgba(255, 0, 0, 0.1);
+        }
+        .componentItemLabel {
+            display: block;
+        }
+    }
+}
+
+// send contract document
+.contractDocRequire {
+    padding: 40px;
+    .contractList {
+        display: flex;
+        flex-direction: column;
+        gap: $space-02;
+        margin-top: $space-03;
+        padding: $space-02;
+        border: 1px solid $border-accent;
+        .item {
+            font-size: var(--font-size-2xl);
+            cursor: pointer;
+            &.on {
+                background-color: $background-subtler;
+            }
+        }
+    }
+}
+
+// file upload modal
+.fileUploadModal {
+    .desc {
+        margin-bottom: 10px;
+        font-weight: 600;
+        font-size: var(--font-size-md);
+        line-height: var(--font-size-md);
+        color: $color-accent;
+    }
+}
+
+@media (max-width: 1440px) {
+    .infiniteScroller {
+        column-gap: 36px;
+    }
+}
+
+.editTemplate {
+    .context {
+        padding: 30px;
+        height: calc(100vh - 129px);
+        overflow-y: auto;
+    }
+    .section {
+        padding: 25px 30px;
+        border: 1px solid $border-default;
+        border-radius: $corner-xs;
+        & + .section {
+            margin-top: 25px;
+        }
+    }
+    .sectionTit {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        font-size: var(--font-size-lg);
+        line-height: var(--line-height-lg);
+        color: $color-accent;
+        border-bottom: 3px solid $border-neutral;
+        .ico {
+            display: flex;
+            align-items: center;
+            justify-self: center;
+            width: 26px;
+            height: 26px;
+            border-radius: $corner-full;
+            background-color: var(--bgFocus);
+            svg {
+                margin: 0 auto;
+            }
+        }
+        .btnOptions {
+            display: flex;
+            gap: 5px;
+            margin-left: auto;
+        }
+    }
+    .formCont {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        .formItem {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            .item {
+                width: 330px;
+            }
+            .chkOption {
+                display: flex;
+                gap: 20px;
+                height: 46px;
+                align-items: flex-end;
+            }
+        }
+        .label {
+            margin-left: -15px;
+            font-size: var(--font-size-sm);
+            line-height: 11px;
+            color: $color-accent;
+        }
+        .switch {
+            position: relative;
+            margin-bottom: -23px;
+        }
+    }
+    .tblFooter {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 15px;
+        .label {
+            font-size: var(--font-size-md);
+            color: $color-accent;
+        }
+    }
+}
+.custom {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    .formItem {
+        margin-left: 22px;
+    }
+    .customInput {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        .input {
+            width: 288px;
+        }
+    }
+    .chkOption {
+        margin-top: -20px;
+    }
+    .item {
+        width: 288px !important;
+    }
+}
+.etc {
+    .part {
+        width: 800px;
+        padding: 20px;
+        background-color: $background-default;
+        & + .part {
+            margin-top: 20px;
+        }
+    }
+    .chkOption {
+        .title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            .switch {
+                margin-bottom: -12px;
+            }
+        }
+        .switch {
+            margin-bottom: 0;
+            margin-left: auto;
+        }
+        .label {
+            margin-left: -5px;
+        }
+    }
+    .tblHeader {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+        .label {
+            margin: 0 0 -3px -10px;
+        }
+        .switch {
+            margin: 0 0 -14px;
+        }
+    }
+    table {
+        thead {
+            tr {
+                th {
+                    text-align: left;
+                }
+            }
+        }
+    }
+    .select {
+        width: 200px;
+    }
+}
+
+.editTemplateModal {
+    .barTitle {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        .btnBack {
+            transform: rotate(90deg);
+        }
+    }
+}
+
+// edit template right side
+.componentOptions {
+    .title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 15px;
+        letter-spacing: -0.1em;
+        .icon {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            background-color: $background-default;
+        }
+        .tooltip {
+            button {
+                padding: 3px;
+                border-radius: $corner-full;
+                background-color: $background-subtler;
+            }
+        }
+    }
+    .name {
+        margin-bottom: 15px;
+    }
+    .label {
+        display: block;
+        margin-bottom: 4px;
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
+        color: $color-accent;
+        letter-spacing: -0.1em;
+        &.groupTit {
+            display: block;
+            margin-bottom: 10px;
+        }
+    }
+    .label2 {
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-sm);
+        color: $color-accent;
+        letter-spacing: -0.17em;
+    }
+    .switchLable {
+        margin-left: -20px;
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-sm);
+        color: $color-neutral;
+    }
+    .type {
+        .required {
+            margin-left: 9px;
+        }
+        .checkedOption {
+            margin-top: 13px;
+        }
+    }
+    .position {
+        margin-bottom: 15px;
+    }
+    .divisionLine {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px dashed $border-neutral;
+    }
+    .col {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        .selectBox {
+            flex: 0.5;
+        }
+        .textBox {
+            flex: 0.5;
+        }
+    }
+    .textAreaBox {
+        .label {
+            display: block;
+            margin-bottom: 7px;
+        }
+        & + .textAreaBox {
+            margin-top: 15px;
+        }
+    }
+    .selectBasic,
+    .guideText {
+        margin-top: 22px;
+    }
+    .dateForm,
+    .timeForm,
+    .datePickerForm {
+        margin-top: 18px;
+    }
+    .setText {
+        .col {
+            .selectBox {
+                flex: 0.7;
+            }
+            .numberBox {
+                flex: 0.3;
+            }
+        }
+    }
+    .decorationList {
+        gap: 8px;
+        margin-top: 20px;
+        position: relative;
+    }
+    .palette {
+        display: none;
+        position: fixed;
+        padding: 20px;
+        border: 1px solid $border-default;
+        border-radius: $corner-xs;
+        background-color: $background-white;
+        transform: translate(-50px, -90px);
+        z-index: 9;
+        box-shadow: 0px 4px 10px 0px $shadow-layer1;
+        &.on {
+            display: block;
+        }
+    }
+    .styleList {
+        display: flex;
+        justify-content: space-between;
+        .item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 4px;
+            background-color: $background-default;
+            cursor: pointer;
+        }
+        .bold {
+            font-weight: 600;
+        }
+        .italic {
+            font-style: italic;
+        }
+        .underline {
+            text-decoration: underline;
+        }
+        .color {
+            &::after {
+                content: '';
+                display: inline-block;
+                width: 4px;
+                height: 4px;
+                margin-bottom: -10px;
+                border-radius: $corner-full;
+                background-color: $background-bk;
+                vertical-align: bottom;
+            }
+        }
+    }
+    .colorList {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 10px;
+        .item {
+            width: 20px;
+            height: 20px;
+            position: relative;
+            border-radius: $corner-full;
+            font-size: 0;
+            cursor: pointer;
+            &.white {
+                border: 1px solid $border-default;
+            }
+            &.on {
+                &::after {
+                    content: '';
+                    display: block;
+                    width: 20px;
+                    height: 20px;
+                    background: url('../../../../public/img/ico/template/ico_check.png') no-repeat;
+                }
+            }
+        }
+    }
+    .dataForm {
+        .datePicker {
+            margin-bottom: 26px;
+        }
+    }
+    .itemDetailOption {
+        .inputText {
+            margin-bottom: 19px;
+        }
+    }
+}
+
+.pdfPreview {
+    width: 120px;
+    margin: 0 auto 20px;
+
+    .tit {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 12px;
+    }
+
+    .previewWrapper {
+        overflow-y: auto;
+        padding-right: 8px;
+
+        &::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+    }
+
+    .previewPage {
+        position: relative;
+        margin-bottom: 24px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        border-radius: 4px;
+        transition: all 0.2s;
+
+        &.active {
+            border-color: #0066ff;
+        }
+
+        .pageNumber {
+            width: 100%;
+            position: absolute;
+            bottom: -17px;
+            left: 0;
+            font-size: var(--font-size-lg);
+            line-height: var(--line-height-lg);
+            color: $color-accent;
+            text-align: center;
+            padding: 5px 0;
+        }
+
+        /* PDF.js 렌더링 스타일 조정 */
+        canvas {
+            width: 100% !important;
+            height: auto !important;
+            border: 2px solid #eee;
+        }
+        &:hover {
+            canvas {
+                border-color: var(--primary);
+            }
+        }
+    }
+}

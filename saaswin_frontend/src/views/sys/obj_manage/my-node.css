@@ -1,0 +1,73 @@
+.node {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: rgb(243, 240, 240);
+}
+.info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.ryg {
+    background-color: red;
+    width: 5px;
+}
+.profile-pic {
+    width: 50px;
+}
+.prof-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    align-items: center;
+    top: 10px;
+    position: relative;
+}
+.details {
+    width: 100px;
+    height: 62px;
+}
+.name {
+    padding-top: 10px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    text-align: start;
+    height: 25px;
+}
+.designation {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    color: #7c7b7b;
+    text-align: start;
+    height: 13px;
+}
+.team {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    color: #7c7b7b;
+    text-align: start;
+    height: 13px;
+}
+.orgchart.myChart > ul > li > ul li::before {
+    border-top-color: #bbc;
+}
+
+.orgchart.myChart > ul > li > ul li .oc-node::before,
+.orgchart.myChart ul li .oc-node:not(:only-child)::after {
+    background-color: #bbc;
+}
+.orgchart.myChart {
+    background-image: none !important;
+}
+.orgchart .oc-node .leftEdge,
+.orgchart .oc-node .topEdge,
+.orgchart .oc-node .rightEdge {
+    display: none;
+}

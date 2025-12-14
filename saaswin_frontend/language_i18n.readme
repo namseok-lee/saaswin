@@ -1,0 +1,21 @@
+* 설정파일
+- /src/i18n/i18n.ts 
+ 앱에서의 설정을 담당함 (클라이언트사이드)
+ 언어 리소스로드 (i18next에 추가) , 리소스캐싱 , 언어변경처리 (i18next.changeLanguage()) 등
+
+- /src/i18n/next-i18next.config -> next.js에서의 설정의 담당 (서버사이드)
+ 설정 후, next.config.mjs에 해당부분 import하여 추가
+ -> next.config.mjs 에 직접 옵션을 넣어서 설정하였음
+
+* 적용
+1. layout 페이지
+- useEffect() 부분에서 localStorage의 값을 읽어 loadLanguage() 를 호출하도록 함
+
+2. BasicSetting 페이지
+- 다국어선택할때 바뀐코드를 파라미터로 loadLanguage() 를 호출하도록 함. ex) loadLanguage('en')
+
+3. 개발 페이지
+- import { useTranslation } from 'react-i18next'; - 최상단 추가
+- const { t } = useTranslation(); - 상단에 추가 (함수에는 동작하지않고 컴포넌트에만 동작함)
+- t(변수명) . ex) {t(item.grid_tit_info?.title)}  or {t('235')} 
+

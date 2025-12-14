@@ -1,0 +1,22 @@
+@use '/src/styles/_variables.scss' as *;
+
+.textarea {
+    height: 84px;
+    padding: 10px;
+    border-radius: $corner-xs;
+    border: 1px solid $border-input-default;
+    resize: none;
+    &::placeholder {
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
+        color: $color-subtitle;
+    }
+}
+.textareaWrap {
+    .countText {
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-xxs);
+        text-align: right;
+        color: $gray-600;
+    }
+}

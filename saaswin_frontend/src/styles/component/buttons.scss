@@ -1,0 +1,256 @@
+@use '/src/styles/_variables.scss' as *;
+
+@mixin btnBasic($color, $bgColor) {
+    font-family: $font-family-body;
+    color: $color;
+    background-color: $bgColor !important;
+    &.sm {
+        min-width: 60px;
+        height: 29px;
+        padding: 0 10px;
+        font-size: var(--font-size-sm);
+        letter-spacing: -0.1em;
+        svg {
+            transform: scale(0.738);
+        }
+    }
+    &.md {
+        min-width: 86px;
+        height: 35px;
+        padding: 0 12px;
+        svg {
+            transform: scale(0.85);
+        }
+    }
+    &.lg {
+        min-width: 90px;
+        height: 35px;
+        padding: 0 14px;
+        font-size: var(--font-size-lg);
+    }
+    &.reset {
+        border-radius: 0;
+        &:hover {
+            box-shadow: none;
+        }
+        .MuiTouchRipple-root {
+            display: none;
+        }
+    }
+    &.rounded {
+        border-radius: $corner-xs;
+    }
+}
+
+.btnPrimary {
+    @include btnBasic($color-white, var(--primary));
+    svg {
+        fill: $icon-white;
+    }
+    &:hover {
+        background-color: var(--highest) !important;
+    }
+    &:active {
+        background-color: var(--deeper) !important;
+    }
+    &:disabled {
+        color: $color-disabled;
+        background-color: $background-disabled !important;
+        svg {
+            fill: $icon-disabled;
+        }
+    }
+}
+.btnDefault {
+    @include btnBasic($color-neutral, $gray-white);
+    border: 1px solid $border-bold;
+    svg {
+        fill: $icon-default;
+    }
+    &:hover {
+        color: var(--primary);
+        svg {
+            fill: var(--primary);
+        }
+    }
+    &:active {
+        border-color: var(--primary);
+        color: var(--primary);
+        svg {
+            fill: var(--primary);
+        }
+    }
+    &:disabled {
+        color: $color-disabled;
+        border-color: $border-disabled;
+        svg {
+            fill: $icon-disabled;
+        }
+    }
+}
+.btnText {
+    @include btnBasic($color-neutral, var($background-white));
+    &.sm,
+    &.md,
+    &.lg {
+        padding: 0;
+    }
+    &:hover {
+        color: var(--primary);
+        svg {
+            fill: var(--primary);
+        }
+    }
+    &:active {
+        background-color: var(--lower) !important;
+        color: var(--primary);
+        svg {
+            fill: var(--primary);
+        }
+    }
+    &:disabled {
+        background-color: $background-white !important;
+        color: $color-disabled;
+        svg {
+            fill: $icon-disabled;
+        }
+    }
+}
+.btnLink {
+    @include btnBasic(var(--primary), var($background-white));
+    width: fit-content;
+    &.sm,
+    &.md,
+    &.lg {
+        padding: 0;
+    }
+    svg {
+        fill: var(--primary);
+    }
+    &:hover {
+        color: $color-state-hover;
+        background-color: $background-default !important;
+        svg {
+            fill: $icon-state-hover !important;
+        }
+    }
+    &:active {
+        background-color: var(--lower) !important;
+        color: $color-state-hover !important;
+        svg {
+            fill: $icon-state-hover !important;
+        }
+    }
+    &.disabled {
+        background-color: $background-white !important;
+        color: $color-disabled !important;
+        cursor: default;
+        svg {
+            fill: $icon-disabled !important;
+        }
+    }
+}
+.btnOnlyIcon {
+    @include btnBasic($color-neutral, var($background-white));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.sm,
+    &.md,
+    &.lg {
+        min-width: unset !important;
+        padding: 0 !important;
+    }
+    &.sm {
+        width: 28px;
+        height: 24px;
+    }
+    &.md {
+        width: 29px;
+    }
+    &.lg {
+        width: 35px;
+    }
+    svg {
+        fill: $icon-default;
+    }
+    &:hover {
+        background-color: $background-default !important;
+        svg {
+            fill: var(--primary);
+        }
+    }
+    &:active {
+        background-color: var(--lower) !important;
+        svg {
+            fill: var(--primary);
+        }
+    }
+    &:disabled {
+        background-color: $background-white !important;
+        svg {
+            fill: $icon-disabled !important;
+        }
+    }
+}
+.btnOnlyIconPrimary {
+    @include btnBasic(var(--primary), var($background-white));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.sm,
+    &.md,
+    &.lg {
+        min-width: unset !important;
+        padding: 0 !important;
+    }
+    &.sm {
+        width: 28px;
+        height: 24px;
+    }
+    &.md {
+        width: 29px;
+    }
+    &.lg {
+        width: 35px;
+    }
+    svg {
+        fill: var(--primary);
+    }
+    &:hover {
+        background-color: $background-default !important;
+        svg {
+            fill: $background-state-hover !important;
+        }
+    }
+    &:active {
+        background-color: var(--lower) !important;
+        svg {
+            fill: var(--deeper) !important;
+        }
+    }
+    &:disabled {
+        background-color: $background-white !important;
+        svg {
+            fill: $icon-disabled !important;
+        }
+    }
+}
+.btnWithIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    &.alignCenter {
+        justify-content: center;
+    }
+    &.alignRight {
+        justify-content: end;
+    }
+}

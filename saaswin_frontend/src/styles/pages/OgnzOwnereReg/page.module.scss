@@ -1,0 +1,156 @@
+@use '/src/styles/_variables.scss' as *;
+
+.ognzOwnerReg {
+    .organizationName {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 21px;
+        padding-bottom: 7px;
+        border-bottom: 1px dashed $border-neutral;
+        .icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 26px;
+            height: 26px;
+            border-radius: $corner-full;
+            background-color: $background-subtler;
+            margin-right: 10px;
+            svg {
+                transform: scale(0.75);
+            }
+        }
+    }
+    .registration {
+        .list {
+            display: flex;
+            gap: 15px;
+        }
+        .item {
+            flex: 1;
+            position: relative;
+        }
+        .tit {
+            margin-bottom: 12px;
+            font-size: var(--font-size-lg);
+            line-height: var(--line-height-md);
+            color: $color-accent;
+        }
+        .info {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            height: 105px;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid $border-default;
+            background-color: var(--bgFocus);
+            &.noData {
+                justify-content: center;
+                align-items: center;
+                font-size: var(--font-size-md);
+                line-height: var(--line-height-md);
+                .icon {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 26px;
+                    height: 26px;
+                    border-radius: $corner-full;
+                    background-color: $background-subtler;
+                    margin-right: 10px;
+                    svg {
+                        transform: scale(0.75);
+                    }
+                }
+            }
+            .text {
+                margin-right: auto;
+                font-size: var(--font-size-md);
+                line-height: var(--line-height-md);
+            }
+            .name {
+                font-weight: 600;
+                color: $color-accent;
+            }
+            .position {
+                color: $color-neutral;
+            }
+            .term {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                font-size: var(--font-size-sm);
+                line-height: var(--line-height-sm);
+                .title {
+                    padding: 3px 10px;
+                    color: $color-neutral;
+                    border: 1px solid $border-neutral;
+                    border-radius: 20px;
+                    background-color: $background-white;
+                }
+                .date {
+                    color: $color-accent;
+                }
+                .btnEdit {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 24px;
+                    height: 24px;
+                    border-radius: $corner-full;
+                    background-color: var(--lower);
+                }
+                .code {
+                    font-size: var(--font-size-md);
+                    line-height: var(--line-height-md);
+                    color: $color-subtitle;
+                }
+            }
+        }
+        .btnUnReg {
+            position: absolute;
+            top: -2px;
+            right: 0;
+        }
+    }
+}
+.pageBtnArea {
+    display: flex;
+    justify-content: end;
+    gap: 5px;
+    margin: 10px -24px 0 -22px;
+    padding: 15px 30px;
+    border-top: 1px solid $border-neutral;
+}
+
+// 모달
+.agtAuth {
+    .msg {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+        padding: 10px 12px;
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
+        color: $color-info-enabled;
+        background-color: $background-info-default;
+        svg {
+            transform: scale(0.7);
+        }
+    }
+    .rdoGroup {
+        margin: 0 0 20px 158px;
+    }
+    .caution {
+        margin-top: 20px;
+        font-size: var(--font-size-lg);
+        line-height: var(--line-height-lg);
+        color: $color-accent;
+        text-align: center;
+        .emphasis {
+            color: var(--primary);
+        }
+    }
+}

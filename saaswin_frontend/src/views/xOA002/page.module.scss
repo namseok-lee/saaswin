@@ -1,0 +1,436 @@
+@use '/src/styles/_variables.scss' as *;
+
+.hrPersonalInfo {
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
+    overflow: hidden;
+}
+.tabCont {
+    gap: 0;
+}
+.hrMyInfo {
+    width: 288px;
+    // height: 100vh;
+    padding: 20px 30px;
+    position: relative;
+    border-right: 1px solid $border-neutral;
+    background-color: $background-white;
+    // overflow: hidden;
+    // overflow-y: auto;
+    .container {
+        height: calc(100vh - 85px);
+        overflow: hidden;
+        overflow-y: auto;
+    }
+
+    .btnBack {
+        margin-bottom: 8px;
+    }
+
+    .memberGroupInfo {
+        margin-top: 15px;
+    }
+
+    .myInfo {
+        .profileImg {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 70px;
+            height: 70px;
+            margin: 20px auto 12px;
+            position: relative;
+            border-radius: $corner-full;
+            background-color: #f5f5f5;
+            cursor: pointer;
+            svg {
+                transform: scale(1.5);
+            }
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: $corner-full;
+                overflow: hidden;
+            }
+            &::after {
+                content: '';
+                width: 30px;
+                height: 33px;
+                position: absolute;
+                bottom: 0;
+                right: -5px;
+                background: url(../../../public/img/ico/ico_camera.png) no-repeat;
+            }
+            &.on {
+                &::after {
+                    content: none;
+                }
+            }
+            .hover {
+                display: none;
+                justify-content: center;
+                align-items: center;
+                width: 70px;
+                height: 70px;
+                gap: 1px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                font-size: var(--font-size-lg);
+                line-height: var(--line-height-lg);
+                color: #ffffff;
+                border-radius: $corner-full;
+                background-color: rgba(39, 39, 39, 0.5);
+                svg {
+                    transform: scale(0.8);
+                }
+            }
+            &:hover {
+                .hover {
+                    display: flex;
+                }
+            }
+        }
+        .btnCreateMyInfo {
+            width: 100%;
+            height: 32px;
+            font-size: var(--font-size-md);
+            line-height: var(--line-height-md);
+            color: $color-neutral;
+            border-radius: $corner-xs;
+            border: 1px solid $border-default;
+            box-shadow: 0 2px 3px $shadow-tab;
+            svg {
+                transform: scale(0.8);
+            }
+        }
+        .infoList {
+            margin-top: 12px;
+            .item {
+                display: flex;
+                gap: 10px;
+                .title {
+                    flex-shrink: 0;
+                    width: 70px;
+                    font-size: var(--font-size-md);
+                    line-height: var(--line-height-md);
+                    color: $color-accent;
+                }
+                .text {
+                    font-size: var(--font-size-md);
+                    line-height: var(--line-height-md);
+                    color: $color-neutral;
+                }
+                & + .item {
+                    margin-top: 13px;
+                }
+            }
+            .btnCopy {
+                transform: scale(0.65);
+                vertical-align: middle;
+            }
+            & + .infoList {
+                margin-top: 12px;
+                padding-top: 12px;
+                border-top: 1px solid $border-neutral;
+            }
+        }
+    }
+    .groupInfo {
+        .treeView {
+            height: calc(100vh - 128px);
+            overflow: hidden;
+            overflow-y: auto;
+            > .MuiTreeItem-root {
+                &::after {
+                    content: '';
+                    display: block;
+                    width: 100%;
+                    height: 50px;
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    background: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+                }
+            }
+        }
+    }
+}
+.hrInfoCard {
+    width: calc(100% - 151px);
+    height: calc(100vh - 20px);
+    overflow: hidden;
+    overflow-y: auto;
+    .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        height: 56px;
+        margin-bottom: 8px;
+        padding: 17px 5px 7px 16px;
+        position: sticky;
+        top: 0;
+        left: 0;
+        font-size: var(--font-size-xl);
+        line-height: var(--line-height-xl);
+        color: $color-accent;
+        background-color: #f6f9fb;
+    }
+    .guideText {
+        display: flex;
+        align-items: center;
+        gap: 1px;
+        padding: 5px 8px;
+        margin-right: auto;
+        font-size: var(--font-size-sm);
+        color: $color-neutral;
+        border: $corner-xxs;
+        background-color: var(--lower);
+    }
+    .options {
+        display: flex;
+        justify-content: space-between;
+        gap: 5px;
+        margin-right: 10px;
+    }
+    .btnShowSummary {
+        margin-right: auto;
+    }
+    &::-webkit-scrollbar-track {
+        display: none;
+    }
+}
+.hrCardList {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    padding: 0 30px 10px;
+    .item {
+        width: calc((100% - 48px) / 4);
+        height: 200px;
+        cursor: pointer;
+        position: relative;
+
+        &[data-swapy-highlighted] {
+            border-radius: $corner-sm;
+            background-color: var(--normal);
+        }
+
+        &.dragging {
+            cursor: grabbing;
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #53c3ee;
+                border-radius: $corner-sm;
+                pointer-events: none;
+                z-index: 1;
+            }
+        }
+
+        &.dragOver {
+            border: 2px dashed #89cff0;
+            border-radius: $corner-sm;
+            background-color: rgba(137, 207, 240, 0.2);
+        }
+
+        .cardWrap {
+            height: 100%;
+            cursor: inherit;
+        }
+
+        // 드래그 비활성화 상태일 때
+        &:not([draggable='true']) {
+            .cardWrap {
+                cursor: pointer; /* 클릭 가능한 포인터 커서 */
+            }
+        }
+
+        // 드래그 활성화 상태일 때
+        &[draggable='true'] {
+            .cardWrap {
+                cursor: grab; /* 드래그 가능 커서 */
+            }
+
+            &:active .cardWrap {
+                cursor: grabbing; /* 드래그 중 커서 */
+            }
+        }
+    }
+}
+.emptyCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 194px;
+    background-color: $background-accent-subtler;
+}
+.quickMenuArea {
+    width: 150px;
+    margin-top: 61px;
+}
+.quickMenu {
+    width: 120px;
+    padding: 10px 10px 18px;
+    text-align: center;
+    border-radius: $corner-sm;
+    border: 1px solid var(--primary);
+    background-color: $background-white;
+    .menuList {
+        .item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 3px 0;
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-sm);
+            color: $color-neutral;
+            cursor: pointer;
+            & + .item {
+                margin-top: 2px;
+            }
+            &:hover {
+                border: $corner-xxs;
+                background-color: var(--lower);
+                color: var(--primary);
+                svg {
+                    fill: var(--primary);
+                }
+            }
+
+            &.dragging {
+                opacity: 0.5;
+                cursor: grabbing;
+                background-color: rgba(0, 0, 0, 0.03);
+            }
+
+            &.dragOver {
+                border: 1px dashed #ccc;
+                background-color: rgba(0, 0, 0, 0.03);
+            }
+        }
+        .icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            border-radius: $corner-full;
+            background-color: rgba(232, 241, 244, 0.3);
+        }
+    }
+    .btnSetDrag {
+        margin-top: 12px;
+    }
+}
+
+// modal(내소개입력)
+.editMyInfoModal {
+    .modalTitle {
+        display: flex;
+        align-items: center;
+        height: 60px;
+        position: sticky;
+        top: 0;
+        border-bottom: 1px solid $border-default;
+        background-color: #ffffff;
+        .container {
+            display: flex;
+            align-items: center;
+            margin-bottom: -10px;
+        }
+        .text {
+            margin: -18px 0 0 -15px;
+        }
+        .showTooltip {
+            margin: -10px 0 0 2px;
+            vertical-align: middle;
+        }
+    }
+    .context {
+        height: calc(100vh - 360px);
+        padding: 24px 0;
+        overflow: hidden;
+        overflow-y: auto;
+    }
+    .formItem {
+        & + .formItem {
+            margin-top: 12px;
+        }
+    }
+    .formTitle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 33px;
+    }
+    .textarea {
+        width: 100%;
+    }
+    .multiTypeSelectbox {
+        display: flex;
+        position: relative;
+        align-items: center;
+        .inputText {
+            width: 100%;
+            height: 30px;
+            padding: 5px;
+            background-color: $gray-50;
+        }
+    }
+    .recommandItem {
+        width: 100%;
+        margin-top: -1px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        border: 1px solid $border-input-default;
+        background-color: $background-white;
+        z-index: 9;
+        .title {
+            padding: 6px 10px;
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-sm);
+            color: $color-accent;
+        }
+        .recommandList {
+            .item {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                height: 34px;
+                padding: 5px;
+                font-size: var(--font-size-sm);
+                line-height: var(--line-height-sm);
+                color: $color-neutral;
+                cursor: pointer;
+                &:hover {
+                    color: $color-accent;
+                    background-color: var(--lower);
+                    .ico {
+                        fill: var(--primary);
+                    }
+                }
+            }
+        }
+    }
+}
+
+//조직원 탭
+.searchGroupInfo {
+    margin-top: 15px;
+}
+.treeView {
+    margin-top: 22px;
+}
+.memberInfoCard {
+    cursor: pointer;
+}

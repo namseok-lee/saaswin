@@ -1,0 +1,370 @@
+/* Basic Reset & Root Styles */
+.organisation-chart-container {
+    font-family: 'Pretendard', sans-serif; /* From Figma Styles */
+    color: #010101;
+    background-color: #ffffff; /* Default background */
+    display: flex; /* Use flex for layout */
+    position: relative; /* For potential absolute positioning inside */
+}
+
+.wrap {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.lnb-and-content {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- LNB Styles --- */
+.lnb {
+    display: flex;
+    width: 248px; /* Based on INSTANCE "1402:26637" width */
+    height: 100%;
+    background-color: #ffffff; /* LnbOpen background */
+    border-right: 1px solid #e2e2e2; /* Stroke from LnbOpen */
+    flex-shrink: 0; /* Prevent LNB from shrinking */
+    position: relative; /* For the toggle button */
+}
+
+.lnb-fixed {
+    width: 50px;
+    height: 100%;
+    background-color: #13a9e9; /* Container background */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0; /* Home has no top margin */
+}
+
+.lnb-home {
+    width: 50px;
+    height: 50px;
+    background-color: #565656;
+    border-bottom: 1px solid #82d4f3; /* Stroke */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white; /* Placeholder */
+    font-size: 10px; /* Placeholder */
+}
+
+.lnb-categories {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5px; /* Matches 39143 y - 39138 y */
+    gap: 4px; /* Matches spacing */
+}
+
+.lnb-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white; /* Icon color (placeholder) */
+}
+
+.lnb-icon:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.lnb-icon.active {
+    background-color: #0488c7;
+}
+
+.lnb-profile {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white; /* Placeholder */
+    font-size: 10px; /* Placeholder */
+    margin-top: auto; /* Push to bottom */
+}
+
+.lnb-open {
+    width: 182px; /* Based on FRAME "1377:77047" width */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-right: 1px solid #e2e2e2;
+}
+
+.lnb-company {
+    height: 50px;
+    background-color: rgba(232, 241, 244, 0.3); /* Fill with opacity */
+    border-bottom: 1px solid #e2e2e2; /* Stroke */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px; /* Padding based on text position */
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.lnb-menu-container {
+    padding: 10px; /* Based on INSTANCE "1377:77052" position */
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.lnb-menu-title {
+    background-color: #e1f5fc;
+    border-radius: 8px;
+    padding: 10px 16px; /* Approximation */
+    margin-bottom: 5px; /* Space before first submenu */
+    color: #13a9e9;
+    font-size: 16px;
+    font-weight: 500;
+}
+.lnb-submenu {
+    margin-bottom: 4px; /* Spacing between submenus */
+}
+
+.lnb-2depth-item {
+    padding: 6px 0 6px 15px; /* Matches 39223 y - 39217 y and text indent */
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #7c7c7c; /* Default color */
+}
+
+.lnb-2depth-item.active {
+    color: #010101;
+    font-weight: 400; /* Regular */
+}
+
+.lnb-2depth-item:hover {
+    background-color: #f0f0f0;
+}
+
+.lnb-3depth-container {
+    padding-left: 15px; /* Indentation for 3rd level */
+    margin-top: 2px; /* Space below 2nd level item */
+    margin-bottom: 2px; /* Space below 2nd level item */
+}
+
+.lnb-3depth-item {
+    padding: 2px 0 2px 17px; /* Matches 39253 y - 39251 y and text indent */
+    font-size: 13px;
+    color: #7c7c7c;
+    cursor: pointer;
+}
+
+.lnb-3depth-item.active {
+    color: #13a9e9;
+}
+.lnb-3depth-item:hover {
+    text-decoration: underline;
+}
+
+.lnb-toggle-btn {
+    position: absolute;
+    right: -16px; /* Position over the border */
+    top: 0px; /* Matches INSTANCE "1377:77088" y */
+    width: 16px;
+    height: 50px;
+    background-color: #13a9e9;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+/* --- Main Content Area --- */
+.main-content-area {
+    flex-grow: 1; /* Take remaining space */
+    background-color: #ffffff; /* Fill from FRAME "2740:138988" */
+    padding: 0; /* Container likely handles padding */
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Fill height */
+}
+
+.content-container {
+    padding: 16px 30px; /* Based on Typography position */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* Page Title */
+.page-title {
+    margin-bottom: 16px; /* Space below title */
+    display: flex;
+    align-items: center;
+}
+.page-title h3 {
+    font-size: 15px;
+    font-weight: 500;
+    color: #010101;
+    margin: 0;
+    margin-left: 3px; /* Space after bookmark icon */
+}
+.title-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 3px; /* Space between icons and text */
+}
+.help-icon {
+    background-color: rgba(232, 241, 244, 0.4); /* Fill with opacity */
+    border-radius: 100px;
+    padding: 3px; /* To center inner icon */
+    box-sizing: border-box;
+    margin-left: 3px;
+}
+
+/* Search Section */
+.search-section {
+    margin-bottom: 16px; /* Space below search (39251 y - (39143 y + 108 h)) */
+}
+.search-wrap {
+    background-color: #fbfbfb; /* Fill from Search FRAME */
+    border: 1px solid #e2e2e2; /* Stroke */
+    border-radius: 4px;
+    padding: 25px 30px; /* Based on Columns position */
+}
+.search-columns {
+    display: flex;
+    gap: 60px; /* Approximated spacing */
+    align-items: center;
+}
+.search-column {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between label and input */
+}
+.search-column label {
+    width: 85px; /* Fixed width from Figma */
+    text-align: left;
+    font-size: 13px;
+    color: #010101;
+    flex-shrink: 0;
+}
+.search-column input {
+    width: 275px; /* Fixed width */
+    height: 30px;
+    border: 1px solid #9e9e9e;
+    background-color: #f5f5f5;
+    padding: 0 12px; /* Value padding */
+    font-size: 13px;
+    color: #9e9e9e;
+    box-sizing: border-box;
+}
+.search-column .icon {
+    position: absolute; /* Position icons within input where applicable */
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+}
+.input-datepicker,
+.input-select {
+    position: relative; /* For icon positioning */
+    display: flex; /* Overriding search-column flex for internal layout */
+    align-items: center;
+}
+.required {
+    color: #e33131;
+    margin-left: 2px;
+}
+.search-button-wrap {
+    margin-left: auto; /* Push button to the right */
+}
+.search-button {
+    background-color: #13a9e9;
+    color: white;
+    width: 90px;
+    height: 33px;
+    border: none;
+    border-radius: 4px; /* Assuming default button style */
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Content Display */
+.content-display {
+    flex-grow: 1; /* Take remaining vertical space */
+    background-color: rgba(232, 241, 244, 0.4); /* Fill */
+    border: 1px solid rgba(217, 217, 217, 0.6); /* Stroke */
+    background-image: url('data:image/svg+xml,...'); /* Placeholder for pattern FRAME "2743:142367" if needed */
+    background-repeat: repeat; /* Assuming pattern is tiled */
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    flex-direction: column; /* Stack empty state elements */
+}
+
+.empty-state-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Space between EmptyState and ButtonGroup */
+}
+
+.empty-state {
+    text-align: center;
+    color: #7c7c7c;
+    font-size: 13px;
+    line-height: 20px;
+}
+.empty-icon {
+    /* Placeholder styling for the icon group */
+    width: 62px;
+    height: 47px;
+    background-color: #f0f0f0;
+    margin: 0 auto 10px auto;
+    color: #b4c0ca;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    border-radius: 4px;
+}
+
+.empty-buttons {
+    display: flex;
+    gap: 5px; /* Space between buttons */
+}
+.link-button {
+    background-color: #ffffff;
+    border: 1px solid #b6b6b6;
+    color: #565656;
+    font-size: 12px;
+    padding: 4px 10px; /* Approximation */
+    height: 29px;
+    border-radius: 4px; /* Assuming default button style */
+    cursor: pointer;
+}
+
+/* Generic Placeholder Styles */
+.icon {
+    display: inline-block;
+    width: 18px; /* Default size */
+    height: 18px;
+    color: #565656; /* Default icon color */
+    font-size: 10px; /* Placeholder */
+    text-align: center;
+    line-height: 18px; /* Center placeholder text */
+    /* background-color: #eee; /* Placeholder viz */
+    vertical-align: middle;
+}
+
+/* Add more specific styles based on Figma properties as needed */

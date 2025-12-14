@@ -1,0 +1,62 @@
+@use '/src/styles/_variables.scss' as *;
+
+.tblWrap {
+    .tblHeader {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.tbl {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-top: 1px solid var(--primary);
+    thead {
+        tr {
+            th {
+                padding: 10px 12px;
+                font-weight: 500;
+                font-size: var(--font-size-md);
+                line-height: var(--line-height-md);
+                color: $color-accent;
+                border-left: 1px solid $border-default;
+                background-color: $background-default;
+                &:first-child {
+                    border-left: none;
+                }
+            }
+        }
+    }
+    tbody {
+        tr {
+            th {
+                padding: 9px 12px;
+                font-size: var(--font-size-md);
+                line-height: var(--line-height-md);
+                font-weight: 500;
+                color: $color-accent;
+                text-align: left;
+                border: 1px solid $border-default;
+                border-left: none;
+                background-color: $background-default;
+                vertical-align: middle;
+            }
+            td {
+                padding: 9px 12px;
+                border: 1px solid $border-default;
+                border-right: none;
+                background-color: $background-white;
+                &:first-child {
+                    border-left: none;
+                }
+            }
+        }
+    }
+    .error {
+        color: $color-error;
+    }
+    .asterisk {
+        color: $color-accent-red;
+    }
+}

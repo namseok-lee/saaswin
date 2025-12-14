@@ -1,0 +1,36 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Node
+**/node_modules/
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/pnpm-debug.log*
+
+# Env / secrets
+**/.env
+**/.env.*
+**/*.pem
+**/*.key
+
+# Build outputs
+**/dist/
+**/build/
+**/.next/
+**/out/
+**/coverage/
+
+# Logs
+**/*.log
+
+# Python (만약 백엔드에 파이썬 섞여있으면)
+**/__pycache__/
+**/*.pyc
+
+**/application-*.properties
+**/application-*.yml
+**/application-*.yaml

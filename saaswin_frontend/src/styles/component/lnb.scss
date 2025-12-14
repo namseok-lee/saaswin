@@ -1,0 +1,283 @@
+@use '/src/styles/_variables.scss' as *;
+@use '/src/styles/mixin.scss' as *;
+
+.lnb {
+    display: grid;
+    // grid-template-columns: 110px 1fr;
+    grid-template-columns: 50px 0fr;
+    grid-template-rows: 50px 1fr;
+    // width: 308px;
+    width: 66px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    .linkToHome {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        background-color: $gray-600;
+        .logoWrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 100%;
+            background-color: var(--high);
+        }
+        &.on {
+            width: 110px;
+            position: relative;
+            z-index: 99;
+        }
+    }
+    .linkTocompanyInfo {
+        width: 0;
+        border-right: 1px solid $border-default;
+        overflow: hidden;
+    }
+    .companyInfoWrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 5px;
+        width: 100%;
+        height: 50px;
+        padding: 0 $padding-m;
+        background-color: $background-white;
+        .companyName {
+            font-size: var(--font-size-xl);
+            color: $color-accent;
+        }
+    }
+    // 주메뉴
+    .lnbList {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 5px 0;
+        position: absolute;
+        top: 50px;
+        bottom: 0;
+        left: 0;
+        border-top: 1px solid var(--lightest);
+        background-color: var(--primary);
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0 7px;
+            cursor: pointer;
+            .icoWrap {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                width: 36px;
+                height: 36px;
+                svg {
+                    width: 18px;
+                    height: 18px;
+                }
+            }
+            .menuName {
+                display: none;
+                font-size: var(--font-size-sm);
+                line-height: var(--line-height-sm);
+                color: $color-white;
+                @include ellipsis;
+            }
+        }
+        .item {
+            &:hover,
+            &.on {
+                .icoWrap {
+                    border-radius: $corner-sm;
+                    background-color: var(--highest);
+                    box-shadow: $shadow-1depOn-inner;
+                }
+            }
+        }
+        &:hover {
+            width: 110px;
+            z-index: 9;
+            .menuName {
+                display: block;
+            }
+        }
+    }
+    // 서브메뉴
+    .lnbSub {
+        display: none;
+        width: 182px;
+        height: 100%;
+        margin-left: 50px;
+        padding: 9px 10px;
+        position: relative;
+        border-top: 1px solid $border-default;
+        border-right: 1px solid $border-default;
+        background-color: rgba(232, 241, 244, 0.3);
+        z-index: 8;
+        overflow: hidden;
+        overflow-y: auto;
+    }
+    .subMenuTitle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 66px;
+        padding: 0 $space-04;
+        font-weight: 600;
+        font-size: var(--font-size-2xl);
+        color: var(--primary);
+        white-space: break-spaces;
+        border-radius: $corner-sm;
+        background-color: var(--lower);
+        .menuIco {
+            svg {
+                fill: var(--primary);
+            }
+        }
+    }
+    .subMenuList {
+        margin-top: 5px;
+        .depth2 {
+            .depth2Item {
+                display: flex;
+                justify-content: space-between;
+                padding: 6px 7px 6px 15px;
+                font-size: var(--font-size-md);
+                line-height: var(--line-height-md);
+                color: $color-subtitle;
+                white-space: break-spaces;
+                cursor: pointer;
+                .icoDepth2 {
+                    fill: #c4c4c4;
+                }
+                &.on {
+                    color: $color-accent;
+                    .icoDepth2 {
+                        flex-shrink: 0;
+                        transform: rotate(180deg);
+                        fill: #666;
+                    }
+                }
+                &:hover {
+                    color: $color-accent;
+                }
+            }
+        }
+        > .item {
+            > .linkTo {
+                display: flex;
+                padding: 6px 7px 6px 15px;
+                font-size: var(--font-size-md);
+                line-height: var(--line-height-md);
+                color: $color-subtitle;
+                white-space: break-spaces;
+                &:hover {
+                    color: $color-accent;
+                }
+            }
+        }
+        .depth3 {
+            .subMenuList {
+                margin-top: 0;
+            }
+            padding: 0 17px;
+            .item {
+                font-size: var(--font-size-md);
+                line-height: var(--line-height-md);
+                &:first-child {
+                    margin-top: 0;
+                }
+                > .linkTo {
+                    display: flex;
+                    gap: 5px;
+                    padding: 2px 0;
+                    color: $color-subtitle;
+                    &::before {
+                        content: '·';
+                        font-weight: 700;
+                        font-size: 13px;
+                    }
+                    &.on {
+                        color: var(--primary);
+                    }
+                    &:hover {
+                        color: var(--primary);
+                    }
+                }
+            }
+        }
+    }
+    // profile
+    .profile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 34px;
+        height: 34px;
+        position: absolute;
+        bottom: 10px;
+        left: 8px;
+        z-index: 10;
+        background-color: var(--normal);
+        border-radius: $corner-full;
+        &.on {
+            &::after {
+                content: '';
+                display: block;
+                width: 10px;
+                height: 10px;
+                position: absolute;
+                bottom: 1px;
+                right: 1px;
+                border-radius: $corner-full;
+                background-color: $background-white;
+            }
+        }
+        &.active {
+            left: 38px;
+        }
+    }
+    // 토글버튼
+    .btnToggleLnb {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 16px;
+        position: absolute;
+        top: 17px;
+        right: -17px;
+        border-radius: 0 0 $corner-xxs $corner-xxs;
+        background-color: var(--primary);
+        transform: rotate(-90deg);
+    }
+    // active
+    &.active {
+        width: 248px;
+        grid-template-columns: 50px 1fr;
+        .linkTocompanyInfo {
+            width: 182px;
+            overflow: visible;
+        }
+        .lnbSub {
+            display: block;
+        }
+        .btnToggleLnb {
+            svg {
+                transform: rotate(180deg);
+            }
+        }
+    }
+}
+@media (min-width: 0px) {
+    .css-17s2akf-MuiDrawer-docked {
+        display: block;
+    }
+}

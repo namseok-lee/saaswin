@@ -1,0 +1,149 @@
+0.도커설치 : https://docs.docker.com/desktop/setup/install/windows-install/
+
+* package.json 참조
+0.npm run build:test
+0.npm run build:dev
+
+1.도커빌드 : docker build -t saaswin:0.54 . 
+- 0.54은 버전이라 신규배포시 수정해야함.
+- 이미지 생성됨
+- 확인 : docker images
+
+2.도커이미지 태그설정 : docker tag saaswin:0.54 218.236.10.179:5000/saaswin:0.54
+- 0.54은 버전이라 신규배포시 수정해야함.
+- 이미지 생성됨
+- 확인 : docker images
+
+3.태그된 도커이미지 푸쉬 : docker push 218.236.10.179:5000/saaswin:0.54
+- 0.54은 버전이라 신규배포시 수정해야함.
+
+4.서버접속하여 도커컴포즈파일 버전 수정
+- 218.236.10.179접속 후, 아래 경로에서 docker-compose.yml 파일의 버전변경
+- /home/win/docker/nodejs/docker-compose.yml
+- 각모듈마다 버전을 수정 -> 0.54을 신규로 올리는 버전으로 수정
+-->> 변경
+- /home/win/docker/nodejs/.env 파일을 열어 IMAGE_TAG의 버전을 수정 후 저장
+
+5.도커시작
+- 도커컴포즈 실행 (기존버전의 컨테이너는 종료 후, 태깅된 버전으로 실행됨)
+- docker-compose down
+- docker rm <container_id>   or   docker container prune
+- docker rmi <image_id>
+- docker-compose up -d
+- docker-compose.yml 이 아닌 다른이름의 파일로 종료 띄우고 싶을때
+-->> 변경
+docker-compose -f docker-compose-1.yml down
+docker-compose -f docker-compose-1.yml up -d
+위 작업하여 전부 배포한 후에
+docker-compose -f docker-compose-2.yml down
+docker-compose -f docker-compose-2.yml up -d
+
+
+
+/**
+도커 명령어 참고
+이미지 push 확인 : curl http://218.236.10.179:5000/v2/_catalog or 웹페이지에 입력
+도커이미지확인 : docker images
+도커이미지 삭제 : docker rmi <imageid or name>
+실행중인 도커컨테이너확인 : docker ps 
+모든 도커컨테이너확인 : docker ps -a
+도커 컨테이너 중지 : docker stop <container_id>
+도커 컨테이너 시작 : docker start <container_id>
+도커 컨테이너 재시작 : docker restart <container_id>
+도커 컨테이너 삭제 : docker rm <container_id>
+도커컴포즈 실행 : docker-compose up -d (docker-compose.yml 있는폴더에서 실행)
+도커컴포즈 중지 : docker-compose down (docker-compose.yml 있는폴더에서 실행)
+도커컴포즈로 이미지만 가져오기 (캐싱될때) : docker-compose pull (docker-compose.yml 있는폴더에서 실행)
+도커로그 : docker logs -f your_container_id
+도커전체 재시작 : systemctl restart docker
+도커컨테이너 접근 : docker exec -it <container id or name> /bin/bash
+도커컨테이너 내부로 파일복사 : docker cp nginx.conf <container id or name>:<path and filename>
+
+레지스트리 검색 : curl -X GET http://218.236.10.179:5000/v2/_catalog
+레지스트리 태그목록 : curl -X GET http://218.236.10.179:5000/v2/saaswin/tags/list
+태그삭제하는것 스크립트로 작성하여 실행해야할듯함
+
+*/
+
+**푸쉬할때 https 오류발생시
+C:\Users\USER\.docker\daemon.json 
+"insecure-registries" : ["218.236.10.179:5000"]
+위 문구추가 후
+도커리스타트
+docker info 에서 insecure-registries 해당 옵션에 설정한 host:port 가 있는지 확인
+
+**etc
+===================================================================================
+=============================================================
+*docker registry
+
+docker-compose -f docker-compose-registry.yml up -d
+
+- git처럼 docker image를 관리 (pull push 해서 올려놓을수있음) 
+- GPG키 등록
+- 저장소추가
+- docker-compose.yml 파일을 생성하여 yml파일을 실행하여 띄울수있음
+
+*docker image생성 
+- 도커빌드 : docker build -t custom-nginx:latest .
+- 도커빌드 : docker build -f Dockerfile.dev -t my-app:dev . (Dockerfile 명이 아니라면)
+
+*docker registry에 이미지 push
+tag생성 : docker tag custom-nginx:latest localhost:5000/custom-nginx:latest
+푸쉬 : docker push localhost:5000/custom-nginx:latest
+전체확인 : curl -X GET http://localhost:5000/v2/_catalog
+특정확인 : curl -X GET http://localhost:5000/v2/custom-nginx/tags/list
+
+*docker registry에 이미지 pull
+docker pull localhost:5000/custom-nginx:latest
+
+*docker 로그
+docker logs your_container_id
+
+
+**Dockerfile 작성 후, 이미지 빌드 후 띄우기
+
+**http로 클라이언트에서 접근하도록
+vi /etc/docker/daemon.json 추가하여 아래내용 입력
+{
+  "insecure-registries": ["218.236.10.179:5000"]
+}
+저장 후 docker 재시작
+systemctl restart docker
+
+=============================================================
+
+*nginx docker 띄우기
+docker pull nginx:1.27.2
+docker run -d -p 80:80 nginx:1.27.2
+docker ps로 확인
+docker exec -it kind_golick(id or name) /bin/bash   : 컨테이너안에 접속하기
+/etc/nginx/nginx.conf 수정해야함
+docker cp nginx.conf b04b4fea559d:/etc/nginx/nginx.conf     : 외부에서 수정한걸 안으로 넣음
+컨테이너접속 docker exec -it <컨테이너ID or 컨테이너명> /bin/bash
+컨테이너접속해서 리로드 nginx -s reload 
+컨테이너밖에서 리로드 docker exec -it <nginx_container_name> nginx -s reload
+
+도커자체를 재시작 : docker restart f0fcb0d5eedf
+로그보기 : docker logs -f f0fcb0d5eedf
+sudo docker logs --tail 10 -f  b04b4fea559d
+
+=============================================================
+
+*nginx log 보기
+
+# 기본 로그 확인
+docker logs 컨테이너이름_또는_ID
+
+# 실시간 로그 스트리밍 (-f 또는 --follow 옵션)
+docker logs -f 컨테이너이름_또는_ID
+
+# 최근 로그 라인만 보기 (--tail 옵션)
+docker logs --tail 100 컨테이너이름_또는_ID
+
+# 타임스탬프 표시 (-t 또는 --timestamps 옵션)
+docker logs -t 컨테이너이름_또는_ID
+
+=============================================================
+
+

@@ -1,0 +1,403 @@
+@use '/src/styles/_variables.scss' as *;
+
+$data-grid-cell-color-light: rgba(0, 0, 0, 0.85);
+$data-grid-cell-color-dark: rgba(255, 255, 255, 0.65);
+$data-grid-border-bottom-dark: 1px solid #303030;
+
+// 그리드 밖 상단 영역
+.gridHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .total {
+        margin: 0 auto 0 5px;
+    }
+}
+
+.MuiDataGrid-root {
+    border: 0;
+    border-radius: 0;
+    color: rgba(255, 255, 255, 0.85);
+    font-family: $font-family-body, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    -webkit-font-smoothing: auto;
+    letter-spacing: normal;
+    &::after {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 1px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: var(--primary);
+    }
+
+    // 그리드 제목영역
+    .MuiDataGrid-columnHeader {
+        height: 37px !important;
+        font-size: var(--font-size-md);
+        color: $color-accent;
+        border-left: 1px solid $border-default;
+        border-top: 1px solid $border-default;
+        background-color: $background-default;
+    }
+    .MuiDataGrid-row--borderBottom .MuiDataGrid-columnHeader,
+    .MuiDataGrid-cell:focus-within {
+        &:focus-within,
+        &:focus {
+            outline: none;
+        }
+    }
+    .MuiDataGrid-row:hover {
+        background-color: var(--bgFocus) !important;
+    }
+
+    // 그리드 제목 영역, 제목
+    .MuiDataGrid-columnHeader,
+    .MuiDataGrid-cell {
+        border-left: $border-default;
+        // ... 아이콘
+        &:not(.MuiDataGrid-columnHeader--sorted) {
+            &:hover {
+                .MuiSvgIcon-root {
+                    fill: $icon-default;
+                    opacity: 1;
+                }
+            }
+        }
+        // sort 아이콘
+        .MuiButtonBase-root[aria-label='Sort'] {
+            .MuiSvgIcon-root {
+                fill: $icon-accent;
+            }
+        }
+        // 헤더 아이콘
+        .MuiIconButton-root {
+            &:hover {
+                background-color: transparent;
+            }
+            &:focus {
+                .MuiSvgIcon-root {
+                    fill: var(--primary);
+                }
+            }
+            .MuiTouchRipple-rippleVisible {
+                visibility: hidden;
+            }
+        }
+        // 크기 조절 바
+        .MuiDataGrid-columnSeparator {
+            .MuiDataGrid-iconSeparator {
+                &.MuiSvgIcon-root {
+                    fill: transparent;
+                }
+            }
+        }
+    }
+    // 제목영역 2번째 줄부터 해당 선 추가
+    div[role='row'] {
+        &:nth-child(n + 2) {
+            border-block-start: 1px solid $border-default;
+        }
+    }
+
+    // 제목영역 두줄일때 아래 줄 하나 더 생김
+    .MuiDataGrid-columnHeader--filledGroup {
+        .MuiDataGrid-withBorderColor {
+            border-bottom-width: 0;
+        }
+    }
+    .MuiDataGrid-columnHeaderTitleContainer {
+        border-bottom: none !important;
+    }
+
+    .MuiDataGrid-cell--pinnedLeft {
+        border-right: 1px solid $border-default;
+        .MuiCheckbox-root {
+            padding: 0;
+        }
+    }
+
+    // 그리드 제목 영역, 제목
+    .MuiDataGrid-columnHeader:first-of-type,
+    .MuiDataGrid-cell:first-of-type,
+    .MuiDataGrid-columnHeader:nth-of-type(2),
+    .MuiDataGrid-cell:nth-of-type(2) {
+        border-left: none;
+    }
+    .MuiDataGrid-columnHeader {
+        border-left: 1px solid $border-default;
+        &:first-of-type {
+            border-left: none;
+        }
+    }
+    div[role='presentation'] {
+        & + .MuiDataGrid-columnHeader {
+            border-left: none;
+        }
+    }
+    .MuiDataGrid-columnHeader:nth-of-type(2) {
+        border-right: 1px solid $border-default;
+    }
+
+    // right-border있는 경우 제거
+    .MuiDataGrid-columnHeader--withRightBorder {
+        border-right: none;
+    }
+
+    .MuiDataGrid-columnHeader:first-of-type {
+        border-right: 1px solid $border-default;
+    }
+
+    .MuiDataGrid-columnsContainer,
+    .MuiDataGrid-cell {
+        // height:30px;
+        border-top: none !important;
+        border-left: 1px solid $border-default;
+        border-bottom: 1px solid $border-default;
+    }
+    .MuiDataGrid-cellOffsetLeft {
+        & + .MuiDataGrid-cell {
+            border-left: none;
+        }
+    }
+
+    .MuiDataGrid-cell {
+        align-items: center;
+        color: $data-grid-cell-color-dark;
+        @media (prefers-color-scheme: light) {
+            color: $data-grid-cell-color-light;
+        }
+    }
+    .MuiPaginationItem-root {
+        border-radius: 0;
+    }
+    // 내용 영역
+    // checkbox
+    .MuiCheckbox-root {
+        svg {
+            width: 16px;
+            height: 16px;
+            border: 1px solid $border-input-default;
+            path {
+                display: none;
+            }
+        }
+        &.Mui-checked:not(.MuiCheckbox-indeterminate) {
+            svg {
+                background: var(--primary) url('../../../public/img/ico/ico_checkbox_on.png') 50% 50% no-repeat;
+                border: 1px solid var(--primary);
+            }
+        }
+    }
+    div[role='row']:nth-child(n + 2) {
+        border-block-start: unset;
+    }
+}
+
+// 옵션 팝업 메뉴
+.MuiDataGrid-menu {
+    .MuiPaper-root {
+        border-radius: $corner-xxs;
+        box-shadow: (0 4px 10px $shadow-layer1);
+    }
+    .MuiStack-root {
+        padding: 0;
+    }
+    .MuiMenuItem-root {
+        padding: 7px 10px;
+        &:hover {
+            background-color: var(--bgFocus);
+        }
+    }
+    .MuiTypography-root {
+        font-size: var(--font-size-md);
+        color: $gray-600;
+    }
+    // 줄(border) 없애기기
+    .MuiDivider-root {
+        display: none;
+    }
+    // 왼쪽 아이콘
+    .MuiListItemIcon-root {
+        min-width: 26px;
+        svg {
+            width: 18px;
+            height: 18px;
+            fill: $icon-accent;
+        }
+    }
+}
+// grid 안 form 요소들
+// select tree
+.MuiFormControl-root .MuiInputLabel-root {
+}
+label + .css-bg6n0t-MuiInputBase-root-MuiInput-root {
+    margin-top: 0;
+}
+.MuiDataGrid-root {
+    .MuiTextField-root {
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
+        color: $color-accent;
+        border-bottom: 1px solid $gray-400;
+        // background-color: $gray-50;
+        &:hover {
+            border-color: var(--primary);
+        }
+        &:has(.Mui-focused) {
+            background-color: var(--lower);
+        }
+    }
+    .MuiInputBase-root.MuiInput-root.MuiInput-underline::before {
+        content: none;
+    }
+    // input
+    .MuiInputBase-input {
+        padding: 0;
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-md);
+        color: $color-accent;
+    }
+    .MuiInputBase-root.MuiInput-root::after {
+        border-bottom: none;
+    }
+    .MuiAutocomplete-root {
+        .MuiButtonBase-root {
+            width: 20px;
+            height: 20px;
+            top: 0;
+            right: 6px;
+            background-image: url('../../../public/img/ico/ico_selectbox.png');
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+            svg {
+                display: none;
+            }
+        }
+    }
+    .MuiAutocomplete-clearIndicator {
+        display: none;
+    }
+    // datepicker
+    .MuiDataGrid-cell {
+        .MuiOutlinedInput-notchedOutline {
+            background-color: transparent;
+        }
+        .MuiIconButton-edgeEnd {
+            padding: 0 18px 0 0;
+            z-index: 1;
+            svg {
+                width: 20px;
+                height: 20px;
+                background: url('../../../public/img/ico/ico_calendar.png') no-repeat;
+                path {
+                    display: none;
+                }
+            }
+        }
+        .MuiIconButton-edgeEnd {
+            height: 100%;
+            margin-right: 0;
+        }
+    }
+    .MuiDataGrid-cell--editable {
+        &.MuiDataGrid-cell--editing {
+            padding: 0;
+            box-shadow: none;
+        }
+    }
+}
+// options
+.MuiAutocomplete-popper {
+    border-radius: $corner-xxs;
+    border: 1px solid var(--primary);
+    .MuiList-root {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .MuiAutocomplete-listbox {
+        .MuiButtonBase-root {
+            padding: 0;
+            padding-left: 12px;
+        }
+    }
+}
+
+// grid header
+.gridHeader {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 7px;
+    &.alignRight {
+        justify-content: end;
+    }
+    .asterisk {
+        color: $color-warning;
+    }
+}
+
+.MuiDataGrid-root {
+    .MuiDataGrid-cell {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 8px;
+        border-bottom: 1px solid $border-default;
+    }
+
+    .MuiInputBase-root,
+    .MuiSelect-root {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 4px 8px;
+    }
+
+    .MuiDataGrid-cell div {
+        display: flex;
+        justify-content: flex-start; // 그리드에 우측정렬이 고정으로 되어있어 트리col에 문제 발생(임시로 수정)
+        align-items: center;
+        width: 100%;
+        height: 30px;
+    }
+    .MuiDataGrid-cell .inputBasicBox .options {
+        display: flex;
+        justify-content: unset;
+        width: auto;
+        height: auto;
+    }
+    div.MuiInputAdornment-root {
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        background: url('../../../public/img/ico/ico_calendar.png') no-repeat;
+        z-index: 1;
+        svg {
+            display: none;
+        }
+    }
+}
+
+// header 점 세개
+.MuiDataGrid-columnHeader .MuiDataGrid-menuIcon {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+.MuiDataGrid-columnHeader .MuiDataGrid-menuIcon {
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: auto !important;
+    pointer-events: all !important;
+}
+
+// input text
+.MuiDataGrid-cell {
+    .inputBasicBox {
+        .inputBasic {
+            background-color: transparent;
+        }
+    }
+}

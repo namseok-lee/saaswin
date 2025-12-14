@@ -1,0 +1,53 @@
+@use '/src/styles/_variables.scss' as *;
+
+.visualization {
+    .visualiz-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+        .item {
+            padding: 15px 20px;
+            border: 1px solid $border-default;
+        }
+        .title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            font-size: var(--font-size-lg);
+            line-height: var(--line-height-lg);
+            border-bottom: 1px solid $border-default;
+        }
+        .stastics {
+            font-weight: 700;
+            font-size: var(--font-size-2xl);
+            line-height: var(--line-height-2xl);
+        }
+        .subText {
+            font-weight: 400;
+            font-size: var(--font-size-md);
+            .emphasis {
+                font-weight: 700;
+                font-size: var(--font-size-2xl);
+                color: var(--primary);
+            }
+        }
+        .stastics,
+        .subText {
+            &::before {
+                content: '';
+                display: inline-block;
+                width: 5px;
+                height: 5px;
+                margin-right: 5px;
+                border-radius: $corner-full;
+                background-color: $background-bk;
+                vertical-align: middle;
+            }
+        }
+        .chart {
+            margin-top: 20px;
+        }
+    }
+}

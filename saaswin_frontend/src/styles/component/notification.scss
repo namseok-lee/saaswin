@@ -1,0 +1,67 @@
+@use '/src/styles/_variables.scss' as *;
+@use '/src/styles/mixin.scss' as *;
+
+.notificationPoper {
+    width: 320px;
+    padding: 12px 20px;
+    position: absolute;
+    top: 154px;
+    left: 49px;
+    border-radius: $corner-sm;
+    border: 1px solid var(--primary);
+    box-shadow: (1px 2px 4px $shadow-layer1);
+    background-color: $background-white;
+    opacity: 0;
+    transition: all 0.3s;
+    .tit {
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-lg);
+        color: #000;
+        .btnTit {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+    }
+    .msgList {
+        margin-top: 10px;
+        .msg {
+            position: relative;
+            .text {
+                width: 260px;
+                font-size: var(--font-size-sm);
+                line-height: var(--line-height-sm);
+                color: $color-accent;
+                @include ellipsis;
+            }
+            &::after {
+                content: '';
+                display: block;
+                width: 16px;
+                height: 16px;
+                position: absolute;
+                bottom: 2px;
+                right: 0;
+                background: url('../../../public/img/ico/ico_snackbar.png') 50% 50% no-repeat;
+                background-size: 16px;
+            }
+            &:hover {
+                .text {
+                    color: var(--primary);
+                }
+            }
+            cursor: pointer;
+            & + .msg {
+                margin-top: 1px;
+            }
+        }
+    }
+    .btnClose {
+        position: absolute;
+        top: 12px;
+        right: 14px;
+    }
+    &.on {
+        opacity: 1;
+    }
+}

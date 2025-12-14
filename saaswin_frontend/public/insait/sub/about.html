@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>인사잇(insa-IT) - 통합 HR 서비스</title>
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+        <style>
+            /* 전체 스타일 */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Pretendard', sans-serif;
+            }
+
+            body {
+                font-family: 'Pretendard', sans-serif;
+                line-height: 1.6;
+                color: #333;
+                /* 스크롤 방지 */
+                max-width: 1920px;
+                min-width: 1200px;
+                /* 화면 높이에 맞춤 */
+            }
+
+            /* 헤더 스타일 */
+            header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                background-color: #fff;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+                z-index: 9999 !important; /* z-index 값을 더 높게 설정 */
+                padding: 7px 0;
+                border-bottom: 1px solid #eee;
+            }
+
+            .header-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 1280px;
+                margin: 0 auto;
+            }
+
+            /* 로고 스타일 */
+            .logo {
+                height: 60px;
+                text-decoration: none;
+                flex-basis: 20%;
+                margin-left: 20px;
+            }
+
+            .logo img {
+                height: 100%;
+            }
+
+            /* 네비게이션 스타일 */
+            nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 80%;
+            }
+
+            .main-nav {
+                display: flex;
+                list-style: none;
+                justify-content: center;
+                flex-basis: 60%;
+            }
+
+            .main-nav li {
+                position: relative;
+                margin: 0 25px;
+            }
+
+            .main-nav li a {
+                text-decoration: none;
+                color: #333;
+                font-weight: 500;
+                font-size: 18px;
+                padding: 10px 15px;
+                border-radius: 20px;
+                transition: all 0.3s;
+            }
+            .main-nav > li > a {
+                padding: 43px 15px;
+            }
+
+            .main-nav li a:hover {
+                color: #13a9e9;
+            }
+
+            /* 서비스 드롭다운 메뉴 */
+            .dropdown {
+                position: relative;
+            }
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #fff;
+                min-width: 180px;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+                top: 40px;
+                left: 0;
+                padding: 10px 0;
+                z-index: 100;
+            }
+
+            .dropdown-content a {
+                color: #333;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                font-size: 16px;
+                font-weight: 400;
+                border-radius: 0;
+            }
+
+            .dropdown-content a:hover {
+                background-color: #f1f1f1;
+                border-radius: 0;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+
+            .dropdown-arrow {
+                display: inline-block;
+                margin-left: 5px;
+                transition: transform 0.3s;
+            }
+
+            .dropdown:hover .dropdown-arrow {
+                transform: rotate(180deg);
+            }
+
+            /* 로그인 및 도입 문의 버튼 */
+            .auth-buttons {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                flex-basis: 30%;
+            }
+
+            .btn {
+                display: inline-block;
+                padding: 12px 24px;
+                border-radius: 4px;
+                font-weight: 500;
+                font-size: 16px;
+                cursor: pointer;
+                transition: all 0.3s;
+                text-decoration: none;
+                text-align: center;
+            }
+
+            .btn-login {
+                color: #13a9e9;
+                background-color: transparent;
+                margin-right: 15px;
+            }
+
+            .btn-cta {
+                background-color: #13a9e9;
+                color: #fff;
+                border: none;
+                padding: 6px 12px;
+            }
+
+            .btn-cta:hover {
+                background-color: #0092c7;
+            }
+
+            /* 브랜드 스토리 섹션 스타일 */
+            .timeline-section {
+                background-color: #f0faff;
+                padding: 210px 24px;
+            }
+
+            section {
+                padding: 80px 24px;
+                max-width: 1024px;
+                margin: 0 auto;
+            }
+
+            .main-slogan {
+                font-size: 32px;
+                font-weight: 700;
+                text-align: center;
+                margin-bottom: 40px;
+                color: #111827;
+            }
+
+            .tit {
+                font-size: 22px;
+                font-weight: 600;
+                margin-bottom: 12px;
+                color: #0098ff;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .pharagraph {
+                font-size: 17px;
+                margin-bottom: 24px;
+            }
+
+            .intro {
+                text-align: left;
+                max-width: 720px;
+                margin: 0 auto 48px;
+            }
+
+            .highlight {
+                color: #0098ff;
+                font-weight: 600;
+            }
+
+            .divider {
+                width: 60px;
+                height: 3px;
+                background-color: #0098ff;
+                margin: 40px auto;
+            }
+
+            .timeline-container {
+                position: relative;
+                padding: 60px 0;
+            }
+
+            .timeline-line {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 50%;
+                width: 4px;
+                background-color: #0098ff;
+                transform: translateX(-50%);
+            }
+
+            .timeline-item {
+                position: relative;
+                width: 50%;
+                padding: 20px 40px;
+                box-sizing: border-box;
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            .timeline-item.left {
+                left: 0;
+                text-align: right;
+            }
+
+            .timeline-item.right {
+                left: 50%;
+                text-align: left;
+            }
+
+            .timeline-dot {
+                position: absolute;
+                top: 32px;
+                left: 50%;
+                width: 14px;
+                height: 14px;
+                background-color: #0098ff;
+                border-radius: 50%;
+                transform: translateX(-50%);
+                z-index: 10;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .timeline-dot:hover {
+                transform: translateX(-50%) scale(1.5);
+                box-shadow: 0 0 10px #0098ff;
+            }
+
+            .timeline-year {
+                font-size: 20px;
+                font-weight: 700;
+                margin-bottom: 4px;
+            }
+
+            .timeline-title {
+                font-size: 18px;
+                font-weight: 600;
+                color: #0098ff;
+                margin-bottom: 8px;
+            }
+
+            .timeline-desc {
+                font-size: 15px;
+                color: #374151;
+            }
+
+            .closing {
+                text-align: center;
+                font-size: 17px;
+                font-weight: 500;
+                color: #1f2937;
+                margin-top: 60px;
+            }
+
+            .value-box {
+                opacity: 0;
+                transform: translateY(40px);
+                transition: opacity 0.6s ease, transform 0.6s ease;
+                margin-bottom: 48px;
+                background-color: #f8fafc;
+                padding: 32px;
+                border-radius: 12px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+            }
+
+            .value-box:hover {
+                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+            }
+
+            .value-cards {
+                display: flex;
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            /* 특장점 섹션 스타일 */
+            .slogan {
+                background-color: #0098ff;
+                color: white;
+                padding: 1.5rem 0;
+                text-align: center;
+                font-size: 1.25rem;
+            }
+
+            .intro-text {
+                text-align: center;
+                margin: 2rem auto;
+                font-size: 1.125rem;
+                font-weight: 500;
+                line-height: 1.7;
+            }
+
+            .intro-text strong {
+                display: block;
+                font-size: 1.5rem;
+                margin-top: 0.3rem;
+            }
+
+            .card-grid {
+                display: flex;
+                flex-direction: column;
+                max-width: 1024px;
+                margin: 0 auto 4rem;
+                gap: 2rem;
+            }
+
+            .card-row {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .card {
+                width: calc((100% - 4rem) / 3);
+                aspect-ratio: 4/3;
+                background: white;
+                border-radius: 16px;
+                padding: 1.5rem;
+                text-align: center;
+                cursor: pointer;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+                transition: all 0.3s ease;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                box-sizing: border-box;
+            }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 152, 255, 0.12);
+            }
+
+            .card-placeholder {
+                width: calc((100% - 4rem) / 3);
+                visibility: hidden;
+            }
+
+            .last-row {
+                justify-content: flex-start;
+            }
+
+            .icon {
+                background-color: #0098ff;
+                color: white;
+                width: 48px;
+                height: 48px;
+                margin: 0 auto 1rem;
+                border-radius: 50%;
+                font-weight: bold;
+                line-height: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .card-title {
+                font-weight: bold;
+                margin-bottom: 0.5rem;
+            }
+
+            .feature-section {
+                scroll-margin-top: 120px;
+                max-width: 1024px;
+                margin: 6rem auto;
+                display: flex;
+                align-items: center;
+                gap: 4rem;
+                padding: 0 2rem;
+            }
+
+            .feature-section.reverse {
+                flex-direction: row-reverse;
+            }
+
+            .feature-section img {
+                width: 50%;
+                border-radius: 16px;
+                box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            }
+
+            .text-block {
+                width: 50%;
+            }
+
+            .text-block h4 {
+                color: #0098ff;
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .text-block h2 {
+                font-size: 1.75rem;
+                margin-bottom: 1rem;
+                text-align: left;
+            }
+
+            .text-block p {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+                line-height: 1.7;
+            }
+
+            .feature-section {
+                opacity: 0.4;
+                transform: scale(0.97);
+                transition: transform 0.6s ease, opacity 0.6s ease;
+            }
+
+            .feature-section.visible {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            /* 성공사례 섹션 스타일 */
+            .success-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 0 16px;
+                text-align: center;
+            }
+
+            .success-cards {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .success-card {
+                width: 32%;
+                background: #fff;
+                text-align: left;
+            }
+
+            .card-image-wrapper {
+                width: 100%;
+                padding-top: 75%;
+                background-color: #f0f0f0;
+                position: relative;
+                overflow: hidden;
+                border-radius: 8px;
+            }
+
+            .success-card-content {
+                margin-top: 12px;
+            }
+
+            .success-card h3 {
+                font-size: 16px;
+                font-weight: bold;
+                margin-bottom: 8px;
+            }
+
+            .success-card p {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+
+            .summary {
+                margin-top: 40px;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+
+            .cta {
+                margin-top: 24px;
+                font-weight: bold;
+                font-size: 18px;
+            }
+
+            .cta-button {
+                display: inline-block;
+                margin-top: 16px;
+                padding: 10px 24px;
+                font-size: 16px;
+                border-radius: 24px;
+                border: 2px solid #0098ff;
+                color: #0098ff;
+                text-decoration: none;
+                transition: all 0.3s ease;
+            }
+
+            .cta-button:hover {
+                background-color: #0098ff;
+                color: white;
+            }
+
+            /* 푸터 스타일 */
+            #footer {
+                padding: 20px 0 0;
+            }
+            .bottom-section {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 0 20px;
+                text-align: center;
+            }
+
+            .service-image {
+                margin-bottom: 40px;
+                width: 100%;
+                max-width: 800px;
+                height: auto;
+            }
+
+            .main-message {
+                font-size: 28px;
+                font-weight: 600;
+                margin-bottom: 40px;
+                line-height: 1.4;
+            }
+
+            .highlight {
+                color: #13a9e9;
+                font-weight: 700;
+            }
+
+            .btn-inquiry {
+                background-color: #007bff;
+                color: white;
+                border: 2px solid transparent;
+                padding: 12px 24px;
+                font-size: 16px;
+                font-weight: bold;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s ease-in-out;
+                cursor: pointer;
+                border-radius: 50px;
+                text-decoration: none;
+            }
+
+            .btn-inquiry:hover {
+                background-color: #0056b3; /* 색상 강조 */
+                transform: scale(1.02); /* 살짝 확대 */
+                font-weight: bold; /* 글자 강조 */
+            }
+            footer {
+                width: 100%;
+                background-color: #f5f5f5;
+                padding: 40px 0;
+            }
+
+            .footer-container {
+                display: flex;
+                width: 1280px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+
+            .company-info-column {
+                flex: 1;
+                padding-right: 30px;
+            }
+
+            .company-title {
+                font-size: 18px;
+                font-weight: 600;
+                margin: 0;
+                margin-bottom: 15px;
+                color: #444;
+            }
+
+            .company-details {
+                font-size: 14px;
+                color: #777;
+                line-height: 1.8;
+            }
+
+            .copyright {
+                font-size: 12px;
+                color: #999;
+                margin-top: 20px;
+            }
+
+            .menu-columns {
+                flex: 2;
+                display: flex;
+            }
+
+            .menu-column {
+                flex: 1;
+                padding: 0 15px;
+            }
+
+            .menu-title {
+                font-size: 18px;
+                font-weight: 600;
+                margin-bottom: 15px;
+                color: #444;
+            }
+
+            .menu-links {
+                list-style: none;
+            }
+
+            .menu-links li {
+                margin-bottom: 10px;
+            }
+
+            .menu-links a {
+                color: #666;
+                text-decoration: none;
+                font-size: 14px;
+                transition: color 0.2s;
+            }
+
+            .menu-links a:hover {
+                color: #007bff;
+            }
+
+            .legal-contact-column {
+                flex: 1;
+                padding-left: 30px;
+            }
+
+            .legal-title {
+                font-size: 18px;
+                font-weight: 600;
+                margin-bottom: 15px;
+                color: #444;
+            }
+
+            .legal-links {
+                list-style: none;
+                margin-bottom: 30px;
+            }
+
+            .legal-links li {
+                margin-bottom: 10px;
+            }
+
+            .legal-links a {
+                color: #666;
+                text-decoration: none;
+                font-size: 14px;
+                transition: color 0.2s;
+            }
+
+            .legal-links a:hover {
+                color: #007bff;
+            }
+
+            .contact-title {
+                font-size: 18px;
+                font-weight: 600;
+                margin-bottom: 15px;
+                color: #444;
+            }
+
+            .contact-info {
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+
+            .contact-info i {
+                margin-right: 10px;
+                color: #666;
+                font-size: 14px;
+            }
+
+            .contact-info a {
+                color: #666;
+                text-decoration: none;
+                font-size: 14px;
+                transition: color 0.2s;
+            }
+
+            .contact-info a:hover {
+                color: #007bff;
+            }
+
+            /* 메뉴 타이틀로 사용할 항목들 스타일 통일 */
+            .nav-title {
+                font-size: 18px;
+                font-weight: 600;
+                margin-bottom: 15px;
+                color: #444;
+                display: block;
+                text-decoration: none;
+            }
+
+            .nav-title:hover {
+                color: #007bff;
+            }
+
+            @media screen and (max-width: 768px) {
+                .success-card {
+                    width: 100%;
+                }
+                .feature-section {
+                    flex-direction: column;
+                }
+                .feature-section.reverse {
+                    flex-direction: column;
+                }
+                .feature-section img,
+                .text-block {
+                    width: 100%;
+                }
+            }
+
+            @media (max-width: 1280px) {
+                .header-container {
+                    width: 1000px;
+                }
+                .main-nav {
+                    flex-basis: 70%;
+                }
+            }
+
+            @media (max-width: 992px) {
+                .header-container {
+                    width: 800px;
+                }
+                .logo {
+                    font-size: 30px;
+                }
+                .main-nav li {
+                    margin: 0 10px;
+                }
+                .main-nav li a {
+                    padding: 23px 15px;
+                    font-size: 15px;
+                }
+                .btn-login {
+                    padding: 0;
+                }
+            }
+
+            @media (max-width: 680px) {
+                .header-container {
+                    width: 600px;
+                }
+                .logo {
+                    font-size: 20px;
+                }
+                nav {
+                    width: 90%;
+                }
+                .main-nav {
+                    flex-basis: 60%;
+                }
+                .main-nav li {
+                    margin: 0;
+                }
+                .main-nav li a {
+                    padding: 15px;
+                    font-size: 13px;
+                    letter-spacing: -0.1em;
+                }
+                .dropdown-content {
+                    top: 34px;
+                }
+                .auth-buttons {
+                    flex-basis: 40%;
+                    justify-content: flex-start;
+                }
+                .btn-login {
+                    padding: 0;
+                    font-size: 13px;
+                    letter-spacing: -0.1em;
+                }
+                .btn-cta {
+                    display: none;
+                }
+            }
+        </style>
+        <link href="assets/css/insaIT-global.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- 1. 브랜드 스토리 섹션 -->
+        <!-- 헤더 영역 -->
+        <header>
+            <div class="header-container">
+                <a class="logo" href="../index.html"><img src="../img/logo.png" alt="" srcset="" /></a>
+                <nav>
+                    <ul class="main-nav">
+                        <li class="dropdown">
+                            <a href="#">서비스</a>
+                            <div class="dropdown-content">
+                                <a href="./service/basic.html">인사 기본</a>
+                                <a href="./service/compensation.html">보상 관리</a>
+                                <a href="./service/performance.html">성과 평가</a>
+                                <a href="./service/recruit.html">채용</a>
+                                <a href="./service/development.html">인재육성</a>
+                            </div>
+                        </li>
+                        <li><a href="./pricing.html">가격정책</a></li>
+                        <li><a href="./blog.html" target="_blank">블로그</a></li>
+                        <li><a href="./about.html">인사잇</a></li>
+                    </ul>
+                    <div class="auth-buttons">
+                        <a class="btn btn-login" href="/auth">로그인</a>
+                        <a class="btn btn-cta" href="#">도입 문의</a>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <section class="timeline-section">
+            <h2 class="main-slogan">인사잇(insa-IT), 이렇게 시작되었습니다</h2>
+
+            <div class="timeline-item left">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">1990</div>
+                <div class="timeline-title">출발</div>
+                <div class="timeline-desc">
+                    <strong>HR 시스템 개발의 시작, 코리아정보통신 설립</strong><br />
+                    국내 기업용 인사 시스템 구축을 시작하며, 이후 화이트정보통신으로 성장해나가며 HR 기술 기반을
+                    다져왔습니다.
+                </div>
+            </div>
+
+            <div class="timeline-item right">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2000s</div>
+                <div class="timeline-title">확장</div>
+                <div class="timeline-desc">
+                    <strong>산업 맞춤형 시스템 도입, 고객 기반 확대</strong><br />
+                    제조·공공·금융 등 다양한 산업군에 HR 시스템을 공급하며 고객의 니즈에 대응했습니다.
+                </div>
+            </div>
+
+            <div class="timeline-item left">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2010s</div>
+                <div class="timeline-title">기반 강화</div>
+                <div class="timeline-desc">
+                    <strong>SaaS 도입과 기술 완성도 정비</strong><br />
+                    H5on 출시 및 아시아 HR 프로젝트 수상 등으로 서비스 품질과 전문성을 다듬었습니다.
+                </div>
+            </div>
+
+            <div class="timeline-item right">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2020s</div>
+                <div class="timeline-title">전환</div>
+                <div class="timeline-desc">
+                    <strong>환경 변화에 대응한 전략적 SaaS 기획</strong><br />
+                    디지털 전환과 업무 유연화 흐름 속, 구독형 서비스 모델로의 전환을 본격화했습니다.
+                </div>
+            </div>
+
+            <div class="timeline-item left">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2025</div>
+                <div class="timeline-title">탄생</div>
+                <div class="timeline-desc">
+                    <strong>insa-IT, 전략형 HR SaaS 브랜드의 출범</strong><br />
+                    30년 HR 경험과 기술을 바탕으로, 실무에 강한 SaaS 제품 ‘인사잇’을 세상에 선보였습니다.
+                </div>
+            </div>
+            <p class="closing">이런 고민과 경험이 모여 인사잇(insa-IT)이 되었습니다.</p>
+        </section>
+        <div class="divider"></div>
+        <section id="value-section">
+            <h2 class="main-slogan"><span class="highlight">insa-IT</span>, 이름에 담긴 세 가지 관점</h2>
+            <div class="intro">
+                <p class="pharagraph">
+                    인사잇이라는 이름에는 HR을 어떻게 정의하고 해결할 것인지에 대한 방향이 담겨 있습니다. 세 가지 핵심
+                    메시지로 간결하게 전합니다.
+                </p>
+            </div>
+            <div class="value-cards">
+                <div class="value-box">
+                    <h3 class="tit">① 인사? IT! — 이름 그대로, HR을 위한 서비스입니다</h3>
+                    <p class="pharagraph">
+                        '인사'라는 단어를 그대로 담았습니다. HR을 위한 서비스라는 점이, 이름에서 직관적으로 드러나도록
+                        했습니다.
+                    </p>
+                </div>
+                <div class="value-box">
+                    <h3 class="tit">② INSIGHT — 인사 데이터를 통찰로 바꿉니다</h3>
+                    <p class="pharagraph">
+                        인사잇은 데이터를 단순히 보여주는 데서 멈추지 않습니다. 기업의 인사 데이터를 분석하고 해석하여,
+                        전략적인 인사이트를 제공합니다.
+                    </p>
+                </div>
+                <div class="value-box">
+                    <h3 class="tit">③ 기술 기반의 HR 혁신 — 일하는 방식을 바꿉니다</h3>
+                    <p class="pharagraph">
+                        최신 SaaS 기술을 바탕으로, 반복적인 인사업무를 자동화하고, 실무자의 업무 효율을 높이는 방향으로
+                        설계되었습니다.
+                    </p>
+                </div>
+            </div>
+            <p class="closing">이 이름에 담긴 세 가지 관점은 인사잇이 추구하는 HR 서비스의 방향성과 철학입니다.</p>
+        </section>
+
+        <!-- 2. 특장점 섹션 -->
+        <div class="slogan">우리의 철학이 기술로 실현되는 순간들</div>
+        <div class="intro-text">
+            인사잇은 사람과 운영의 본질을 이해하고,<br /><strong>그에 맞는 구조를 설계합니다.</strong>
+        </div>
+        <div class="card-grid">
+            <div class="card-row">
+                <div class="card" onclick="location.href='#hr'">
+                    <div class="icon">HR</div>
+                    <div class="card-title">통합 HR 서비스</div>
+                    <div>채용부터 평가까지 전 과정 관리</div>
+                </div>
+                <div class="card" onclick="location.href='#wsd'">
+                    <div class="icon">W</div>
+                    <div class="card-title">Win SignDocs</div>
+                    <div>계약부터 결재까지 한 번에</div>
+                </div>
+                <div class="card" onclick="location.href='#data'">
+                    <div class="icon">D</div>
+                    <div class="card-title">데이터 시각화</div>
+                    <div>CDC + Vision 기반 분석</div>
+                </div>
+            </div>
+            <div class="card-row">
+                <div class="card" onclick="location.href='#sso'">
+                    <div class="icon">S</div>
+                    <div class="card-title">SSO 통합</div>
+                    <div>단일 로그인으로 시스템 연결</div>
+                </div>
+                <div class="card" onclick="location.href='#connect'">
+                    <div class="icon">C</div>
+                    <div class="card-title">시스템 연계</div>
+                    <div>외부 서비스와 유연하게 연동</div>
+                </div>
+                <div class="card" onclick="location.href='#sec'">
+                    <div class="icon">Sec</div>
+                    <div class="card-title">서비스 보안</div>
+                    <div>CSAP 인증 기반 보안 설계</div>
+                </div>
+            </div>
+            <div class="card-row last-row">
+                <div class="card" onclick="location.href='#corp'">
+                    <div class="icon">Co</div>
+                    <div class="card-title">법인 통합 관리</div>
+                    <div>스위칭 기반 통합 모니터링</div>
+                </div>
+                <div class="card-placeholder"></div>
+                <div class="card-placeholder"></div>
+            </div>
+        </div>
+
+        <section class="feature-section" id="hr">
+            <div class="text-block">
+                <h4>HR 시스템</h4>
+                <h2 class="main-slogan">통합 HR 서비스 솔루션</h2>
+                <p class="pharagraph">
+                    온프레미스부터 클라우드까지, 기업의 다양한 환경에 맞는 유연한 HR 시스템을 제공합니다.
+                </p>
+                <p class="pharagraph">
+                    · 전 과정 통합관리: 채용-근태-평가까지 하나로 연결<br />· 기업 규모별 확장성과 사용자 편의성 강화
+                </p>
+            </div>
+            <img alt="HR UI 예시" src="https://via.placeholder.com/600x400?text=HR UI 예시" />
+        </section>
+        <section class="feature-section reverse" id="wsd">
+            <div class="text-block">
+                <h4>문서 자동화</h4>
+                <h2 class="main-slogan">Win SignDocs</h2>
+                <p class="pharagraph">하루에 몇 번이나 같은 서류를 출력하고, 서명하고, 다시 스캔하시나요?</p>
+                <p class="pharagraph">
+                    인사잇은 이런 HR 업무의 비효율을 없애기 위해 Win SignDocs를 만듭니다.<br />문서 작성부터 계약, 출력,
+                    결재까지 한 번에 해결할 수 있어요.
+                </p>
+            </div>
+            <img alt="SignDocs UI" src="https://via.placeholder.com/600x400?text=SignDocs UI" />
+        </section>
+        <section class="feature-section" id="data">
+            <div class="text-block">
+                <h4>데이터 기반</h4>
+                <h2 class="main-slogan">데이터 시각화</h2>
+                <p class="pharagraph">복잡한 데이터, 쉽게 보이시나요?</p>
+                <p class="pharagraph">
+                    인사잇은 CDC + Vision 기반의 데이터 시각화로<br />HR 데이터를 전략적으로 활용할 수 있도록
+                    도와줍니다.
+                </p>
+            </div>
+            <img alt="데이터 시각화 차트" src="https://via.placeholder.com/600x400?text=데이터 시각화 차트" />
+        </section>
+        <section class="feature-section reverse" id="sso">
+            <div class="text-block">
+                <h4>보안 인증</h4>
+                <h2 class="main-slogan">SSO 통합</h2>
+                <p class="pharagraph">비밀번호 관리가 너무 번거롭진 않으셨나요?</p>
+                <p class="pharagraph">
+                    SSO 기반 단일 로그인으로 여러 시스템을 하나처럼<br />간편하고 안전하게 이용할 수 있습니다.
+                </p>
+            </div>
+            <img alt="SSO 로그인 화면" src="https://via.placeholder.com/600x400?text=SSO 로그인 화면" />
+        </section>
+        <section class="feature-section" id="connect">
+            <div class="text-block">
+                <h4>외부 연동</h4>
+                <h2 class="main-slogan">시스템 연계</h2>
+                <p class="pharagraph">HR 시스템이 따로따로 놀고 있진 않나요?</p>
+                <p class="pharagraph">
+                    SNS 로그인부터 외부 서비스 연동까지<br />필요한 기능을 연결하여 효율적인 운영이 가능합니다.
+                </p>
+            </div>
+            <img alt="시스템 연동 예시" src="https://via.placeholder.com/600x400?text=시스템 연동 예시" />
+        </section>
+        <section class="feature-section reverse" id="sec">
+            <div class="text-block">
+                <h4>보안 설계</h4>
+                <h2 class="main-slogan">서비스 보안</h2>
+                <p class="pharagraph">HR 정보, 안전하게 보호하고 계신가요?</p>
+                <p class="pharagraph">CSAP 인증을 기반으로<br />강력한 정보보호 체계를 제공합니다.</p>
+            </div>
+            <img alt="보안 설계 예시" src="https://via.placeholder.com/600x400?text=보안 설계 예시" />
+        </section>
+        <section class="feature-section" id="corp">
+            <div class="text-block">
+                <h4>법인 모니터링</h4>
+                <h2 class="main-slogan">법인 통합 관리</h2>
+                <p class="pharagraph">법인별 운영 현황, 한눈에 파악할 수 있나요?</p>
+                <p class="pharagraph">
+                    인사잇은 스위칭 기반 통합 모니터링 시스템으로<br />여러 법인을 하나의 플랫폼에서 관리할 수 있습니다.
+                </p>
+            </div>
+            <img alt="법인 관리 예시" src="https://via.placeholder.com/600x400?text=법인 관리 예시" />
+        </section>
+
+        <!-- 3. 성공사례 섹션 -->
+        <div class="success-container">
+            <h2 class="main-slogan">
+                스마트한 HR의 시작, 먼저 경험한 기업들이 증명합니다.<br />비즈니스 성장을 이끈 전략적 인사관리 사례를
+                확인하세요
+            </h2>
+            <div class="success-cards">
+                <div class="success-card">
+                    <div class="card-image-wrapper"></div>
+                    <div class="success-card-content">
+                        <h3 class="tit">A전자 인사팀장</h3>
+                        <p class="pharagraph">
+                            "인사잇(insa-IT) 도입 후 채용 프로세스 시간이 40% 단축되었고, 인사데이터 분석 시간이 주당
+                            15시간에서 3시간으로 감소했습니다.<br />특히 맞춤형 대시보드 기능은 경영진 보고 자료 준비에
+                            큰 도움이 되었습니다."
+                        </p>
+                    </div>
+                </div>
+                <div class="success-card">
+                    <div class="card-image-wrapper"></div>
+                    <div class="success-card-content">
+                        <h3 class="tit">B쇼핑몰 HR담당</h3>
+                        <p class="pharagraph">
+                            "급여 관리와 연말정산 업무가 80% 자동화되어 인사팀의 업무 부담이 크게 줄었습니다.<br />직원들도
+                            모바일 앱을 통해 언제든지 필요한 인사 정보를 확인할 수 있어 만족도가 높아졌습니다."
+                        </p>
+                    </div>
+                </div>
+                <div class="success-card">
+                    <div class="card-image-wrapper"></div>
+                    <div class="success-card-content">
+                        <h3>C스타트업 대표</h3>
+                        <p class="pharagraph">
+                            "급성장하는 스타트업으로서 유연한 HR 시스템이 필요했는데, 인사잇(insa-IT)의 확장성 덕분에
+                            직원이 30명에서 150명으로 증가하는 과정에서도 원활하게 인사 관리를 할 수 있었습니다. 초기
+                            설정부터 운영까지 전문적인 지원에 감사드립니다."
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="summary">
+                <p class="pharagraph">
+                    인사잇(insa-IT) 도입 기업의 평균 인사업무 효율성은 60% 향상되었으며,<br />직원 만족도는 평균 85%로
+                    조사되었습니다.
+                </p>
+            </div>
+            <div class="cta">
+                인사잇 도입하고 성공사례 만들고 싶다면?
+                <br />
+                <a class="cta-button" href="#">인사잇 시작하기</a>
+            </div>
+        </div>
+        <footer>
+            <div class="footer-container">
+                <!-- 좌측: 기업 정보 -->
+                <div class="company-info-column">
+                    <h3 class="company-title">(주)웨티즌</h3>
+                    <div class="company-details">
+                        <p>대표: 김진우</p>
+                        <p>사업자등록번호: 107-81-83562</p>
+                        <p>주소: 서울시 강남구 연주로 725,</p>
+                        <p>동관 7층(논현동, 보전빌딩)</p>
+                    </div>
+                    <p class="copyright">Copyright © 2025 (주)웨티즌 All rights reserved.</p>
+                </div>
+                <!-- 중앙: 서비스 메뉴 및 네비게이션 -->
+                <div class="menu-columns">
+                    <div class="menu-column">
+                        <a class="nav-title" href="#">서비스</a>
+                        <ul class="menu-links">
+                            <li><a href="../sub/service/basic.html">인사 기본</a></li>
+                            <li><a href="../sub/service/compensation.html">보상 관리</a></li>
+                            <li><a href="../sub/service/performance.html">성과 평가</a></li>
+                            <li><a href="../sub/service/recruit.html">채용</a></li>
+                            <li><a href="../sub/service/development.html">인재 육성</a></li>
+                        </ul>
+                    </div>
+                    <div class="menu-column">
+                        <a class="nav-title" href="./pricing.html">가격 정책</a>
+                        <a class="nav-title" href="./blog.html" target="_blank">인사잇 블로그</a>
+                        <a class="nav-title" href="./about.html">인사잇</a>
+                    </div>
+                </div>
+                <!-- 우측: 법적 고지 및 고객 문의 -->
+                <div class="legal-contact-column">
+                    <h3 class="legal-title">법적 고지</h3>
+                    <ul class="legal-links">
+                        <li><a href="#">이용 약관</a></li>
+                        <li><a href="#">개인정보 처리방침</a></li>
+                    </ul>
+                    <h3 class="contact-title">고객 문의</h3>
+                    <div class="contact-info">
+                        <i>📞</i>
+                        <span>02-3474-2225</span>
+                    </div>
+                    <div class="contact-info">
+                        <i>✉️</i>
+                        <a href="mailto:help@win.co.kr">help@win.co.kr</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- 통합 스크립트 -->
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+        <script>
+            // 1. 브랜드 스토리 애니메이션
+            AOS.init();
+            gsap.registerPlugin(ScrollTrigger);
+
+            gsap.utils.toArray('.timeline-item').forEach((item, i) => {
+                gsap.to(item, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top 80%',
+                        toggleActions: 'play reverse play reverse',
+                    },
+                });
+            });
+
+            gsap.utils.toArray('.value-box').forEach((box) => {
+                gsap.to(box, {
+                    scrollTrigger: {
+                        trigger: box,
+                        start: 'top 85%',
+                        toggleActions: 'play reverse play reverse',
+                    },
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'power2.out',
+                });
+            });
+
+            // 2. 특장점 섹션 애니메이션
+            const sections = document.querySelectorAll('.feature-section');
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        } else {
+                            entry.target.classList.remove('visible');
+                        }
+                    });
+                },
+                { threshold: 0.4 }
+            );
+
+            sections.forEach((section) => {
+                observer.observe(section);
+            });
+
+            // 카드 호버 효과 개선
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card) => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-5px)';
+                    card.style.boxShadow = '0 10px 20px rgba(0,152,255,0.12)';
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                    card.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
+                });
+            });
+        </script>
+    </body>
+</html>

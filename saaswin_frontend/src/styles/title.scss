@@ -1,0 +1,13 @@
+@use '/src/styles/_variables.scss' as *;
+
+.sectionTit {
+    font-size: var(--font-size-3xl);
+}
+.sectionOption {
+    display: flex;
+    justify-content: space-between;
+    .options {
+        display: flex;
+        gap: $space-02;
+    }
+}

@@ -1,0 +1,242 @@
+@use '/src/styles/_variables.scss' as *;
+@use '/src/styles/mixin.scss' as *;
+
+@mixin labelStyle {
+    flex-shrink: 0;
+    width: 85px;
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-md);
+    color: $color-accent;
+    @include ellipsis;
+    .asterisk {
+        font-size: var(--font-size-sm);
+        color: $color-error;
+    }
+}
+
+.MuiSelect-root {
+    font-size: var(--font-size-md);
+}
+
+.MuiFormControl-root {
+    fieldset {
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
+        color: $color-accent;
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid $gray-400;
+        background-color: $gray-50;
+        z-index: 0;
+    }
+    .MuiInputLabel-root {
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
+        color: $gray-400;
+        transform: translate(12px, 6px) scale(1);
+        &.MuiInputLabel-shrink {
+            display: none;
+        }
+    }
+    .MuiInputBase-input {
+        height: 30px;
+        min-height: unset;
+        padding: 6px 40px 6px 12px;
+        box-sizing: border-box;
+        z-index: 1;
+        &.MuiSelect-multiple {
+            .checkbox {
+                display: none;
+            }
+        }
+    }
+    .Mui-focused {
+        fieldset {
+            background-color: var(--lower);
+            border-bottom: 1px solid var(--primary) !important;
+            border-width: 1px !important;
+        }
+        .MuiSelect-icon {
+            background-image: url('../../../public/img/ico/ico_selectbox_on.png');
+            transform: rotate(0deg);
+        }
+    }
+    .MuiSelect-icon {
+        width: 20px;
+        height: 20px;
+        top: 6px;
+        right: 6px;
+        background-image: url('../../../public/img/ico/ico_selectbox.png');
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        z-index: 1;
+        path {
+            display: none;
+        }
+    }
+    // disabled
+    .MuiInputBase-root {
+        &.Mui-disabled {
+            color: $color-disabled;
+        }
+    }
+}
+.selectBasicBox {
+    .row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .label {
+        @include labelStyle;
+    }
+    .validationText {
+        margin-top: 4px;
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-sm);
+        text-align: right;
+        color: $gray-500;
+    }
+    .textWrap {
+        position: relative;
+        width: 100%;
+        height: 30px;
+        line-height: 100%;
+    }
+    // vertical
+    &.vertical {
+        position: relative;
+        .label {
+            flex-shrink: 0;
+            width: 70%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            @include ellipsis;
+            & + .textWrap {
+                margin-top: 20px;
+            }
+        }
+        .countText {
+            width: 25%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            & + .row {
+                > .textWrap {
+                    margin-top: 20px;
+                }
+            }
+        }
+    }
+    //error
+    &.error {
+        fieldset {
+            border-bottom-color: $border-error;
+            background-color: $background-error;
+        }
+        .validationText {
+            color: $color-error;
+        }
+    }
+    // disabled
+    &.disabled {
+        fieldset {
+            border-bottom-color: $border-disabled;
+            background-color: $background-disabled;
+        }
+        .validationText {
+            display: none;
+        }
+        .asterisk {
+            display: none;
+        }
+        .btnDeleteText {
+            display: none;
+        }
+        .btnToggleVisible {
+            path {
+                fill: $icon-disabled;
+            }
+        }
+    }
+    .btnSearch {
+        fill: $icon-accent;
+    }
+    &.white {
+        .MuiFormControl-root {
+            fieldset {
+                background-color: $background-white;
+            }
+        }
+    }
+}
+
+// options
+.MuiMenu-paper {
+    margin: -5px 0 0;
+    border-radius: $corner-xxs;
+    border: 1px solid var(--primary);
+    border-radius: $corner-xxs;
+    .MuiMenu-list {
+        padding: 0;
+        .MuiMenuItem-root {
+            gap: 10px;
+            align-items: center;
+            padding: 7px 13px;
+            font-size: var(--font-size-md);
+            line-height: var(--line-height-md);
+            color: $color-accent;
+            &:hover {
+                background-color: var(--lower);
+            }
+        }
+        .MuiTouchRipple-root {
+            display: none;
+        }
+    }
+    input[type='checkbox'] {
+        appearance: none;
+        .label {
+            margin-bottom: -7px;
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-sm);
+            color: $color-accent;
+        }
+        &::before {
+            content: '';
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            top: 8px;
+            left: 5px;
+            border: 1px solid $border-input-default;
+            border-radius: $corner-xxs;
+        }
+
+        :disabled {
+            &::before {
+                border-color: $border-neutral;
+                background-color: $background-disabled;
+            }
+            :checked {
+                &::before {
+                    background-image: url('../../../public/img/ico/ico_checkbox_off.png');
+                }
+            }
+        }
+    }
+}
+.contextMenu {
+    .MuiMenu-paper {
+        border: none;
+    }
+}
+input[type='checkbox'] {
+    .Mui-selected & {
+        &::before {
+            border-color: var(--primary);
+            background: var(--primary) url('../../../public/img/ico/ico_checkbox_on.png') 50% 50% no-repeat;
+        }
+    }
+}

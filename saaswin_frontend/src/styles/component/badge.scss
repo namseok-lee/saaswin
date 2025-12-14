@@ -1,0 +1,178 @@
+@use '/src/styles/_variables.scss' as *;
+@use '/src/styles/mixin.scss' as *;
+
+.badge {
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-xs);
+    color: $color-white;
+    padding: 0 3px;
+    border-radius: $corner-full;
+    background-color: $background-brand;
+    &.success {
+        background-color: $icon-success;
+    }
+    &.error {
+        background-color: $icon-error;
+    }
+    &.warning {
+        background-color: $icon-warning;
+    }
+    &.offline {
+        background-color: $background-brand;
+        border: 1px solid $border-input-default;
+    }
+    &.vacancy {
+        background-color: $icon-disabled;
+    }
+    // dot
+    &.dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+    }
+    // state
+    &.state {
+        padding: 0 8px;
+        font-size: var(--font-size-sm);
+        line-height: var(--font-size-sm);
+        color: $color-info-enabled;
+
+        border-radius: $corner-xxs;
+        background-color: $background-accent-subtler;
+        &::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            margin: -1px 7px 0 0;
+            border-radius: $corner-full;
+            background-color: $icon-info-enabled;
+            vertical-align: middle;
+        }
+        &.disabled {
+            color: $color-disabled;
+            background-color: $background-info-disabled;
+            &::before {
+                background-color: $icon-info-disabled;
+            }
+        }
+        &.warning {
+            color: $color-warning;
+            background-color: $background-warning;
+            &::before {
+                background-color: $icon-warning;
+            }
+        }
+        &.error {
+            color: $color-error;
+            background-color: $background-error;
+            &::before {
+                background-color: $icon-error;
+            }
+        }
+        &.progress {
+            color: $color-primary;
+            background-color: $background-info-default;
+            &::before {
+                background-color: $icon-brand;
+            }
+        }
+        &.success {
+            color: $color-success;
+            background-color: $background-success;
+            &::before {
+                background-color: $icon-success;
+            }
+        }
+    }
+    &.notification {
+        display: inline-block;
+        background-color: unset;
+        .num {
+            display: inline-block;
+            position: relative;
+            top: 5px;
+            padding: 0 $space-01;
+            font-size: var(--font-size-xs);
+            line-height: var(--line-height-xs);
+            color: $color-white;
+            border-radius: $corner-full;
+            background: $icon-error;
+            z-index: 1;
+        }
+        .icoNotification {
+            position: relative;
+            top: -9px;
+            left: -14px;
+            z-index: 0;
+        }
+    }
+    &.mail {
+        position: relative;
+        background-color: unset;
+        &::after {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            position: absolute;
+            top: 0;
+            right: 2px;
+            border-radius: $corner-full;
+            background-color: $icon-info-accent;
+        }
+    }
+    &.step {
+        padding: 0 8px;
+        font-size: var(--font-size-sm);
+        line-height: var(--font-size-sm);
+        color: $color-info-enabled;
+        border-radius: $corner-xxs;
+        background-color: $background-accent-subtler;
+        &::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            margin: -1px 7px 0 0;
+            border-radius: $corner-full;
+            background-color: $icon-info-enabled;
+            vertical-align: middle;
+        }
+        &.two {
+            color: $color-accent;
+            background-color: $background-info-default;
+            &::before {
+                background-color: $icon-brand;
+            }
+        }
+        &.three {
+            color: $color-primary;
+            background-color: $background-info-default;
+            &::before {
+                background-color: $icon-brand;
+            }
+        }
+        &.four {
+            color: $color-success;
+            background-color: $background-success;
+            &::before {
+                background-color: $icon-success;
+            }
+        }
+        &.five {
+            color: $color-warning;
+            background-color: $background-warning;
+            &::before {
+                background-color: $icon-warning;
+            }
+        }
+        &.six {
+            color: $color-disabled;
+            background-color: $background-info-disabled;
+            &::before {
+                background-color: $icon-info-disabled;
+            }
+        }
+    }
+}

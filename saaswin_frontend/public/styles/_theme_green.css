@@ -1,0 +1,42 @@
+:root {
+    --deeper: #065a37;
+    --deep: #097a4c;
+    --highest: #0d8b58;
+    --high: #159d65;
+    --primary: #1cac70;
+    --secondary: #4ab885;
+    --normal: #6dc59a;
+    --lightest: #98d4b6;
+    --low: #c0e5d2;
+    --lower: #e5f5ed;
+    --bgFocus: #e4faf099;
+    --bgInfoDefaultOpa:rgba(228,250,240,0.3);
+    --bgTemplateList: url('/img/template/bg_list_thumb_green.png') 50% 100% no-repeat;
+    --bgSwitchOn: url('/img/ico/ico_switch_on_green.png');
+    --bgSwitchOnHover: url('/img/ico/ico_switch_on_hover_green.png');
+    --bgSwitchOnFocus: url('/img/ico/ico_switch_on_focus_green.png');
+    --bgRadioChecked:url('/img/ico/ico_Radio_on_green.png') 50% 51% no-repeat;
+    --bgTooltip:var(--lower) url('/img/ico/ico_tooltip_green.png') .5rem 50% no-repeat;
+
+
+    --font-size-base:14px;
+    --font-size-xxs: 0.6875rem;
+    --font-size-xs: 0.6875rem;
+    --font-size-sm: 0.75rem;
+    --font-size-md: 0.8125rem;
+    --font-size-lg: 0.875rem;
+    --font-size-xl: 0.9375rem;
+    --font-size-2xl: 1rem;
+    --font-size-3xl: 1.25rem;
+    --font-size-4xl: 2rem;
+
+    --line-height-xxs: 1rem;
+    --line-height-xs: 0.875rem;
+    --line-height-sm: 1.1875rem;
+    --line-height-md: 1.25rem;
+    --line-height-lg: 1.3125rem;
+    --line-height-xl: 1.375rem;
+    --line-height-2xl: 1.5rem;
+    --line-height-3xl: 1.75rem;
+    --line-height-4xl: 2.5rem;
+}

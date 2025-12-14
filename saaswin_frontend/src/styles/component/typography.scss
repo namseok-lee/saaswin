@@ -1,0 +1,76 @@
+@use '/src/styles/_variables.scss' as *;
+@use '/src/styles/mixin.scss' as *;
+
+.titPageArea {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    .titPage {
+        padding: 14px 0;
+        font-size: var(--font-size-xl);
+        line-height: var(--line-height-xl);
+        color: $color-accent;
+    }
+    .btnFavOn {
+        svg {
+            path {
+                fill: #ffa830;
+            }
+        }
+    }
+    &:has(.titSection) {
+        padding: 11px 0;
+        svg {
+            transform: scale(0.9);
+        }
+    }
+    &:has(.titTable) {
+        margin-bottom: 0;
+        padding: 11px 0;
+        svg {
+            transform: scale(0.8);
+        }
+    }
+    &:has(.titForm) {
+        padding: 0 0 11px;
+        svg {
+            transform: scale(0.7);
+        }
+    }
+    .tooltipWrap {
+        display: inline-block;
+        margin-bottom: -7px;
+        vertical-align: middle;
+    }
+    .btnOption {
+        margin-left: auto;
+    }
+    .btnGuide,
+    .btnShortInfo {
+        // opacity: 0;
+        svg {
+            fill: var(--primary);
+        }
+    }
+    &:hover {
+        .btnGuide,
+        .btnShortInfo {
+            // opacity: 1;
+        }
+    }
+}
+.titSection {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-lg);
+    color: $color-accent;
+}
+.titTable {
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-md);
+    color: $color-accent;
+}
+.titForm {
+    font-size: var(--font-size-xl);
+    line-height: var(--line-height-xl);
+    color: $color-accent;
+}

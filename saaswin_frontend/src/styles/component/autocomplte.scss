@@ -1,0 +1,110 @@
+@use '/src/styles/_variables.scss' as *;
+@use '/src/styles/mixin.scss' as *;
+
+// input 부분
+.MuiAutocomplete-root {
+    .MuiChip-root {
+        z-index: 1;
+    }
+    .MuiChip-deletable {
+        svg {
+            background: url('../../../public/img/ico/ico_close.png') 50% 50% no-repeat;
+            transform: scale(0.7);
+            path {
+                display: none;
+            }
+        }
+    }
+    .MuiAutocomplete-endAdornment {
+        z-index: 1;
+        svg[data-testid='ArrowDropDownIcon'] {
+            background: url('../../../public/img/ico/ico_selectbox.png') 50% 50% no-repeat;
+            path {
+                display: none;
+            }
+        }
+        .MuiButtonBase-root {
+            &:hover {
+                background-color: transparent;
+            }
+        }
+        .MuiTouchRipple-root {
+            display: none;
+        }
+    }
+    // 모두삭제 버튼
+    .MuiAutocomplete-clearIndicator {
+        svg {
+            background: url('../../../public/img/ico/ico_delete.png') 50% 50% no-repeat;
+            path {
+                display: none;
+            }
+        }
+    }
+    .MuiInputBase-root {
+        gap: 3px;
+        height: 30px;
+        padding: 0 12px !important;
+    }
+    .Mui-focused {
+        .MuiAutocomplete-endAdornment {
+            svg[data-testid='ArrowDropDownIcon'] {
+                background-image: url('../../../public/img/ico/ico_selectbox_on.png');
+                transform: rotate(180deg);
+            }
+        }
+        &.MuiInputBase-root {
+            height: auto;
+        }
+    }
+
+    .MuiChip-root {
+        margin: 0;
+        height: 25px;
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-sm);
+        border: 1px solid $border-neutral;
+        background-color: $background-white;
+    }
+    fieldset {
+        border-bottom: 1px solid $border-input-default;
+    }
+    &.transparent {
+        fieldset {
+            background-color: transparent;
+        }
+    }
+}
+// checkbox
+.autoCompleteChk {
+    margin-top: -6px;
+    margin-right: 8px;
+    svg {
+        width: 16px;
+        height: 16px;
+        border: 1px solid $border-input-default;
+        border-radius: $corner-xxs;
+        path {
+            display: none;
+        }
+    }
+    &.Mui-checked {
+        svg {
+            border-color: var(--primary);
+            background: var(--primary) url('../../../public/img/ico/ico_checkbox_on.png') 50% 50% no-repeat;
+        }
+    }
+}
+// options
+.MuiAutocomplete-popper {
+    margin: -5px 0 0 !important;
+    .MuiListItemButton-root {
+        &:hover,
+        &:focus-within {
+            background-color: var(--lower);
+        }
+    }
+    .MuiTouchRipple-root {
+        display: none;
+    }
+}

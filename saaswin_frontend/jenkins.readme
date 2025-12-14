@@ -1,0 +1,39 @@
+** 배포
+url : http://218.236.10.179:9090
+id/pw : root / win!@3456 
+saaswin-deploy-SaasWin-FrontEnd 프로젝트의 우측 빌드버튼클릭(초록색세모)
+saaswin-deploy-SaasWin-FrontEnd 클릭 후, Builds를 클릭하여 Console Output 확인
+
+
+** 설치 (참고)
+jenkins docker 218.236.10.179
+
+# Jenkins 데이터를 저장할 볼륨 생성
+mkdir -p /home/win/jenkins_home
+
+# Jenkins 권한 설정 (Docker 내부 Jenkins 사용자(1000)가 볼륨에 쓰기 권한을 가지도록)
+chown -R 1000:1000 /home/win/jenkins_home
+
+# Jenkins 컨테이너 실행 - 9090 포트사용
+docker run -d \
+  --name jenkins \
+  -p 9090:8080 \
+  -p 50000:50000 \
+  -v /home/win/jenkins_home:/var/jenkins_home \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  --restart unless-stopped \
+  jenkins/jenkins:lts
+  
+# 초기 어드민비밀번호 확인
+docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+
+# 초기 어드민계정 설정
+http://218.236.10.179:9090 접속 후, 
+초기 어드민비밀번호 입력 하고,
+계정생성과 계정비밀번호 설정
+
+# 설정 후, 컨테이너로 이미지 생성
+commit jenkins jenkins:0.1                                -- (버전은 알아서 변경)
+docker tag jenkins:0.1 218.236.10.179:5000/jenkins:0.1    -- 태그
+docker push 218.236.10.179:5000/jenkins:0.1               -- registry에 푸시
+

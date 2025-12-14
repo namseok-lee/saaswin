@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        // 파일 구조
+        "rootDir": "./src",
+        "outDir": "./dist",
+
+        // 환경 설정
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "target": "ES2022",
+        "lib": ["ES2022"],
+        "types": ["node"],
+
+        // 출력 옵션
+        "sourceMap": true,
+        "declaration": true,
+
+        // 타입 체크
+        "strict": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "skipLibCheck": true,
+
+        // 추가 옵션
+        "resolveJsonModule": true,
+        "isolatedModules": true
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "dist"]
+}

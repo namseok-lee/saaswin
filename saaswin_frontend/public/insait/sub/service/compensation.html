@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>인사기본 - 인사잇</title>
+        <link href="insaIT-global.css" rel="stylesheet" />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Pretendard', sans-serif;
+            }
+
+            body {
+                font-family: 'Pretendard', sans-serif;
+                line-height: 1.6;
+                color: #333;
+                /* 스크롤 방지 */
+                max-width: 1920px;
+                min-width: 1200px;
+                /* 화면 높이에 맞춤 */
+            }
+            .container {
+                max-width: 1200px;
+                margin: 185px auto 0;
+                padding: 0 20px;
+            }
+
+            /* 헤더 스타일 */
+            header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 80px;
+                background-color: #fff;
+                z-index: 9999 !important; /* z-index 값을 더 높게 설정 */
+            }
+
+            .header-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 1360px;
+                margin: 0 auto;
+                position: relative;
+            }
+
+            /* 로고 스타일 */
+            .logo {
+                height: 28px;
+                margin-right: 50px;
+                text-decoration: none;
+            }
+
+            .logo img {
+                height: 100%;
+            }
+
+            /* 네비게이션 스타일 */
+            nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+            }
+            nav.moVer {
+                display: none;
+                flex-direction: column;
+                justify-content: space-between;
+                width: 100%;
+                height: calc(100vh - 60px);
+                position: fixed;
+                top: 60px;
+                left: 0;
+                background-color: #ffffff;
+            }
+            .navList {
+                width: 100%;
+                list-style: none;
+                padding: 30px 16px;
+            }
+            .navList > .item > .linkTo {
+                display: block;
+                padding: 10px 0;
+                font-size: 20px;
+                line-height: 28px;
+                color: #010101;
+                text-decoration: none;
+            }
+            .navList > .item.on > .linkTo {
+                color: #13a9e9;
+            }
+            .navList > .item.blog > .linkTo::after {
+                content: '';
+                display: inline-block;
+                width: 18px;
+                height: 18px;
+                background: url(../../img/ico_blank.png) no-repeat;
+                vertical-align: top;
+            }
+            .nav.moVer .btns {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+                padding: 16px;
+                border-top: 1px solid #d9d9d9;
+            }
+            .nav.moVer .btns .btn {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 44px;
+                font-size: 16px;
+                line-height: 24px;
+                color: #565656;
+                border-radius: 4px;
+                border: 1px solid #e2e2e2;
+            }
+            .nav.moVer .btns .btn.primary {
+                color: #ffffff;
+                border-color: #13a9e9;
+                background-color: #13a9e9;
+            }
+            .btnToggleMenu {
+                display: none;
+                width: 30px;
+                height: 30px;
+                background: url(../../img/ico_menu.png) 50% 50% no-repeat;
+                position: absolute;
+                top: 15px;
+                right: 20px;
+            }
+            .btnToggleMenu.on {
+                background-image: url(../../img/ico_close.png);
+            }
+
+            .main-nav {
+                display: flex;
+                list-style: none;
+                justify-content: center;
+            }
+
+            .main-nav li {
+                position: relative;
+                margin: 0 15px;
+            }
+
+            .main-nav li a {
+                align-items: center;
+                text-decoration: none;
+                color: #010101;
+                font-weight: 500;
+                font-size: 16px;
+                padding: 10px 15px;
+                border-radius: 20px;
+                transition: all 0.3s;
+            }
+            .main-nav > li > a {
+                display: flex;
+                padding: 28px 15px;
+            }
+
+            .main-nav li a:hover {
+                color: #13a9e9;
+            }
+            .main-nav li.blog a::after {
+                content: '';
+                display: inline-block;
+                width: 18px;
+                height: 18px;
+                margin-top: -5px;
+                background: url(../../img/ico_blank.png) no-repeat;
+                vertical-align: top;
+            }
+
+            .btnToggleNav {
+                display: none;
+            }
+
+            /* 로그인 및 도입 문의 버튼 */
+            .auth-buttons {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                flex-basis: 30%;
+            }
+            .btn {
+                display: inline-block;
+                padding: 12px 24px;
+                border-radius: 4px;
+                font-weight: 500;
+                font-size: 16px;
+                cursor: pointer;
+                transition: all 0.3s;
+                text-decoration: none;
+                text-align: center;
+            }
+            .btn:hover {
+                background-color: #0488c7;
+            }
+
+            .btn-login {
+                padding: 8px 28px;
+                font-size: 15px;
+                color: #333333;
+                background-color: transparent;
+            }
+
+            .btn-cta {
+                font-size: 15px;
+                padding: 8px 20px;
+            }
+
+            .btn-cta,
+            .btn-inq {
+                background-color: #13a9e9;
+                color: #fff;
+                border: none;
+                padding: 6px 12px;
+            }
+
+            .btn-cta:hover {
+                background-color: #0092c7;
+            }
+
+            .btn-inq {
+                display: inline-flex;
+                align-items: center;
+                padding: 14px 30px;
+                font-size: 20px;
+            }
+
+            .centered {
+                text-align: center;
+            }
+            .intro-icons {
+                display: flex;
+                justify-content: center;
+                gap: 40px;
+                margin: 40px 0;
+            }
+            .intro-icons img {
+                width: 72px;
+                height: 72px;
+                transition: transform 0.3s ease;
+            }
+            .intro-icons img:hover {
+                transform: scale(1.1);
+            }
+            .summary-cards {
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+                margin: 40px 0;
+            }
+            .summary-card {
+                flex: 1;
+                background: #f9f9f9;
+                border-radius: 12px;
+                padding: 20px;
+                text-align: center;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+                transition: box-shadow 0.3s ease;
+            }
+            .summary-card:hover {
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
+            .anchor-list {
+                text-align: center;
+                margin: 40px 0;
+            }
+            .anchor-list a {
+                margin: 0 10px;
+                color: #007bff;
+                text-decoration: none;
+                font-weight: 500;
+                transition: color 0.2s ease;
+            }
+            .anchor-list a:hover {
+                color: #0056b3;
+            }
+            .feature-section {
+                margin-bottom: 80px;
+                opacity: 0;
+                transform: translateY(40px);
+                transition: all 0.6s ease;
+            }
+            .feature-section.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .key-point {
+                background: #f0f2f4;
+                padding: 1rem;
+                border-left: 4px solid #0098ff;
+                max-width: 720px;
+                margin: 20px auto;
+            }
+            /* 푸터 스타일 */
+            footer {
+                width: 100%;
+                padding: 70px 0 40px;
+                background-color: #010101;
+            }
+            #footer {
+                height: auto !important;
+                min-height: unset !important;
+                padding-bottom: 0;
+            }
+            .footer-container {
+                padding: 0 20px;
+            }
+
+            .menu-n-contact {
+                display: flex;
+                width: 1360px;
+                margin: 0 auto;
+                justify-content: space-between;
+            }
+            .menu-columns {
+                display: flex;
+                gap: 40px;
+            }
+            .menu-columns a {
+                font-size: 16px;
+                line-height: 24px;
+                color: #9e9e9e;
+                text-decoration: none;
+            }
+            .menu-columns a:hover {
+                text-decoration: underline;
+            }
+            .legal-contact-column .tel {
+                display: block;
+                margin-bottom: 15px;
+                font-size: 32px;
+                line-height: 40px;
+                color: #ffffff;
+                text-decoration: none;
+            }
+            .legal-contact-column .legal-title,
+            .legal-contact-column a {
+                display: block;
+                margin-bottom: 15px;
+                font-size: 16px;
+                line-height: 24px;
+                color: #9e9e9e;
+                text-decoration: none;
+            }
+            .company-info-column {
+                margin: 50px auto 0;
+                padding-top: 30px;
+                border-top: 1px solid #2b2b2b;
+            }
+            .company-info-column .column-container {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                column-gap: 20px;
+                width: 1360px;
+                margin: 0 auto;
+            }
+            .company-info-column span,
+            .company-info-column a {
+                font-size: 15px;
+                line-height: 22px;
+                color: #9e9e9e;
+                text-decoration: none;
+            }
+            .company-info-column .company-title {
+                font-weight: 500;
+                font-size: 16px;
+                color: #ffffff;
+            }
+            .company-info-column .copyright {
+                width: 100%;
+                margin-top: 10px;
+                font-size: 15px;
+                line-height: 22px;
+                color: #7c7c7c;
+            }
+
+            /* 메뉴 타이틀로 사용할 항목들 스타일 통일 */
+            .nav-title {
+                font-size: 18px;
+                font-weight: 600;
+                margin-bottom: 15px;
+                color: #444;
+                display: block;
+                text-decoration: none;
+            }
+
+            .nav-title:hover {
+                color: #007bff;
+            }
+
+            .centered {
+                text-align: center;
+            }
+            .intro-icons {
+                display: flex;
+                justify-content: center;
+                gap: 40px;
+                margin: 40px 0;
+            }
+            .intro-icons img {
+                width: 72px;
+                height: 72px;
+                transition: transform 0.3s ease;
+            }
+            .intro-icons img:hover {
+                transform: scale(1.1);
+            }
+            .summary-cards {
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+                margin: 40px 0;
+            }
+            .summary-card {
+                flex: 1;
+                background: #f9f9f9;
+                border-radius: 12px;
+                padding: 20px;
+                text-align: center;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+                transition: box-shadow 0.3s ease;
+            }
+            .summary-card:hover {
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
+            .anchor-list {
+                text-align: center;
+                margin: 40px 0;
+            }
+            .anchor-list a {
+                margin: 0 10px;
+                color: #007bff;
+                text-decoration: none;
+                font-weight: 500;
+                transition: color 0.2s ease;
+            }
+            .anchor-list a:hover {
+                color: #0056b3;
+            }
+            @media (max-width: 1280px) {
+                .header-container {
+                    width: 1000px;
+                }
+                .main-nav {
+                    flex-basis: 70%;
+                }
+            }
+
+            @media (max-width: 992px) {
+                .header-container {
+                    width: 800px;
+                }
+                .logo {
+                    font-size: 30px;
+                }
+                .main-nav li {
+                    margin: 0 10px;
+                }
+                .main-nav li a {
+                    padding: 23px 15px;
+                    font-size: 15px;
+                }
+                .btn-login {
+                    padding: 0;
+                }
+            }
+
+            @media (max-width: 680px) {
+                .header-container {
+                    width: 600px;
+                }
+                .logo {
+                    font-size: 20px;
+                }
+                nav {
+                    width: 90%;
+                }
+                .main-nav {
+                    flex-basis: 60%;
+                }
+                .main-nav li {
+                    margin: 0;
+                }
+                .main-nav li a {
+                    padding: 15px;
+                    font-size: 13px;
+                    letter-spacing: -0.1em;
+                }
+                .dropdown-content {
+                    top: 34px;
+                }
+                .auth-buttons {
+                    flex-basis: 40%;
+                    justify-content: flex-start;
+                }
+                .btn-login {
+                    padding: 0;
+                    font-size: 13px;
+                    letter-spacing: -0.1em;
+                }
+                .btn-cta {
+                    display: none;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="header-container">
+                <a class="logo" href="../../index.html"><img src="../../img/logo.png" alt="" srcset="" /></a>
+                <nav class="nav pcVer">
+                    <ul class="main-nav">
+                        <li><a href="./basic.html">인사 기본</a></li>
+                        <li><a href="./compensation.html">보상 관리</a></li>
+                        <li><a href="./performance.html">성과 평가</a></li>
+                        <li><a href="./recruit.html">채용</a></li>
+                        <li><a href="./development.html">인재육성</a></li>
+                        <!-- <li><a href="./sub/pricing.html">가격정책</a></li> -->
+                        <li class="blog"><a href="../blog.html" target="_blank">블로그</a></li>
+                        <!-- <li><a href="./sub/about.html">인사잇</a></li> -->
+                    </ul>
+                    <div class="auth-buttons">
+                        <a class="btn btn-login" href="/auth">로그인</a>
+                        <a class="btn btn-cta" href="#">도입 문의</a>
+                    </div>
+                </nav>
+                <nav class="nav moVer">
+                    <ul class="navList">
+                        <li class="item">
+                            <a href="./basic.html" class="linkTo">인사 기본</a>
+                        </li>
+                        <li class="item">
+                            <a href="./compensation.html" class="linkTo">보상 관리</a>
+                        </li>
+                        <li class="item">
+                            <a href="./performance.html" class="linkTo">성과 평가</a>
+                        </li>
+                        <li class="item">
+                            <a href="./recruit.html" class="linkTo">채용</a>
+                        </li>
+                        <li class="item">
+                            <a href="./development.html" class="linkTo">인재육성</a>
+                        </li>
+                        <!-- <li class="item">
+                                    <a href="./sub/pricing.html" class="linkTo">가격정책</a>
+                                </li> -->
+                        <li class="item blog">
+                            <a href="../blog.html" class="linkTo" target="_blank">블로그</a>
+                        </li>
+                        <!-- <li class="item">
+                                    <a href="./sub/about.html" class="linkTo">인사잇</a>
+                                </li> -->
+                    </ul>
+                    <div class="btns">
+                        <a href="#none" class="btn primary">도입 문의</a>
+                        <a href="/auth" class="btn">로그인</a>
+                    </div>
+                </nav>
+                <a href="#none" class="btnToggleMenu"></a>
+            </div>
+        </header>
+        <div class="container">
+            <section class="page-title-section" style="text-align: center; margin: 80px 0 40px">
+                <h1>보상의 흐름, 인사잇으로 매끄럽게</h1>
+            </section>
+            <p class="image-caption subtle centered">연봉부터 복지까지, 보상 흐름 정리가 필요할 때예요.</p>
+            <section class="feature-section" id="info">
+                <h2 class="centered">보상 관리 모듈</h2>
+                <div class="image-container">
+                    <img alt="연봉 관리 이미지" src="../../img/service/compensation_module.svg" />
+                </div>
+                <p class="centered">
+                    <strong>보상 흐름을 하나의 모듈로 통합하세요</strong><br />
+                    연봉, 인센티브, 복지까지 구성원 보상의 전 과정을 하나의 흐름으로 관리할 수 있습니다.
+                </p>
+                <div class="key-point">
+                    <strong>Key Point</strong><br />
+                    ▪ 보상 항목별 통합 기준 수립<br />
+                    ▪ 자동화된 보상 흐름 추적<br />
+                    ▪ 인사 데이터 기반 일관성 유지
+                </div>
+            </section>
+            <section class="feature-section" id="move">
+                <h2 class="centered">급여 체계 설계 및 관리</h2>
+                <div class="image-container">
+                    <img alt="이동 승진 이미지" src="../../img/service/compensation_salary_structure.svg" />
+                </div>
+                <p class="centered">
+                    <strong>직무와 직급에 맞는 급여 구조를 설계하세요</strong><br />
+                    급여 테이블을 설계하고 인상률, 시뮬레이션 기능을 통해 체계적인 보상 기준을 운영합니다.
+                </p>
+                <div class="key-point">
+                    <strong>Key Point</strong><br />
+                    ▪ 직무/직급별 기준 급여 설정<br />
+                    ▪ 연봉 인상률 시뮬레이션<br />
+                    ▪ 급여 변경 이력 자동 저장
+                </div>
+            </section>
+            <section class="feature-section" id="org">
+                <h2 class="centered">성과 연동 보상 시스템</h2>
+                <div class="image-container">
+                    <img alt="조직도 이미지" src="../../img/service/compensation_incentive_system.svg" />
+                </div>
+                <p class="centered">
+                    <strong>성과 지표 기반의 투명한 보상을 실현하세요</strong><br />
+                    KPI 및 평가 결과를 기반으로 인센티브를 자동 산정하고, 부서별 차등 지급을 지원합니다.
+                </p>
+                <div class="key-point">
+                    <strong>Key Point</strong><br />
+                    ▪ 성과 지표 기반 보상 계산<br />
+                    ▪ 부서/개인별 차등 인센티브<br />
+                    ▪ 성과 달성률 자동 반영
+                </div>
+            </section>
+            <section class="feature-section" id="request">
+                <h2 class="centered">복리후생 프로그램 관리</h2>
+                <div class="image-container">
+                    <img alt="보상 이력 이미지" src="../../img/service/compensation_welfare_program.svg" />
+                </div>
+                <p class="centered">
+                    <strong>구성원이 체감하는 복지를 설계하세요</strong><br />
+                    선택형 복지 제도 운영부터 신청 내역 관리, 만족도 조사까지 통합된 복지 운영이 가능합니다.
+                </p>
+                <div class="key-point">
+                    <strong>Key Point</strong><br />
+                    ▪ 선택형 복지 항목 구성<br />
+                    ▪ 신청 및 사용 이력 통합 관리<br />
+                    ▪ 복지 만족도 분석 기능
+                </div>
+            </section>
+            <section class="feature-section" id="skill">
+                <h2 class="centered">보상 분석 및 예산 관리</h2>
+                <div class="image-container">
+                    <img alt="전략 리포트 이미지" src="../../img/service/compensation_budget_analysis.svg" />
+                </div>
+                <p class="centered">
+                    <strong>보상 전략 수립을 위한 인사이트 제공</strong><br />
+                    부서별 보상 수준, 예산 집행률 등을 분석하여 전략적 의사결정을 지원합니다.
+                </p>
+                <div class="key-point">
+                    <strong>Key Point</strong><br />
+                    ▪ 예산 대비 집행률 분석<br />
+                    ▪ 보상 수준 비교 리포트<br />
+                    ▪ 시기별 트렌드 시각화
+                </div>
+            </section>
+        </div>
+        <footer>
+            <div class="footer-container">
+                <div class="menu-n-contact">
+                    <div class="menu-columns">
+                        <a href="./basic.html">인사 기본</a>
+                        <a href="./compensation.html">보상 관리</a>
+                        <a href="./performance.html">성과 평가</a>
+                        <a href="./recruit.html">채용</a>
+                        <a href="./development.html">인재 육성</a>
+                        <a href="../blog.html" target="_blank">블로그 <img src="../../img/ico_blank.png" alt="" /></a>
+                    </div>
+                    <div class="legal-contact-column">
+                        <a href="tel:02-3474-2225" class="tel">02-3474-2225</a>
+                        <h3 class="legal-title">법적 고지</h3>
+                        <a href="#">이용 약관</a>
+                        <a href="#">개인정보 처리방침</a>
+                    </div>
+                </div>
+                <div class="company-info-column">
+                    <div class="column-container">
+                        <h3 class="company-title">(주)웨티즌</h3>
+                        <span>대표: 김진우</span>
+                        <span>사업자등록번호: 107-81-83562</span>
+                        <span>주소: 서울시 강남구 연주로 725, 동관 7층(논현동, 보전빌딩)</span>
+                        <a href="mailto:help@win.co.kr">이메일:help@win.co.kr</a>
+                        <p class="copyright">Copyright © 2025 (주)웨티즌 All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script>
+            const sections = document.querySelectorAll('.feature-section');
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                },
+                {
+                    threshold: 0.1,
+                }
+            );
+
+            sections.forEach((section) => {
+                observer.observe(section);
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,60 @@
+@use '/src/styles/_variables.scss' as *;
+@use '/src/styles/mixin.scss' as *;
+
+.inputCheckbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 16px;
+    position: relative;
+    .label {
+        margin-bottom: -7px;
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-sm);
+        color: $color-accent;
+    }
+    &::before {
+        content: '';
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        top: 3px;
+        left: 0;
+        border: 1px solid $border-input-default;
+        border-radius: $corner-xxs;
+    }
+    .checkbox {
+        opacity: 0;
+    }
+    &.checked {
+        &::before {
+            border-color: var(--primary);
+            background: var(--primary) url('../../../public/img/ico/ico_checkbox_on.png') 50% 50% no-repeat;
+        }
+    }
+    &.disabled {
+        &::before {
+            border-color: $border-neutral;
+            background-color: $background-disabled;
+        }
+        &.checked {
+            &::before {
+                background-image: url('../../../public/img/ico/ico_checkbox_off.png');
+            }
+        }
+    }
+}
+.checkboxGroupWrap {
+    display: flex;
+    gap: 40px;
+}
+.checkboxGroup {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 7px;
+    &.vertical {
+        flex-direction: column;
+        gap: 7px;
+    }
+}

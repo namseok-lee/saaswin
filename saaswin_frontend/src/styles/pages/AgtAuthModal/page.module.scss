@@ -1,0 +1,27 @@
+@use '/src/styles/_variables.scss' as *;
+
+.agtAuth {
+    .msg {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 20px;
+        padding: 10px 12px;
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
+        color: $color-info-enabled;
+        background-color: $background-info-default;
+        svg {
+            transform: scale(0.7);
+        }
+    }
+    .rdoGroup {
+        margin: 0 0 20px 158px;
+    }
+    .caution {
+        font-size: var(--font-size-lg);
+        line-height: var(--line-height-lg);
+        color: $color-accent;
+        text-align: center;
+    }
+}

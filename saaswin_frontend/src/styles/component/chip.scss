@@ -1,0 +1,176 @@
+@use '/src/styles/_variables.scss' as *;
+@use '/src/styles/mixin.scss' as *;
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 15px;
+    font-size: var(--font-size-md);
+    color: $color-white;
+    border-radius: $corner-xl;
+    background-color: $background-brand;
+    svg {
+        path {
+            fill: $icon-white;
+        }
+    }
+    &:hover {
+        background-color: $background-state-hover;
+    }
+    &.active {
+        background-color: $background-state-active;
+    }
+    &.disabled {
+        color: $color-disabled;
+        background-color: $background-disabled;
+        svg {
+            path {
+                fill: $icon-disabled;
+            }
+        }
+    }
+    &.default {
+        color: $color-neutral;
+        border: 1px solid $border-bold;
+        background-color: $background-white;
+        svg {
+            path {
+                fill: $icon-default;
+            }
+        }
+        &:hover {
+            color: $color-primary;
+            svg {
+                path {
+                    fill: $icon-brand;
+                }
+            }
+        }
+        &.active {
+            border-color: $border-brand;
+            color: $color-primary;
+            svg {
+                path {
+                    fill: $icon-brand;
+                }
+            }
+        }
+        &.disabled {
+            color: $color-disabled;
+            border-color: $border-bold;
+            background-color: $background-disabled;
+            svg {
+                path {
+                    fill: $icon-disabled;
+                }
+            }
+        }
+    }
+    &.info {
+        color: $color-neutral;
+        background-color: #e1f5fc;
+        svg {
+            path {
+                fill: $icon-default;
+            }
+        }
+        &:hover {
+            svg {
+                path {
+                    fill: $icon-brand;
+                }
+            }
+        }
+        &.active {
+            border: 1px solid $border-brand;
+            background-color: #e1f5fc;
+            svg {
+                path {
+                    fill: $icon-brand;
+                }
+            }
+        }
+        &.disabled {
+            color: $color-disabled;
+            background-color: $background-disabled;
+            svg {
+                path {
+                    fill: $icon-disabled;
+                }
+            }
+        }
+    }
+    &.error {
+        background-color: $icon-error;
+        &.outlined {
+            color: $color-error;
+            border: 1px solid $border-error;
+            background-color: $background-error;
+            svg {
+                path {
+                    fill: $icon-default;
+                }
+            }
+        }
+        &.disabled {
+            background-color: $background-error;
+        }
+    }
+    &.warning {
+        background-color: $icon-warning;
+        &.outlined {
+            color: $icon-warning;
+            border: 1px solid $icon-warning;
+            background-color: $background-warning;
+            svg {
+                path {
+                    fill: $icon-default;
+                }
+            }
+        }
+        &.disabled {
+            background-color: $background-warning;
+        }
+    }
+    &.success {
+        background-color: $icon-success;
+        &.outlined {
+            color: $icon-success;
+            border: 1px solid $icon-success;
+            background-color: $background-success;
+            svg {
+                path {
+                    fill: $icon-default;
+                }
+            }
+        }
+        &.disabled {
+            background-color: $background-success;
+        }
+    }
+    &.label {
+        min-width: 62px;
+        color: $color-neutral;
+        background-color: $background-accent-subtler;
+    }
+    &.error,
+    &.warning,
+    &.success,
+    &.label {
+        &.disabled {
+            color: $color-disabled;
+            border: none;
+            svg {
+                path {
+                    fill: $icon-disabled;
+                }
+            }
+        }
+    }
+}
+
+.chipsGroup {
+    display: flex;
+    gap: 8px;
+}

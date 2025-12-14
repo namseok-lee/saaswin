@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  springboot_app:
+    image: 218.236.10.179:5000/saaswin_api:0.01
+    container_name: saaswin_api
+    ports:
+      - "9001:9001"
+    environment:
+      - JAVA_OPTS=-Dspring.profiles.active=dev -Djava.security.egd=file:/dev/./urandom -Xms256m -Xmx512m
+    volumes:
+      - /home/win/docker/springboot_logs:/usr/local/tomcat/logs  # 컨테이너의 로그 파일을 호스트의 ./logs 디렉토리로 매핑
+    restart: always
+    #- ./logs:/usr/local/tomcat/logs  # 컨테이너의 로그 파일을 호스트의 ./logs 디렉토리로 매핑
+    #- JAVA_OPTS=-Dspring.profiles.active=dev -Djava.security.egd=file:/dev/./urandom -Xms256m -Xmx512m

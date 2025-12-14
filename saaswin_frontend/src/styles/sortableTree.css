@@ -1,0 +1,54 @@
+/* styles/sortableTree.css */
+
+.ReactVirtualized__Grid {
+    outline: none;
+}
+
+.rst__treeRow {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.rst__treeNode {
+    display: flex;
+    align-items: center;
+}
+
+/* 가로 트리 레이아웃을 위해 추가 */
+.horizontal-tree {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.horizontal-tree .rst__treeNode {
+    flex-direction: column;
+    align-items: center;
+}
+
+.horizontal-tree .rst__treeRow {
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 선 연결을 위한 스타일 조정 */
+.horizontal-tree .rst__connectors {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #ccc;
+    z-index: -1;
+}
+
+.horizontal-tree .rst__connectors::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 20px;
+    background-color: #ccc;
+}

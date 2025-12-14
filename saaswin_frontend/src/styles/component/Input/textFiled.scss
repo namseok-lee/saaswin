@@ -1,0 +1,284 @@
+@use '/src/styles/_variables.scss' as *;
+@use '/src/styles/mixin.scss' as *;
+
+@mixin labelStyle {
+    flex-shrink: 0;
+    width: 85px;
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-md);
+    color: $color-accent;
+    @include ellipsis;
+    .asterisk {
+        font-size: var(--font-size-sm);
+        color: $color-error;
+    }
+}
+
+.inputBasic {
+    width: 100%;
+    height: 30px;
+    padding: 6px 40px 6px 12px;
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-md);
+    color: $color-accent;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid $gray-400;
+    background-color: $gray-50;
+    &::placeholder {
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
+        color: $gray-400;
+    }
+    // type number
+    &[type='number'] {
+        max-width: 122px;
+        padding: 6px 0 6px 12px;
+    }
+}
+.inputBasicBox {
+    .countText {
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-xxs);
+        text-align: right;
+        color: $gray-600;
+    }
+    .row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .label {
+        @include labelStyle;
+        &:hover {
+            width: unset;
+            position: absolute;
+            background-color: $background-white;
+            z-index: 9;
+            @include unSetellipsis;
+            & + .textWrap {
+                margin-left: 95px;
+            }
+            & + .MuiTextField-root {
+                margin-left: 95px;
+            }
+            & + .MuiMultiInputDateRangeField-root {
+                margin-left: 95px;
+            }
+            & + .MuiAutocomplete-root {
+                margin-left: 95px;
+            }
+        }
+    }
+    .validationText {
+        margin-top: 4px;
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-sm);
+        text-align: right;
+        color: $color-accent;
+    }
+    .textWrap {
+        position: relative;
+        width: 100%;
+        line-height: unset;
+    }
+    // vertical
+    &.vertical {
+        position: relative;
+        .label {
+            flex-shrink: 0;
+            width: 70%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            @include ellipsis;
+            & + .textWrap {
+                margin-top: 20px;
+            }
+            &:hover {
+                & + .textWrap {
+                    margin-left: 0;
+                }
+                & + .MuiTextField-root {
+                    margin-left: 0;
+                }
+                & + .MuiMultiInputDateRangeField-root {
+                    margin-left: 0;
+                }
+                & + .MuiAutocomplete-root {
+                    margin-left: 0;
+                }
+            }
+        }
+        .countText {
+            width: 25%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            & + .row {
+                > .textWrap {
+                    margin-top: 20px;
+                }
+            }
+        }
+    }
+    // hover {
+    &:hover {
+        .inputBasic {
+            border-bottom-color: var(--primary);
+        }
+    }
+    // typing {
+    &:focus-within {
+        .inputBasic {
+            outline: none;
+            background-color: var(--bgFocus);
+        }
+    }
+    .options {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+        .btnToggleVisible {
+            min-width: unset;
+        }
+    }
+    .inputBasic {
+        &.typingText {
+            color: var(--primary);
+        }
+    }
+    // filled {
+    .inputBasic {
+        &.filled {
+            border-bottom-color: var(--primary);
+        }
+    }
+    // error
+    &.error {
+        .inputBasic {
+            border-bottom-color: $border-error;
+            background-color: $background-error;
+            &.typingText {
+                color: $color-error;
+            }
+        }
+        .icoError {
+            fill: $icon-error;
+        }
+        .validationText {
+            color: $color-error;
+        }
+        .btnToggleVisible {
+            path {
+                fill: $icon-error;
+            }
+        }
+    }
+    // warning
+    &.warning {
+        .inputBasic {
+            border-bottom-color: $border-warning;
+            background-color: $background-warning;
+            &.typingText {
+                color: $color-warning;
+            }
+        }
+        .icoError {
+            fill: $icon-warning;
+        }
+        .validationText {
+            color: $color-warning;
+        }
+    }
+    // success
+    &.success {
+        .inputBasic {
+            border-bottom-color: $border-success;
+            background-color: $background-success;
+            &.typingText {
+                color: $color-success;
+            }
+        }
+        .icoCheck {
+            fill: $icon-success;
+        }
+        .validationText {
+            color: $color-success;
+        }
+    }
+    // disabled
+    .inputBasic {
+        &:disabled {
+            color: $color-disabled;
+            border-bottom-color: $border-disabled;
+            background-color: $background-disabled;
+        }
+    }
+    .btnSearch {
+        fill: $icon-accent;
+    }
+    &:has(.inputBasic:disabled) {
+        .icoError,
+        .icoCheck,
+        .countText,
+        .validationText {
+            display: none;
+        }
+        .asterisk {
+            display: none;
+        }
+        .btnDeleteText {
+            display: none;
+        }
+        .btnToggleVisible {
+            path {
+                fill: $icon-disabled;
+            }
+        }
+    }
+    // white version
+    &.white {
+        .inputBasic {
+            background-color: $background-white;
+            &.filled {
+                background-color: $background-white;
+                border-bottom-color: var(--primary);
+            }
+        }
+        &:focus-within {
+            .inputBasic {
+                outline: none;
+                background-color: var(--bgFocus);
+            }
+        }
+    }
+    // number type
+    &:has([type='number']) {
+        .label {
+            width: unset;
+        }
+    }
+}
+
+// login input
+.loginInput {
+    &:hover {
+        .inputBasic {
+            border-bottom-color: var(--primary);
+            &.typingText {
+                color: $color-primary;
+            }
+        }
+    }
+    .inputBasic {
+        &.filled {
+            border-bottom-color: var(--primary);
+            color: $color-primary;
+        }
+    }
+}

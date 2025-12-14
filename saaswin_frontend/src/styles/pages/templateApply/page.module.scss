@@ -1,0 +1,119 @@
+@use '/src/styles/_variables.scss' as *;
+.outWorking {
+    .context {
+        height: calc(100vh - 129px);
+        overflow-y: auto;
+    }
+    .section {
+        margin-bottom: 15px;
+    }
+    .MuiPaper-elevation {
+        max-height: 100vh;
+    }
+    .attachFile {
+        position: relative;
+        .fileList {
+            margin-bottom: 15px;
+        }
+        .btnAddFile {
+            position: absolute;
+            top: -40px;
+            right: 0;
+        }
+        .buttonArea {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-default);
+        }
+        .btnUpload {
+            min-width: 80px;
+            height: 32px;
+            font-weight: 500;
+        }
+    }
+    .guideText {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
+        color: $color-warning;
+    }
+    .userSelect {
+        width: 300px;
+    }
+    .fileTitle,
+    .gridHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .btnAddFile {
+            position: static;
+        }
+    }
+    .gridActions {
+        display: flex;
+        gap: 5px;
+    }
+    .totalCost {
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-sm);
+        color: $color-accent;
+        text-align: right;
+    }
+}
+.approverList {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    .item {
+        text-align: center;
+        .state {
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-sm);
+            color: $color-success;
+            white-space: nowrap;
+            &.reject {
+                color: $color-error;
+            }
+        }
+    }
+}
+.approvalLine {
+    table {
+        .formItem {
+            width: 300px;
+        }
+    }
+}
+// 출장 비용 신청
+.optionSection {
+    margin-top: 15px;
+}
+// 결재라인 지정 팝업
+.setApprovalLine {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    .col {
+        width: 476px;
+        padding: 15px 20px;
+        background-color: var(--bgInfoDefaultOpa);
+    }
+    .btnSettings {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: center;
+    }
+    .btnArea {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 12px;
+        height: 45%;
+    }
+}

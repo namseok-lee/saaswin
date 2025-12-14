@@ -1,0 +1,30 @@
+.contContainer {
+    padding: 0 14px 14px;
+    height: 100%;
+    max-height: 100vh;
+}
+.clear {
+    &::after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+}
+.noDataFull {
+    height: 100%;
+    background-color: #e8f1f466;
+}
+
+// ---- temp ---- //
+.MuiStepConnector-root {
+    margin-left: 6px;
+    .MuiStepConnector-line {
+        border: none;
+        background: url('../../public/img/ico/ico_dash.png') no-repeat;
+    }
+    &.Mui-active {
+        .MuiStepConnector-line {
+            background-image: url('../../public/img/ico/ico_dash_on.png');
+        }
+    }
+}

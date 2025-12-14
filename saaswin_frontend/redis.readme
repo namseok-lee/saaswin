@@ -1,0 +1,45 @@
+- 정보
+1. host : 218.236.10.178 
+2. port : 6379(main) / 6389(sandbox)
+3. pwd : de1e2ebd8a6ebc24b12e62bbf3a56704eec31416ba4a2afe4f6a1acc6b42665c 
+         tjdwkd!@3456 (성장!@3456) -> sha512 이후의 값
+
+- 접속
+1. redis-cli
+2. auth #{pwd}
+**redis-cli -h 218.236.10.178
+**redis-cli -h 218.236.10.178 -a yourpassword
+**redis-cli -n 5 -p 6379 (5번 db접속)
+
+- 명령어
+1. 입력 or 수정
+SET key_name value  
+ex) SET name "Alice"
+
+2. 조회
+GET key_name
+GET *key_name*
+SCAN 0 MATCH cmcd_* COUNT 1000
+ex) GET name
+
+3. 삭제
+DEL name
+DEL cmcd_key1 cmcd_key2 cmcd_key3
+ex) DEL name
+
+4. 타입확인
+TYPE name
+
+5. 모든키조회
+KEYS *
+
+*sequence
+INCR counter 
+* 현재 선택된 데이터베이스의 모든 데이터를 삭제
+FLUSHDB
+* 모든 데이터베이스의 모든 데이터를 삭제
+FLUSHALL
+
+
+
+** npm add joint-plus.tgz

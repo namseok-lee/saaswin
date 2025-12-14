@@ -1,0 +1,173 @@
+@use '/src/styles/_variables.scss' as *;
+@use '/src/styles/mixin.scss' as *;
+
+.cardOnlyTitle {
+    justify-content: center;
+    padding-bottom: 34px !important;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px 24px;
+    border-radius: $corner-sm;
+    border: 1px solid $border-default;
+    box-shadow: (1px 2px 4px $shadow-card);
+    background-color: $background-white;
+    .tit {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        background: url('../../../public/img/ico/ico_snackbar.png') 100% 50% no-repeat;
+        background-size: 16px;
+        .icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 34px;
+            height: 34px;
+            min-width: 34px;
+            min-height: 34px;
+            flex-shrink: 0;
+            background-color: var(--primary);
+            border-radius: $corner-full;
+
+            svg {
+                width: 24px;
+                height: 24px;
+                min-width: 24px;
+                min-height: 24px;
+                flex-shrink: 0;
+            }
+        }
+        .text {
+            width: 95%;
+            font-size: var(--font-size-lg);
+            line-height: var(--line-height-lg);
+            color: $color-accent;
+            text-align: left;
+        }
+    }
+    .cardContents {
+        margin-top: 12px;
+        .emptyNoData {
+            padding: 51px 0;
+            border-radius: $corner-md;
+            background-color: $background-subtler;
+        }
+    }
+    &.titleType {
+        display: flex;
+        height: 200px;
+    }
+    &:hover {
+        border-color: var(--primary);
+    }
+    .infoSection {
+        margin-top: 12px;
+        flex: 1;
+        overflow-y: auto;
+        padding-right: 8px;
+
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+
+            &:hover {
+                background: #a1a1a1;
+            }
+        }
+        .primary {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            font-size: var(--font-size-md);
+            line-height: var(--line-height-md);
+            color: $color-accent;
+        }
+        .emphasis {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            .text {
+                font-size: var(--font-size-sm);
+                line-height: var(--line-height-sm);
+                color: $color-neutral;
+            }
+            & + .emphasis {
+                &::before {
+                    content: '';
+                    display: inline-block;
+                    width: 1px;
+                    height: 20px;
+                    background-color: rgba(217, 217, 217, 0.6);
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+    .infoRow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-sm);
+        color: $color-neutral;
+        .rowTitle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            width: 62px;
+            height: 25px;
+            border-radius: $corner-xl;
+            background-color: $background-accent-subtler;
+        }
+        .rowText {
+            @include ellipsis;
+        }
+        & + .infoRow {
+            margin-top: 8px;
+        }
+    }
+    .infoWordList {
+        display: flex;
+        align-items: center;
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-md);
+        color: $color-accent;
+        .item {
+            &::after {
+                content: '';
+                display: inline-block;
+                width: 1px;
+                height: 20px;
+                margin: 0 10px;
+                background-color: rgba(217, 217, 217, 0.6);
+                vertical-align: middle;
+            }
+            &:last-child {
+                &::after {
+                    content: none;
+                }
+            }
+        }
+    }
+    .diviLine {
+        margin: 10px 0;
+        border-top: 1px dashed $border-neutral;
+    }
+}

@@ -1,0 +1,87 @@
+@use '/src/styles/_variables.scss' as *;
+@use '/src/styles/mixin.scss' as *;
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 58px;
+    height: 38px;
+
+    /* Hide default HTML checkbox */
+    input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    /* The slider */
+    .slider {
+        width: 34px;
+        height: 14px;
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #c5c5c5;
+        border-radius: $corner-full;
+        transition: 0.2s;
+        &::before {
+            position: absolute;
+            content: '';
+            height: 38px;
+            width: 38px;
+            left: -10px;
+            bottom: -12px;
+            border-radius: $corner-full;
+            transition: 0.2s;
+            background: url('../../../public/img/ico/ico_switch_off.png') no-repeat;
+        }
+    }
+
+    input:checked + .slider {
+        background-color: var(--low);
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(22px);
+        background-image: var(--bgSwitchOn);
+    }
+    input:hover + .slider {
+        &::before {
+            background-image: url('../../../public/img/ico/ico_switch_off_hover.png');
+        }
+    }
+    input:checked:hover + .slider {
+        &::before {
+            background-image: var(--bgSwitchOnHover);
+        }
+    }
+    input:focus + .slider {
+        &::before {
+            background-image: url('../../../public/img/ico/ico_switch_off_focus.png');
+        }
+    }
+    input:checked:focus + .slider {
+        &::before {
+            background-image: var(--bgSwitchOnFocus);
+        }
+    }
+    // disabled
+    input:disabled + .slider {
+        &::before {
+            background-image: url('../../../public/img/ico/ico_switch_off_disabled.png');
+        }
+    }
+    input:checked:disabled + .slider {
+        background-color: $background-disabled;
+        &::before {
+            background-image: url('../../../public/img/ico/ico_switch_on_disabled.png');
+        }
+    }
+    &.small {
+        transform: scale(0.7);
+    }
+}
